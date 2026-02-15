@@ -3,9 +3,14 @@ pre-commit:
   jobs:
     - name: check
       run: pnpm run astro check
+    - name: build
+      run: pnpm run build
+      glob:
+        - "src/**/*"
+        - "astro.config.mjs"
+        - "tsconfig.json"
 
 commit-msg:
-  parallel: true
   jobs:
     - name: commitlint
-      run: pnpm exec commitlint --edit $1
+      run: pnpm exec commitlint --edit {1}

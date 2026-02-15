@@ -1,0 +1,49 @@
+# Deploy Preview/Prerelease (unstable)
+name: Deploy Preview
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+    branches:
+      - main
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      SITE_URL: https://pr-${{ github.event.pull_request.number }}.${{ vars.CF_PAGES_DOMAIN }}
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - uses: pnpm/action-setup@v4
+        name: Install pnpm
+        with:
+          run_install: false
+
+      - name: Install Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: "pnpm"
+
+      - name: Install dependencies
+        run: pnpm install
+
+      - name: Build
+        run: pnpm run build
+        env:
+          NODE_ENV: production
+
+      - name: Deploy to Cloudflare Pages (PR Preview)
+        id: deploy
+        uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          command: pages deploy dist --branch=pr-${{ github.event.pull_request.number }}
