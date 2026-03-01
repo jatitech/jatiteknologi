@@ -1,0 +1,20 @@
+---
+import { getLocale } from "@/lib/i18n";
+import { locales, baseLocale } from "@/paraglide/runtime";
+import Welcome from "@/components/Welcome.astro";
+import Layout from "@/layouts/Layout.astro";
+
+const locale = getLocale(Astro.currentLocale);
+
+export function getStaticPaths() {
+  return locales
+    .filter((lang) => lang !== baseLocale)
+    .map((lang) => ({
+      params: { lang },
+    }));
+}
+---
+
+<Layout locale={locale}>
+  <Welcome />
+</Layout>

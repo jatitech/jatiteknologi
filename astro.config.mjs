@@ -5,14 +5,21 @@ import tailwindcss from "@tailwindcss/vite";
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import sitemap from "@astrojs/sitemap";
 import icon from "astro-icon";
+import { readFile } from "node:fs/promises";
 
-const site = process.env.SITE_URL || "http://localhost:4321";
+const site = process.env.PUBLIC_SITE_URL || "http://localhost:4321";
+
+const inlangDirectory = "./project.inlang";
+const inlangSettings = await readFile(`${inlangDirectory}/settings.json`)
+const inlang = JSON.parse(inlangSettings.toString() || "{}");
+const defaultLocale = inlang.baseLocale;
+const locales = inlang.locales;
 
 // https://astro.build/config
 export default defineConfig({
-  env: {
+	env: {
     schema: {
-      SITE_URL: envField.string({
+      PUBLIC_SITE_URL: envField.string({
         context: "server",
         access: "public",
         default: "http://localhost:4321",
@@ -28,10 +35,16 @@ export default defineConfig({
   }),
 
   vite: {
+    define: {
+      __LOCALES__: JSON.stringify(locales),
+    },
+    ssr: {
+      external: ["node:fs/promises", "node:url", "node:crypto", "node:fs"],
+    },
     plugins: [
       tailwindcss(),
       paraglideVitePlugin({
-        project: "./project.inlang",
+        project: inlangDirectory,
         outdir: "./src/paraglide",
         strategy: ["cookie", "baseLocale"],
       }),
@@ -39,8 +52,11 @@ export default defineConfig({
   },
 
   i18n: {
-    locales: ["de", "en", "es", "fr", "id", "it", "pt", "ja", "zh-cn"],
-    defaultLocale: "en",
+    locales,
+    defaultLocale,
+    routing: {
+      prefixDefaultLocale: false,
+    },
   },
 
   integrations: [sitemap(), icon()],

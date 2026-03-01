@@ -1,0 +1,28 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getLocale } from "@/lib/i18n";
+import { getCollection, render } from "astro:content";
+import { baseLocale } from "@/paraglide/runtime";
+
+const locale = getLocale(Astro.currentLocale);
+
+export async function getStaticPaths() {
+  const blogs = await getCollection("blog");
+  return blogs
+    .filter((blog) => !blog.id.startsWith(baseLocale))
+    .map((blog) => {
+      const [lang, ...slug] = blog.id.split("/");
+      return {
+        params: { lang, slug: slug.join("/") },
+        props: { blog },
+      };
+    });
+}
+
+const { blog } = Astro.props;
+const { Content } = await render(blog);
+---
+
+<Layout locale={locale}>
+  <Content />
+</Layout>

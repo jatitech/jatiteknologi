@@ -1,44 +1,5 @@
 @import "@fontsource-variable/geist-mono";
-@import "tailwindcss";
-@import "tw-animate-css";
-@plugin "daisyui" {
-  themes:
-    light --default,
-    dark --prefersdark;
-}
-
-@custom-variant dark (&:is(.dark *));
-
-:root {
-  --color-brand-50: oklch(0.968 0.013 48.65);
-  --color-brand-100: oklch(0.933 0.027 49.61);
-  --color-brand-200: oklch(0.859 0.064 53.53);
-  --color-brand-300: oklch(0.792 0.107 57.98);
-  --color-brand-400: oklch(0.723 0.116 59.66);
-  --color-brand-500: oklch(0.647 0.104 59.45);
-  --color-brand-600: oklch(0.549 0.088 59.54);
-  --color-brand-700: oklch(0.446 0.072 60.39);
-  --color-brand-800: oklch(0.341 0.055 59.97);
-  --color-brand-900: oklch(0.243 0.039 57.79);
-  --color-brand-950: oklch(0.19 0.03 56.77);
-  --color-brand: var(--color-brand-500);
-}
-
-@plugin "daisyui/theme" {
-  name: "light";
-  default: true;
-  prefersdark: false;
-  color-scheme: light;
-  --color-primary: var(--color-brand);
-}
-
-@plugin "daisyui/theme" {
-  name: "dark";
-  default: false;
-  prefersdark: true;
-  color-scheme: dark;
-  --color-primary: var(--color-brand);
-}
+@import "./starwind.css";
 
 @theme {
   --font-mono:
@@ -48,10 +9,18 @@
 
 @layer base {
   * {
-    @apply overflow-hidden;
+    @apply overflow-hidden border-border outline-outline/50;
   }
   html,
   body {
     @apply font-mono;
+  }
+
+  body {
+    @apply bg-background text-foreground scheme-light dark:scheme-dark;
+  }
+
+  button {
+    @apply cursor-pointer;
   }
 }

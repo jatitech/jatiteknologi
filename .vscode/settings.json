@@ -1,6 +1,12 @@
 {
+	"editor.tabSize": 2,
+	"typescript.tsdk": "node_modules/typescript/lib",
+	"typescript.enablePromptUseWorkspaceTsdk": true,
 	"files.associations": {
 		"wrangler.json": "jsonc",
 		"*.css": "tailwindcss"
-	}
+	},
+	"[astro]": {
+		"editor.defaultFormatter": "astro-build.astro-vscode"
+	},
 }

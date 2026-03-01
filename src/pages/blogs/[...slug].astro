@@ -1,0 +1,24 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import { getCollection, render } from "astro:content";
+import { baseLocale } from "@/paraglide/runtime";
+
+export async function getStaticPaths() {
+  const blogs = await getCollection("blog");
+  const blog = blogs.filter((blog) => blog.id.split("/").at(0) === baseLocale);
+  return blog.map((blog) => {
+    const [_, ...slug] = blog.id.split("/");
+    return {
+      params: { slug: slug.join("/") },
+      props: { blog },
+    };
+  });
+}
+
+const { blog } = Astro.props;
+const { Content } = await render(blog);
+---
+
+<Layout>
+  <Content />
+</Layout>

@@ -1,0 +1,34 @@
+---
+import "@/styles/global.css";
+import { ClientRouter } from "astro:transitions";
+import Head from "@/components/Head.astro";
+import { baseLocale } from "@/paraglide/runtime";
+import type { Locale } from "@/paraglide/runtime";
+import { formatLangTag } from "@/lib/i18n";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = baseLocale } = Astro.props;
+---
+
+<!doctype html>
+<html lang={formatLangTag(locale)}>
+  <head>
+    <Head />
+    <ClientRouter />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>
+
+<style>
+  html,
+  body {
+    margin: 0;
+    width: 100%;
+    height: 100%;
+  }
+</style>

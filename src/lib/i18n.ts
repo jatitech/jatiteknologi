@@ -6,3 +6,5 @@ import type { Locale } from "@/paraglide/runtime";
  * @returns 
  */
 export const getLocale = (locale: string | undefined) => (locale || "en") as Locale
+
+export const formatLangTag = (lang: string) => lang.split("-").map((l, i) => i === 0 ? l.toLowerCase() : l.toUpperCase()).join("-")
