@@ -10,14 +10,14 @@ import { readFile } from "node:fs/promises";
 const site = process.env.PUBLIC_SITE_URL || "http://localhost:4321";
 
 const inlangDirectory = "./project.inlang";
-const inlangSettings = await readFile(`${inlangDirectory}/settings.json`)
+const inlangSettings = await readFile(`${inlangDirectory}/settings.json`);
 const inlang = JSON.parse(inlangSettings.toString() || "{}");
 const defaultLocale = inlang.baseLocale;
 const locales = inlang.locales;
 
 // https://astro.build/config
 export default defineConfig({
-	env: {
+  env: {
     schema: {
       PUBLIC_SITE_URL: envField.string({
         context: "server",

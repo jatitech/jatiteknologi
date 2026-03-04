@@ -1,14 +1,27 @@
 pre-commit:
   parallel: true
   jobs:
+    - name: knip
+      run: pnpm run knip
+
     - name: check
-      run: pnpm run astro check
+      glob: "*.astro"
+      run: pnpm run check
+
+    - name: lint
+      glob: "*.{js,ts,jsx,tsx,astro}"
+      run: pnpm exec oxlint --type-aware --fix {staged_files}
+      stage_fixed: true
+
+    - name: format
+      glob: "*.{js,ts,jsx,tsx,astro,json,jsonc,css,md,yml,yaml}"
+      run: pnpm exec oxfmt --write {staged_files}
+      stage_fixed: true
+
+pre-push:
+  jobs:
     - name: build
       run: pnpm run build
-      glob:
-        - "src/**/*"
-        - "astro.config.mjs"
-        - "tsconfig.json"
 
 commit-msg:
   jobs:

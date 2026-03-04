@@ -1,10 +1,15 @@
-import type { Locale } from "@/paraglide/runtime";
+import { baseLocale, isLocale } from "@/paraglide/runtime";
 
 /**
  * Get locale from Astro.currentLocale
  * @param locale {Astro.currentLocale}
- * @returns 
+ * @returns
  */
-export const getLocale = (locale: string | undefined) => (locale || "en") as Locale
+export const getLocale = (locale: string | undefined) =>
+  isLocale(locale) ? locale : baseLocale;
 
-export const formatLangTag = (lang: string) => lang.split("-").map((l, i) => i === 0 ? l.toLowerCase() : l.toUpperCase()).join("-")
+export const formatLangTag = (lang: string) =>
+  lang
+    .split("-")
+    .map((l, i) => (i === 0 ? l.toLowerCase() : l.toUpperCase()))
+    .join("-");
