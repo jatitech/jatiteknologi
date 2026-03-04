@@ -1,0 +1,30 @@
+{
+  "$schema": "./node_modules/knip/schema.json",
+  "ignoreFiles": ["src/paraglide/**", "src/lib/utils.ts"],
+  "ignoreDependencies": [
+    "@iconify-json/tabler",
+    "@tabler/icons",
+    "clsx",
+    "tailwind-merge",
+    "tailwind-variants"
+  ],
+  "ignoreIssues": {
+    "src/paraglide/**": ["exports", "types"]
+  },
+  "typescript": {
+    "config": ["tsconfig.json"]
+  },
+  "astro": {
+    "config": ["astro.config.{js,cjs,mjs,ts,mts}"],
+    "entry": [
+      "src/content/config.ts",
+      "src/content.config.ts",
+      "src/pages/**/*.{astro,mdx,js,ts}",
+      "!src/pages/**/_*",
+      "!src/pages/**/_*/**",
+      "src/content/**/*.mdx",
+      "src/middleware.{js,ts}",
+      "src/actions/index.{js,ts}"
+    ]
+  }
+}

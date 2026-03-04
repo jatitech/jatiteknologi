@@ -1,12 +1,25 @@
 {
-	"editor.tabSize": 2,
-	"typescript.tsdk": "node_modules/typescript/lib",
-	"typescript.enablePromptUseWorkspaceTsdk": true,
-	"files.associations": {
-		"wrangler.json": "jsonc",
-		"*.css": "tailwindcss"
-	},
-	"[astro]": {
-		"editor.defaultFormatter": "astro-build.astro-vscode"
-	},
+  "editor.tabSize": 2,
+  "typescript.tsdk": "node_modules/typescript/lib",
+  "typescript.enablePromptUseWorkspaceTsdk": true,
+  "typescript.experimental.useTsgo": true,
+  "editor.formatOnSave": true,
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.associations": {
+    "wrangler.json": "jsonc",
+    "*.css": "tailwindcss"
+  },
+  "[javascript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[typescript]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "oxc.oxc-vscode"
+  },
+  "[astro]": {
+    "editor.defaultFormatter": "astro-build.astro-vscode"
+  }
 }

@@ -1,5 +1,5 @@
 import { getCollection } from "astro:content";
-import type { APIRoute } from "astro";
+import type { IntrinsicAPIRoute } from "astro";
 import { baseLocale } from "@/paraglide/runtime";
 
 export async function getStaticPaths() {
@@ -15,7 +15,7 @@ export async function getStaticPaths() {
     });
 }
 
-export const GET: APIRoute = ({ props }) => {
+export const GET: IntrinsicAPIRoute<typeof getStaticPaths> = ({ props }) => {
   return new Response(props.blog.body, {
     headers: {
       "Content-Type": "text/markdown; charset=utf-8",
