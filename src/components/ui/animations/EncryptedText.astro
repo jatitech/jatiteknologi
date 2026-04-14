@@ -1,0 +1,180 @@
+---
+import { cn } from "@/lib/utils";
+
+interface Props {
+  text: string;
+  className?: string;
+  /**
+   * Time in milliseconds between revealing each subsequent real character.
+   * Lower is faster. Defaults to 50ms per character.
+   */
+  revealDelayMs?: number;
+  /** Optional custom character set to use for the gibberish effect. */
+  charset?: string;
+  /**
+   * Time in milliseconds between gibberish flips for unrevealed characters.
+   * Lower is more jittery. Defaults to 50ms.
+   */
+  flipDelayMs?: number;
+  /** CSS class for styling the encrypted/scrambled characters */
+  encryptedClassName?: string;
+  /** CSS class for styling the revealed characters */
+  revealedClassName?: string;
+}
+
+const DEFAULT_CHARSET =
+  "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-={}[];:,.<>/?" as const;
+
+const {
+  text,
+  className,
+  revealDelayMs = 50,
+  charset = DEFAULT_CHARSET,
+  flipDelayMs = 50,
+  encryptedClassName,
+  revealedClassName,
+} = Astro.props;
+
+function generateRandomCharacter(charSet: string): string {
+  if (!charSet) return "";
+  const index = Math.floor(Math.random() * charSet.length);
+  return charSet.charAt(index);
+}
+
+const characters = text ? text.split("") : [];
+---
+
+<encrypted-text
+  class={cn("inline-block", className)}
+  data-text={text}
+  data-reveal-delay={revealDelayMs}
+  data-charset={charset}
+  data-flip-delay={flipDelayMs}
+  data-encrypted-class={encryptedClassName || ""}
+  data-revealed-class={revealedClassName || ""}
+  aria-label={text}
+>
+  {
+    characters.map((char) => {
+      const displayChar = char === " " ? " " : generateRandomCharacter(charset);
+      return <span class={cn(encryptedClassName)}>{displayChar}</span>;
+    })
+  }
+</encrypted-text>
+
+<script>
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const generateRandomCharacter = (charSet: string) => {
+    if (!charSet) return "";
+    const index = Math.floor(Math.random() * charSet.length);
+    return charSet.charAt(index);
+  };
+
+  class EncryptedText extends HTMLElement {
+    private animationFrame: number | null = null;
+    private startTime: number = 0;
+    private lastFlipTime: number = 0;
+    private isCancelled: boolean = false;
+    private trigger: ScrollTrigger | null = null;
+
+    connectedCallback() {
+      const text = this.dataset.text || "";
+      if (!text) return;
+
+      const revealDelayMs = parseInt(this.dataset.revealDelay || "50", 10);
+      const charset = this.dataset.charset || "";
+      const flipDelayMs = parseInt(this.dataset.flipDelay || "50", 10);
+      const encryptedClass = this.dataset.encryptedClass || "";
+      const revealedClass = this.dataset.revealedClass || "";
+
+      const spans = Array.from(this.querySelectorAll("span"));
+
+      this.trigger = ScrollTrigger.create({
+        trigger: this,
+        start: "top 90%", // Start animating when the text comes into viewport
+        once: true,
+        onEnter: () => {
+          this.startTime = performance.now();
+          this.lastFlipTime = this.startTime;
+          this.isCancelled = false;
+
+          const update = (now: number) => {
+            if (this.isCancelled) return;
+
+            const elapsedMs = now - this.startTime;
+            const totalLength = text.length;
+            const currentRevealCount = Math.min(
+              totalLength,
+              Math.floor(elapsedMs / Math.max(1, revealDelayMs)),
+            );
+
+            if (currentRevealCount >= totalLength) {
+              // Finish by revealing all characters exactly
+              for (let i = 0; i < totalLength; i++) {
+                const span = spans[i];
+                if (span.textContent !== text[i]) {
+                  span.textContent = text[i];
+                  if (revealedClass) {
+                    span.className = revealedClass;
+                  } else if (encryptedClass) {
+                    span.className = "";
+                  }
+                }
+              }
+              return;
+            }
+
+            // Re-randomize unrevealed scramble characters on an interval
+            const timeSinceLastFlip = now - this.lastFlipTime;
+            if (timeSinceLastFlip >= Math.max(0, flipDelayMs)) {
+              for (let index = 0; index < totalLength; index += 1) {
+                const span = spans[index];
+                if (index < currentRevealCount) {
+                  // Text should be revealed
+                  if (span.textContent !== text[index]) {
+                    span.textContent = text[index];
+                    if (revealedClass) {
+                      span.className = revealedClass;
+                    } else if (encryptedClass) {
+                      span.className = "";
+                    }
+                  }
+                } else {
+                  // Text remains gibberish
+                  if (text[index] !== " ") {
+                    span.textContent = generateRandomCharacter(charset);
+                  } else {
+                    span.textContent = " ";
+                  }
+                }
+              }
+              this.lastFlipTime = now;
+            }
+
+            this.animationFrame = requestAnimationFrame(update);
+          };
+
+          this.animationFrame = requestAnimationFrame(update);
+        },
+      });
+    }
+
+    disconnectedCallback() {
+      this.isCancelled = true;
+      if (this.animationFrame !== null) {
+        cancelAnimationFrame(this.animationFrame);
+      }
+      if (this.trigger) {
+        this.trigger.kill();
+      }
+    }
+  }
+
+  if (!customElements.get("encrypted-text")) {
+    customElements.define("encrypted-text", EncryptedText);
+  }
+</script>

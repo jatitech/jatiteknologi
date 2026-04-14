@@ -1,4 +1,9 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "example_message": "Witaj {username}"
+  "example_message": "Witaj {username}",
+  "hero_title": "Projektowanie skalowalnych systemów cyfrowych zapewniających długoterminowy wzrost",
+  "hero_description": "Projektujemy wydajną, natywną infrastrukturę cyfrową dla start-upów i rozwijających się firm, które wymagają stabilności, szybkości i zrównoważonego rozwoju.",
+  "base_profile": "Profil",
+  "book_a_call": "Zarezerwuj architekturę połączenia",
+  "explore_services": "Poznaj nasze usługi"
 }

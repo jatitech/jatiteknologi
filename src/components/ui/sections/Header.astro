@@ -1,0 +1,104 @@
+---
+import { Image } from "astro:assets";
+import { deLocalizeHref, locales } from "@/paraglide/runtime";
+import LogoLight from "@/assets/logos/jti/jati-technology-light.svg";
+import LogoDark from "@/assets/logos/jti/jati-technology-dark.svg";
+import World from "@tabler/icons/outline/world.svg";
+import Menu from "@tabler/icons/outline/menu.svg";
+import ThemeToggle from "@/components/ui/starwind/theme-toggle";
+import { Button } from "@starwind/button";
+import {
+  Dropdown,
+  DropdownTrigger,
+  DropdownContent,
+  DropdownItem,
+} from "@starwind/dropdown";
+import Navigation from "./Navigation.astro";
+import { Separator } from "@starwind/separator";
+import { getLocale, getLangIcon, toHumanReadableLang } from "@/lib/i18n";
+import { getRelativeLocaleUrl } from "astro:i18n";
+
+const locale = getLocale(Astro.currentLocale);
+---
+
+<header
+  class="z-50 fixed top-0 transition-[background,border-color,box-shadow] duration-300 left-1/2! right-auto! -translate-x-1/2 w-[calc(100%-3rem)] max-w-6xl mt-4 bg-background/30 backdrop-opacity-75 rounded-md bg-clip-padding backdrop-filter backdrop-blur-xl"
+>
+  <div class="flex items-center justify-between h-14 md:px-6 px-4">
+    <a
+      href={getRelativeLocaleUrl(locale, "/")}
+      class="after:hidden flex-none"
+      title="Jati Technology"
+    >
+      <Image
+        src={LogoLight}
+        alt="Jati Technology"
+        height={24}
+        class="hidden dark:block"
+      />
+      <Image
+        src={LogoDark}
+        alt="Jati Technology"
+        height={24}
+        class="dark:hidden"
+      />
+    </a>
+    <Navigation />
+    <div class="flex items-center md:gap-1">
+      <ThemeToggle class="border-0" />
+      <Button
+        type="button"
+        variant="ghost"
+        size="sm"
+        class="uppercase md:hidden"
+        title="Language"
+      >
+        <World class="size-5" />
+        <span class="text-base">{locale}</span>
+      </Button>
+      <Dropdown class="hidden md:block">
+        <DropdownTrigger asChild>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            class="uppercase"
+            title="Language"
+          >
+            <World class="size-5" />
+            <span class="text-base">{locale}</span>
+          </Button>
+        </DropdownTrigger>
+        <DropdownContent class="w-50!" align="end" sideOffset={10}>
+          {
+            locales.map((lang) => (
+              <DropdownItem
+                as="a"
+                href={getRelativeLocaleUrl(
+                  lang,
+                  deLocalizeHref(Astro.url.pathname),
+                )}
+                class:list={["capitalize", lang !== locale && "after:hidden"]}
+                title={lang}
+                aria-selected={lang === locale}
+              >
+                <span>{getLangIcon(lang)}</span>
+                <span>{toHumanReadableLang(lang)}</span>
+              </DropdownItem>
+            ))
+          }
+        </DropdownContent>
+      </Dropdown>
+      <Separator orientation="vertical" class:list="md:hidden" />
+      <Button
+        type="button"
+        variant="ghost"
+        size="sm"
+        class="md:hidden"
+        title="Menu"
+      >
+        <Menu class="size-5" />
+      </Button>
+    </div>
+  </div>
+</header>

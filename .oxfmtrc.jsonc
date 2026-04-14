@@ -3,5 +3,10 @@
   "tabWidth": 2,
   "printWidth": 80,
   "useTabs": false,
+  "sortTailwindcss": {
+    "stylesheet": "./src/styles/global.css",
+    "functions": ["clsx", "cn", "tw", "tv"],
+    "preserveWhitespace": true,
+  },
   "ignorePatterns": ["worker-configuration.d.ts"],
 }

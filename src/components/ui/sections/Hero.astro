@@ -1,0 +1,920 @@
+---
+import { m } from "@/paraglide/messages";
+import { baseLocale } from "@/paraglide/runtime";
+import Button from "@starwind/button";
+import ArrowDownDashed from "@tabler/icons/outline/arrow-down-dashed.svg";
+import FileDownload from "@tabler/icons/outline/file-download.svg";
+import ExternalLink from "@tabler/icons/outline/external-link.svg";
+import EncryptedText from "@/components/ui/animations/EncryptedText.astro";
+
+interface Props {
+  locale?: Locale;
+}
+
+const { locale = baseLocale } = Astro.props;
+---
+
+<hero-section class="relative w-full h-[155vh] block">
+  <div class="relative h-full">
+    <div class="container h-full">
+      <div
+        class="sticky top-0 z-1 flex flex-col flex-1 justify-end md:justify-center md:flex-none md:grid md:grid-cols-12 items-end h-screen gap-2 md:gap-4 pb-4 md:pb-6"
+      >
+        <h1
+          class="md:col-span-6 text-2xl md:text-5xl font-bold scramble-title max-w-4xl tracking-tight"
+          title={m.hero_title(undefined, { locale })}
+        >
+          <EncryptedText
+            text={m.hero_title(undefined, { locale })}
+            encryptedClassName="text-blue-500"
+            revealedClassName="text-current"
+            revealDelayMs={50}
+          />
+        </h1>
+        <div class="hidden md:block md:col-span-1">
+          <a
+            href="https://lynk.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            download="Jati-Technology-Profile.pdf"
+            title="Download Jati Technology Company Profile"
+            class="flex flex-wrap items-center gap-2 w-fit"
+          >
+            <FileDownload class="size-4 flex-none" />
+            {m.base_profile(undefined, { locale })}
+          </a>
+        </div>
+        <div class="hidden md:block md:col-span-1">
+          <a
+            href="https://lynk.id"
+            target="_blank"
+            rel="noopener noreferrer"
+            title="See Lynk.id"
+            class="flex flex-wrap items-center gap-2 w-fit"
+          >
+            lynk.id
+            <ExternalLink class="size-4 flex-none" />
+          </a>
+        </div>
+        <div class="md:col-span-4 flex flex-col justify-between gap-4">
+          <p
+            class="text-sm md:text-base dark:text-zinc-300 text-zinc-600"
+            title={m.hero_description(undefined, { locale })}
+          >
+            <EncryptedText
+              text={m.hero_description(undefined, { locale })}
+              encryptedClassName="text-orange-500"
+              revealedClassName="text-current"
+              revealDelayMs={18}
+            />
+          </p>
+          <div class="flex flex-col xl:flex-row gap-4">
+            <Button
+              size="sm"
+              class="w-full font-bold"
+              title={m.book_a_call(undefined, { locale })}
+            >
+              {m.book_a_call(undefined, { locale })}
+            </Button>
+            <Button
+              size="sm"
+              variant="outline"
+              class="w-full"
+              title={m.explore_services(undefined, { locale })}
+            >
+              <ArrowDownDashed class="size-4" />
+              {m.explore_services(undefined, { locale })}
+            </Button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <canvas class="fixed top-0 left-0 w-full h-screen pointer-events-none z-0"
+    ></canvas>
+  </div>
+</hero-section>
+
+<script>
+  import {
+    BufferAttribute,
+    BufferGeometry,
+    WebGLRenderer,
+    Fog,
+    PlaneGeometry,
+    AdditiveBlending,
+    Material,
+    Color,
+    Clock,
+    Points,
+    PointsMaterial,
+    PerspectiveCamera,
+    Scene,
+    AmbientLight,
+    PointLight,
+    MathUtils,
+  } from "three";
+  import gsap from "gsap";
+  import ScrollTrigger from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+
+  const vertexShader = `
+  #define VAL_PI 3.1415926535897932384626433832795
+  #define VAL_PHI VAL_PI * (3. - sqrt(5.))
+
+  uniform float time;
+  uniform float morph;
+  uniform float fadeOutMaxSize;
+  uniform float modelScale;
+  uniform vec3 objectSize;
+  uniform vec3 colorIn;
+  uniform vec3 colorCenter;
+  uniform vec3 colorOut;
+  uniform float radius;
+  uniform vec3 waveColor;
+  uniform float waveNoiseAmplitude;
+  uniform float waveNoiseDensity;
+  uniform float waveTimeScale;
+  uniform float noiseAmplitude;
+  uniform float noiseDensity;
+  uniform float timeScale;
+  uniform vec2 subdivision;
+  uniform vec2 mouse;
+  uniform vec3 light;
+  uniform vec3 lightColor;
+  uniform vec3 mouseLightColor;
+  uniform float blurPower;
+  uniform float animStops[12];
+  uniform float size;
+  uniform float scale;
+
+  varying float fadeOut;
+  varying vec3 vNormal;
+  varying vec3 vColor;
+  varying float vFogDepth;
+
+  attribute vec3 planePosition;
+  attribute float index;
+
+  vec4 calcPerm(vec4 x){return mod(((x*34.0)+1.0)*x,289.0);}
+  vec4 calcTayInv(vec4 r){return 1.79284291400159-0.85373472095314*r;}
+  vec4 calcFd(vec4 t){return t*t*t*(t*(t*6.0-15.0)+10.0);}
+  
+  float getSimplex(vec4 P){
+    vec4 Pi0=floor(P);
+    vec4 Pi1=Pi0+1.0;
+    Pi0=mod(Pi0,289.0);
+    Pi1=mod(Pi1,289.0);
+    vec4 Pf0=fract(P);
+    vec4 Pf1=Pf0-1.0;
+    vec4 ix=vec4(Pi0.x,Pi1.x,Pi0.x,Pi1.x);
+    vec4 iy=vec4(Pi0.yy,Pi1.yy);
+    vec4 iz0=vec4(Pi0.zzzz);
+    vec4 iz1=vec4(Pi1.zzzz);
+    vec4 iw0=vec4(Pi0.wwww);
+    vec4 iw1=vec4(Pi1.wwww);
+    vec4 ixy=calcPerm(calcPerm(ix)+iy);
+    vec4 ixy0=calcPerm(ixy+iz0);
+    vec4 ixy1=calcPerm(ixy+iz1);
+    vec4 ixy00=calcPerm(ixy0+iw0);
+    vec4 ixy01=calcPerm(ixy0+iw1);
+    vec4 ixy10=calcPerm(ixy1+iw0);
+    vec4 ixy11=calcPerm(ixy1+iw1);
+    vec4 gx00=ixy00/7.0;
+    vec4 gy00=floor(gx00)/7.0;
+    vec4 gz00=floor(gy00)/6.0;
+    gx00=fract(gx00)-0.5;
+    gy00=fract(gy00)-0.5;
+    gz00=fract(gz00)-0.5;
+    vec4 gw00=vec4(0.75)-abs(gx00)-abs(gy00)-abs(gz00);
+    vec4 sw00=step(gw00,vec4(0.0));
+    gx00-=sw00*(step(0.0,gx00)-0.5);
+    gy00-=sw00*(step(0.0,gy00)-0.5);
+    vec4 gx01=ixy01/7.0;
+    vec4 gy01=floor(gx01)/7.0;
+    vec4 gz01=floor(gy01)/6.0;
+    gx01=fract(gx01)-0.5;
+    gy01=fract(gy01)-0.5;
+    gz01=fract(gz01)-0.5;
+    vec4 gw01=vec4(0.75)-abs(gx01)-abs(gy01)-abs(gz01);
+    vec4 sw01=step(gw01,vec4(0.0));
+    gx01-=sw01*(step(0.0,gx01)-0.5);
+    gy01-=sw01*(step(0.0,gy01)-0.5);
+    vec4 gx10=ixy10/7.0;
+    vec4 gy10=floor(gx10)/7.0;
+    vec4 gz10=floor(gy10)/6.0;
+    gx10=fract(gx10)-0.5;
+    gy10=fract(gy10)-0.5;
+    gz10=fract(gz10)-0.5;
+    vec4 gw10=vec4(0.75)-abs(gx10)-abs(gy10)-abs(gz10);
+    vec4 sw10=step(gw10,vec4(0.0));
+    gx10-=sw10*(step(0.0,gx10)-0.5);
+    gy10-=sw10*(step(0.0,gy10)-0.5);
+    vec4 gx11=ixy11/7.0;
+    vec4 gy11=floor(gx11)/7.0;
+    vec4 gz11=floor(gy11)/6.0;
+    gx11=fract(gx11)-0.5;
+    gy11=fract(gy11)-0.5;
+    gz11=fract(gz11)-0.5;
+    vec4 gw11=vec4(0.75)-abs(gx11)-abs(gy11)-abs(gz11);
+    vec4 sw11=step(gw11,vec4(0.0));
+    gx11-=sw11*(step(0.0,gx11)-0.5);
+    gy11-=sw11*(step(0.0,gy11)-0.5);
+    vec4 g0000=vec4(gx00.x,gy00.x,gz00.x,gw00.x);
+    vec4 g1000=vec4(gx00.y,gy00.y,gz00.y,gw00.y);
+    vec4 g0100=vec4(gx00.z,gy00.z,gz00.z,gw00.z);
+    vec4 g1100=vec4(gx00.w,gy00.w,gz00.w,gw00.w);
+    vec4 g0010=vec4(gx10.x,gy10.x,gz10.x,gw10.x);
+    vec4 g1010=vec4(gx10.y,gy10.y,gz10.y,gw10.y);
+    vec4 g0110=vec4(gx10.z,gy10.z,gz10.z,gw10.z);
+    vec4 g1110=vec4(gx10.w,gy10.w,gz10.w,gw10.w);
+    vec4 g0001=vec4(gx01.x,gy01.x,gz01.x,gw01.x);
+    vec4 g1001=vec4(gx01.y,gy01.y,gz01.y,gw01.y);
+    vec4 g0101=vec4(gx01.z,gy01.z,gz01.z,gw01.z);
+    vec4 g1101=vec4(gx01.w,gy01.w,gz01.w,gw01.w);
+    vec4 g0011=vec4(gx11.x,gy11.x,gz11.x,gw11.x);
+    vec4 g1011=vec4(gx11.y,gy11.y,gz11.y,gw11.y);
+    vec4 g0111=vec4(gx11.z,gy11.z,gz11.z,gw11.z);
+    vec4 g1111=vec4(gx11.w,gy11.w,gz11.w,gw11.w);
+    vec4 nm00=calcTayInv(vec4(dot(g0000,g0000),dot(g0100,g0100),dot(g1000,g1000),dot(g1100,g1100)));
+    g0000*=nm00.x;g0100*=nm00.y;g1000*=nm00.z;g1100*=nm00.w;
+    vec4 nm01=calcTayInv(vec4(dot(g0001,g0001),dot(g0101,g0101),dot(g1001,g1001),dot(g1101,g1101)));
+    g0001*=nm01.x;g0101*=nm01.y;g1001*=nm01.z;g1101*=nm01.w;
+    vec4 nm10=calcTayInv(vec4(dot(g0010,g0010),dot(g0110,g0110),dot(g1010,g1010),dot(g1110,g1110)));
+    g0010*=nm10.x;g0110*=nm10.y;g1010*=nm10.z;g1110*=nm10.w;
+    vec4 nm11=calcTayInv(vec4(dot(g0011,g0011),dot(g0111,g0111),dot(g1011,g1011),dot(g1111,g1111)));
+    g0011*=nm11.x;g0111*=nm11.y;g1011*=nm11.z;g1111*=nm11.w;
+    float n0000=dot(g0000,Pf0);
+    float n1000=dot(g1000,vec4(Pf1.x,Pf0.yzw));
+    float n0100=dot(g0100,vec4(Pf0.x,Pf1.y,Pf0.zw));
+    float n1100=dot(g1100,vec4(Pf1.xy,Pf0.zw));
+    float n0010=dot(g0010,vec4(Pf0.xy,Pf1.z,Pf0.w));
+    float n1010=dot(g1010,vec4(Pf1.x,Pf0.y,Pf1.z,Pf0.w));
+    float n0110=dot(g0110,vec4(Pf0.x,Pf1.yz,Pf0.w));
+    float n1110=dot(g1110,vec4(Pf1.xyz,Pf0.w));
+    float n0001=dot(g0001,vec4(Pf0.xyz,Pf1.w));
+    float n1001=dot(g1001,vec4(Pf1.x,Pf0.yz,Pf1.w));
+    float n0101=dot(g0101,vec4(Pf0.x,Pf1.y,Pf0.z,Pf1.w));
+    float n1101=dot(g1101,vec4(Pf1.xy,Pf0.z,Pf1.w));
+    float n0011=dot(g0011,vec4(Pf0.xy,Pf1.zw));
+    float n1011=dot(g1011,vec4(Pf1.x,Pf0.y,Pf1.zw));
+    float n0111=dot(g0111,vec4(Pf0.x,Pf1.yzw));
+    float n1111=dot(g1111,Pf1);
+    vec4 fadeVal=calcFd(Pf0);
+    vec4 n_0w=mix(vec4(n0000,n1000,n0100,n1100),vec4(n0001,n1001,n0101,n1101),fadeVal.w);
+    vec4 n_1w=mix(vec4(n0010,n1010,n0110,n1110),vec4(n0011,n1011,n0111,n1111),fadeVal.w);
+    vec4 n_zw=mix(n_0w,n_1w,fadeVal.z);
+    vec2 n_yzw=mix(n_zw.xy,n_zw.zw,fadeVal.y);
+    float n_xyzw=mix(n_yzw.x,n_yzw.y,fadeVal.x);
+    return 2.2*n_xyzw;
+  }
+
+  float calcRawNoise(vec3 p){return getSimplex(vec4(p*noiseDensity,time*timeScale));}
+  vec3 applyRadNoise(vec3 p){return p*(radius+calcRawNoise(p)*noiseAmplitude);}
+  
+  float calcLight(vec3 p,vec3 n,vec3 lPos,float str){
+    vec3 lDir=normalize(lPos-p);
+    float d=distance(lPos,p);
+    float att=1.0/(d*d);
+    float df=max(dot(lDir,normalize(n)),0.0);
+    return clamp(df*att*str,0.,1.);
+  }
+
+  float getVId(){return float(gl_VertexID);}
+
+  float getRotY(mat4 m){
+    return atan(-m[2][0],m[0][0]);
+  }
+
+  vec3 genSph(float i,float tot,inout vec3 nm){
+    float rY=getRotY(modelViewMatrix);
+    float y=1.0-(1.0-(i/tot))*2.0;
+    float r=sqrt(1.0-y*y);
+    float th=mod(VAL_PHI*i*0.5,VAL_PI)-rY;
+    vec3 p=vec3(cos(th)*r,y,sin(th)*r);
+    vec3 tan=normalize(cross(p,vec3(0.0,1.0,0.0)));
+    vec3 bit=cross(p,tan);
+    nm=normalize(cross(tan,bit));
+    return p;
+  }
+
+  vec3 mixPoints(vec3 a,vec3 b,vec3 c,float t){
+    if(t<0.5) return mix(a,b,pow(smoothstep(0.0,0.5,t),0.5));
+    return mix(b,c,pow(smoothstep(0.5,1.0,t),0.5));
+  }
+
+  float normSin(float x){return sin(x)*0.5+0.5;}
+  float rndVal(vec2 n){return fract(sin(dot(n,vec2(12.9898,4.1414)))*43758.5453);}
+  
+  float weightNoise(vec2 p){
+    vec2 ip=floor(p);
+    vec2 u=fract(p);
+    u=u*u*(3.0-2.0*u);
+    float res=mix(mix(rndVal(ip),rndVal(ip+vec2(1.0,0.0)),u.x),mix(rndVal(ip+vec2(0.0,1.0)),rndVal(ip+vec2(1.0,1.0)),u.x),u.y);
+    return res*res;
+  }
+
+  vec3 calcCloud(vec3 p){
+    float idx=getVId();
+    float sc=0.15;
+    float t=sin(time);
+    float n=weightNoise(vec2(idx+t));
+    return p*vec3(n*sc+normSin(n)*1.5);
+  }
+
+  vec3 rotByNorm(vec3 n,float a){
+    vec3 nm=normalize(n);
+    vec3 t;
+    if(abs(nm.x)>0.999) t=vec3(0.0,1.0,0.0);
+    else t=vec3(1.0,0.0,0.0);
+    vec3 bas=normalize(t-nm*dot(t,nm));
+    vec3 b=cross(nm,bas);
+    return bas*cos(a)+b*sin(a);
+  }
+
+  vec3 calcDualShape(inout vec3 nm){
+    float idx=getVId();
+    float sc=0.45;
+    float smp=SAMPLES*0.5;
+    float ang=VAL_PI*0.1+time*0.1;
+    float dist=1.1;
+    vec3 baseN=vec3(0.,-1.,-1.6);
+    float fm=idx;
+    if(idx<=smp){
+      fm=idx;
+    } else {
+      fm=idx-smp;
+      ang+=VAL_PI;
+    }
+    return applyRadNoise(genSph(fm,smp,nm))*sc+rotByNorm(baseN,ang)*dist;
+  }
+
+  vec3 calcTripleShape(inout vec3 nm){
+    float idx=getVId();
+    float sc=0.45;
+    float smp=SAMPLES*0.3333;
+    float ang=VAL_PI*0.4+time*0.1;
+    float dist=1.15;
+    vec3 baseN=vec3(0.,-1.,-2.);
+    float fm=idx;
+    if(idx<=smp){
+      fm=idx;
+    } else if(idx<=smp*2.){
+      ang+=VAL_PI*0.67;
+      fm=idx-smp;
+    } else {
+      ang+=VAL_PI*1.33;
+      fm=idx-smp*2.;
+    }
+    return applyRadNoise(genSph(fm,smp,nm))*sc+rotByNorm(baseN,ang)*dist;
+  }
+
+  float animToSphere(float m){
+    float fi=getVId()/SAMPLES;
+    return smoothstep(0.5*fi,0.5+0.5*fi,m);
+  }
+
+  float animMrph(float m){
+    float fi=dot(position,vec3(0.0,0.0,1.0))*0.5+0.5;
+    return smoothstep(0.5*fi,0.5+0.5*fi,m);
+  }
+
+  float calcMid(float v,float mn,float mx){
+    return 1.0-abs((v-mn)/(mx-mn)*2.0-1.0);
+  }
+
+  vec3 calcRefl(vec3 c,float sx,float z,vec3 p){
+    float df=0.35;
+    float sp=calcMid(sx,mouse.x*0.1-0.3,mouse.x*0.1+0.3);
+    df=smoothstep(0.0,1.0,df*sp);
+    float n=weightNoise(vec2(p.x+time*0.2,p.z));
+    df=df*n;
+    df=1.0+df*1.5;
+    c=c*df;
+    return clamp(c,0.0,1.0);
+  }
+
+  float calcSingleWv(float x,float s){
+    float p=mod(x,1.0);
+    if(p>0.0&&p<s){
+      float pr=p/s;
+      return sin(smoothstep(0.0,1.0,pr)*VAL_PI);
+    }
+    return 0.0;
+  }
+
+  float calcWvField(vec3 p){
+    float v=time*waveTimeScale;
+    float va=(time*waveTimeScale+mouse.y*0.1);
+    float x=p.x/objectSize.x;
+    float z=p.z/objectSize.z;
+    float w1=calcSingleWv(x+v*0.02,0.5)*calcSingleWv(z-0.25,0.3)*0.3;
+    float w2=calcSingleWv(x+v*0.02,0.5)*calcSingleWv(z-0.25,0.3)*0.3;
+    w2+=calcSingleWv(x+v*0.02-0.05,0.2)*calcSingleWv(z-0.25,0.3)*0.3;
+    float w6=calcSingleWv(x+v*0.01+0.3,0.5)*calcSingleWv(z-0.1,0.3)*0.3;
+    float w7=calcSingleWv(x+v*0.03-0.3,0.5)*calcSingleWv(z-0.15,0.2)*0.3;
+    float wML=cos(clamp(z*10.0+sin(x*10.0*.5+va*0.07)*3.,-VAL_PI,VAL_PI))*.5+.5;
+    wML=pow(abs(wML),4.)*sin(x*10.0*.5+v*0.1)*0.7;
+    float wMM=cos(clamp(z*25.0+sin(x*25.0*.5+v*0.1)*3.,-VAL_PI,VAL_PI))*.5+.5;
+    wMM=pow(abs(wMM),4.)*sin(x*10.0*.5+va*0.1)*0.3;
+    float wBLS1=calcSingleWv(x+v*0.01+0.4,0.5)*calcSingleWv(z-0.3,1.0)*0.6;
+    float wBLS2=calcSingleWv(x+v*0.012+0.6,0.5)*calcSingleWv(z-0.23,1.0)*0.6;
+    float wSS1=(sin(x*100.0+v*0.3)+cos(x*80.0+v*0.4)+sin(x*60.0+v*0.5))*0.05;
+    wSS1*=calcSingleWv(z+0.8,0.2);
+    float wSS2=(sin(x*95.0+v*0.5)+cos(x*75.0+v*0.4)+sin(x*55.0+v*0.3))*0.075;
+    wSS2*=calcSingleWv(z+0.65,0.2);
+    float wSS3=(sin(x*70.0+va*0.45)+cos(x*50.0+v*0.35)+sin(x*30.0+va*0.45))*0.1;
+    wSS3*=calcSingleWv(z+0.95,0.2);
+    float wSS4=(sin(x*60.0+v*0.35)+cos(x*40.0+va*0.55)+sin(x*20.0+v*0.5))*0.075;
+    wSS4*=calcSingleWv(z+1.1,0.2);
+    float wZ=sin(z*20.0+v*-0.2)*0.1;
+    float slp=x*-2.0;
+    return (w1+w2+w6+w7+wML+wMM+wBLS1+wBLS2+wSS1+wSS2+wSS3+wSS4+wZ+slp)*(1.0-smoothstep(0.4,0.55,z))*objectSize.y;
+  }
+
+  bool checkPersp(mat4 m){return m[2][3]==-1.0;}
+
+  void main(){
+    vColor=colorIn; 
+    vec3 tr=vec3(position);
+    float pSz=size;
+    vec3 nm=normal;
+    vec3 wPos=planePosition;
+    wPos.y-=calcWvField(planePosition)*waveNoiseAmplitude;
+    vec3 sNorm=normal;
+    vec3 sPos=applyRadNoise(genSph(getVId(),SAMPLES,sNorm));
+    vec3 mNorm=normal;
+    vec3 mPos=applyRadNoise(genSph(index,SAMPLES,mNorm))*0.5;
+    vec3 dNorm=normal;
+    vec3 dPos=calcDualShape(dNorm);
+    vec3 tNorm=normal;
+    vec3 tPos=calcTripleShape(tNorm);
+    vec3 cNorm=normal;
+    vec3 cPos=calcCloud(genSph(index,SAMPLES,cNorm));
+
+    if(morph<animStops[1]){
+      float dA=(VAL_PI*2.0)/subdivision.y;
+      float dB=VAL_PI/subdivision.y;
+      vec3 bTan=cross(normal,tangent.xyz);
+      vec3 pA=wPos+tangent.xyz*dA;
+      vec3 pB=wPos+bTan.xyz*dB;
+      vec3 wNorm=cross(pA-tr.xyz,pB-tr.xyz);
+      float f=animToSphere(smoothstep(0.,animStops[1],morph));
+      tr=mix(wPos,sPos,f);
+      nm=mix(wNorm,sNorm,f);
+    } else if(morph<animStops[2]){
+      float f=pow(smoothstep(animStops[1],animStops[2],morph),13.0);
+      tr=mixPoints(sPos,mPos,mPos,f);
+      nm=mixPoints(sNorm,mNorm,mNorm,f);
+      pSz=mix(size,size*0.5,f);
+    } else if(morph<animStops[3]){
+      float f=pow(smoothstep(animStops[2],animStops[3],morph),13.0);
+      tr=mixPoints(mPos,cPos,dPos,f);
+      nm=mix(mNorm,dNorm,f);
+      pSz=mix(size*0.5,size*0.75,f);
+    } else if(morph<animStops[4]){
+      float f=pow(smoothstep(animStops[3],animStops[4],morph),5.0);
+      tr=mixPoints(dPos,cPos,tPos,f);
+      nm=mix(dNorm,tNorm,f);
+      pSz=mix(size*0.75,size,f);
+    } else if(morph<animStops[7]){
+      tr=tPos;
+      nm=tNorm;
+      pSz=size;
+    } else if(morph<animStops[8]){
+      float f=animMrph(smoothstep(animStops[7],animStops[8],morph));
+      tr=mixPoints(tPos,cPos,sPos,f);
+      nm=mix(tNorm,sNorm,f);
+      pSz=size;
+    } else if(morph<animStops[10]){
+      tr=sPos;
+      nm=sNorm;
+      pSz=size;
+    } else {
+      tr=vec3(1.);
+      pSz=0.01;
+    }
+
+    float wsMorph=smoothstep(animStops[1]*0.5,animStops[1],morph);
+    vec3 oNorm=normalMatrix*nm;
+    vNormal=oNorm;
+    vec4 mvP=modelViewMatrix*vec4(tr,1.);
+    fadeOut=1.0;
+    vec3 vDir=normalize(cameraPosition-mvP.xyz);
+    float clsP=dot(vDir,tr);
+    float sColF=smoothstep(1.3,1.7,clsP);
+    vec3 sCol=mix(colorIn,colorCenter,sColF);
+    vec3 col=mix(waveColor,sCol,wsMorph);
+    vColor=mix(col,colorOut,clamp(pow(1.-fadeOut,5.5),0.,1.));
+    vColor+=mouseLightColor*calcLight(mvP.xyz,oNorm,light,5.0);
+    vColor+=lightColor*calcLight(mvP.xyz,oNorm,vec3(0.,-3.,-5.),10.0);
+    float sX=gl_Position.x/gl_Position.w;
+    vColor=calcRefl(vColor,sX,tr.z/objectSize.z,tr);
+    vec4 mvPos=vec4(tr,1.0);
+    mvPos=modelViewMatrix*mvPos;
+    gl_Position=projectionMatrix*mvPos;
+    gl_PointSize=pSz*mix(1.,fadeOutMaxSize,1.-fadeOut)*modelScale;
+    #ifdef USE_SIZEATTENUATION
+      bool isP=checkPersp(projectionMatrix);
+      if(isP) gl_PointSize*=(scale/-mvPos.z);
+    #endif
+    #ifdef USE_FOG
+      vFogDepth=-mvPos.z;
+    #endif
+  }
+  `;
+
+  const fragmentShader = `
+    varying vec3 vColor;
+    varying float fadeOut;
+    varying vec3 vNormal;
+
+    void main() {
+        float uvLen = length(gl_PointCoord.xy - 0.5);
+        if (fadeOut < 0.0 || uvLen > 0.5) discard;
+        vec4 diffuseColor = vec4( vColor, 1.0 );
+        
+        float fa = 1. - smoothstep(0.55, 1.0, uvLen);
+        float distanceFactor = 1. - smoothstep(0.989, 0.991, gl_FragCoord.z);
+
+        float alpha = fa * (0.25 + 0.75 * pow(fadeOut, 4.)) * distanceFactor;
+
+        diffuseColor *= alpha;
+        diffuseColor.a = distanceFactor;
+    
+        gl_FragColor = diffuseColor;
+    }
+  `;
+
+  const isMobile = () => window.innerWidth < 992;
+  const POINTS_COUNT = 10000;
+
+  function findFactors(product: number, ratio: number) {
+    const b = Math.sqrt(product / ratio);
+    const a = product / b;
+    return [a, b];
+  }
+
+  class HeroSection extends HTMLElement {
+    #canvasEl: HTMLCanvasElement | null = null;
+    #renderer: WebGLRenderer | null = null;
+    #animationId: number | null = null;
+    #handleMouseMove: ((e: MouseEvent) => void) | null = null;
+    #handleResize: (() => void) | null = null;
+    #scrollTrigger: ScrollTrigger | null = null;
+    #sphere: Points | null = null;
+
+    connectedCallback() {
+      this.#canvasEl = this.querySelector("canvas");
+      if (this.#canvasEl) {
+        this.init3dApp();
+      }
+    }
+
+    disconnectedCallback() {
+      // 1. Cancel animation frame loop
+      if (this.#animationId !== null) {
+        cancelAnimationFrame(this.#animationId);
+        this.#animationId = null;
+      }
+
+      // 2. Kill GSAP ScrollTrigger
+      if (this.#scrollTrigger) {
+        this.#scrollTrigger.kill();
+        this.#scrollTrigger = null;
+      }
+
+      // 3. Remove event listeners
+      if (this.#handleMouseMove) {
+        window.removeEventListener("mousemove", this.#handleMouseMove);
+        this.#handleMouseMove = null;
+      }
+      if (this.#handleResize) {
+        window.removeEventListener("resize", this.#handleResize);
+        this.#handleResize = null;
+      }
+
+      // 4. Dispose Three.js objects
+      if (this.#sphere) {
+        this.#sphere.geometry.dispose();
+        if (this.#sphere.material instanceof Material) {
+          this.#sphere.material.dispose();
+        } else if (Array.isArray(this.#sphere.material)) {
+          this.#sphere.material.forEach((m) => m.dispose());
+        }
+        this.#sphere = null;
+      }
+
+      if (this.#renderer) {
+        this.#renderer.dispose();
+        this.#renderer.forceContextLoss();
+        this.#renderer = null;
+      }
+
+      this.#canvasEl = null;
+    }
+
+    init3dApp() {
+      const canvas = this.#canvasEl;
+      if (!canvas) return;
+
+      const svhHeight = window.innerHeight;
+      const dpr = Math.min(window.devicePixelRatio * 2, 4);
+      const width = window.innerWidth;
+      const height = svhHeight;
+
+      const renderer = new WebGLRenderer({
+        canvas,
+        alpha: true,
+        powerPreference: "high-performance",
+      });
+      this.#renderer = renderer;
+
+      renderer.setSize(width, height);
+      renderer.setPixelRatio(dpr);
+
+      const scene = new Scene();
+      scene.fog = new Fog(0x0a0a0a, 3, 12); // darker fog for dark theme
+
+      // =====================
+      // Uniforms
+      // =====================
+      const gu = {
+        time: { value: 0 },
+        planeToSphereMorph: { value: 0 },
+        mouse: { value: [0, 0] },
+        mouseAnimated: { value: [0, 0] },
+        scrollY: { value: window.scrollY },
+        light: { value: [0, 0, 0] },
+        pointSize: { value: 0.04 },
+        maxPointSize: { value: 1.1 },
+
+        fresnelColor: { value: [0.945, 0.23, 0.053] },
+        lightColor: { value: [0.99, 0.2, 0] },
+        mouseLightColor: { value: [0.885, 0.528, 0.44] },
+        sphereColor1: { value: [0.48, 0.095, 0] },
+        sphereColor2: { value: [0.96, 0.645, 0.545] },
+        waveColor: { value: [0.44, 0.66, 0.99] },
+        noiseAmplitude: { value: 0.16 },
+        noiseDensity: { value: 3.3 },
+        timeScale: { value: 0.5 },
+        blurPower: { value: 0.5 },
+        sphereScale: { value: 1.39 },
+        sphereScaleMobile: { value: 1.05 },
+        sphereRotationLimit: { value: 0.1 },
+      };
+
+      const waveSettings = {
+        color: { value: [0.33, 0.55, 0.99] },
+        pointSize: { value: 0.04 },
+        noiseAmplitude: { value: 0.7 },
+        noiseDensity: { value: 2.1 },
+        timeScale: { value: 1.8 },
+      };
+
+      const animStops = {
+        // Simplified scroll breaks: 0, 1000px, 1500px, 2000px, etc.
+        value: new Float32Array([
+          0, 800, 1000, 1200, 1600, 2000, 2400, 2800, 3000, 3200, 3600, 4000,
+        ]),
+      };
+
+      const objectDimensions = [25, 1, 7];
+
+      function getSphereGeometry() {
+        const geometry = new BufferGeometry();
+        const positions = new Float32Array(POINTS_COUNT * 3).fill(0);
+        const indexes = new Float32Array(POINTS_COUNT).fill(0);
+
+        for (let i = 0; i < POINTS_COUNT; i++) {
+          indexes[i] = i;
+        }
+        for (let i = POINTS_COUNT - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [indexes[i], indexes[j]] = [indexes[j], indexes[i]];
+        }
+
+        geometry.setAttribute("position", new BufferAttribute(positions, 3));
+        geometry.setAttribute("index", new BufferAttribute(indexes, 1));
+        return geometry;
+      }
+
+      class WobblingSphere extends Points {
+        constructor() {
+          const sphereGeometry = getSphereGeometry();
+          const pointsMaterial = new PointsMaterial({
+            size: 0.05,
+            vertexColors: true,
+            transparent: true,
+            depthWrite: false,
+            depthTest: false,
+            blending: AdditiveBlending,
+          });
+
+          super(sphereGeometry, pointsMaterial);
+
+          const initialRatio =
+            (objectDimensions[0] * 0.6) / objectDimensions[2];
+          const [heightSegments, widthSegments] = findFactors(
+            POINTS_COUNT,
+            initialRatio,
+          );
+
+          const planeGeometry = new PlaneGeometry(
+            objectDimensions[0],
+            objectDimensions[2],
+            Math.floor(heightSegments),
+            Math.floor(widthSegments),
+          )
+            .rotateX(-Math.PI * 0.65)
+            .translate(0, 1.8, 0);
+
+          planeGeometry.computeTangents();
+
+          sphereGeometry.setAttribute(
+            "planePosition",
+            planeGeometry.attributes.position,
+          );
+          if (planeGeometry.attributes.tangent) {
+            sphereGeometry.setAttribute(
+              "tangent",
+              planeGeometry.attributes.tangent,
+            );
+          }
+
+          // @ts-ignore
+          this.uniforms = {
+            fadeOutMaxSize: gu.maxPointSize,
+            colorIn: gu.sphereColor1,
+            colorCenter: gu.sphereColor2,
+            colorOut: gu.fresnelColor,
+            morph: gu.planeToSphereMorph,
+            // @ts-ignore
+            modelScale: { value: this.getScale() },
+            mouse: gu.mouse,
+            mouseAnimated: gu.mouseAnimated,
+            light: gu.light,
+            mouseLightColor: gu.mouseLightColor,
+            radius: { value: 2 },
+            noiseAmplitude: gu.noiseAmplitude,
+            noiseDensity: gu.noiseDensity,
+            objectSize: { value: objectDimensions },
+
+            waveColor: waveSettings.color,
+            waveNoiseAmplitude: waveSettings.noiseAmplitude,
+            waveTimeScale: waveSettings.timeScale,
+
+            timeScale: gu.timeScale,
+            blurPower: gu.blurPower,
+            subdivision: {
+              value: [widthSegments, heightSegments],
+            },
+            animStops,
+          };
+
+          if (this.material instanceof Material) {
+            this.material.onBeforeCompile = (shader) => {
+              shader.uniforms.time = gu.time;
+              shader.defines = {
+                USE_TANGENT: "",
+                SAMPLES: `${POINTS_COUNT}.0`,
+              };
+              for (let key in (this as any).uniforms) {
+                shader.uniforms[key] = (this as any).uniforms[key];
+              }
+              shader.vertexShader = vertexShader;
+              shader.fragmentShader = fragmentShader;
+            };
+          }
+        }
+
+        getScale() {
+          return isMobile() ? gu.sphereScaleMobile.value : gu.sphereScale.value;
+        }
+      }
+
+      const camera = new PerspectiveCamera(75, width / height, 0.1, 1000);
+      camera.position.set(0, isMobile() ? -1.2 : 0, 7.5);
+
+      scene.add(new AmbientLight(0x222222, 0.5));
+      const mouseLight = new PointLight(
+        new Color(...gu.mouseLightColor.value),
+        1.2,
+        0,
+      );
+      mouseLight.position.set(3, -3, 3);
+      scene.add(mouseLight);
+
+      const sphere = new WobblingSphere();
+      this.#sphere = sphere;
+      scene.add(sphere);
+
+      this.#handleMouseMove = (e) => {
+        const x = (e.clientX / window.innerWidth - 0.5) * 10;
+        const y = -(e.clientY / window.innerHeight - 0.5) * 10;
+        gu.mouse.value = [x, y];
+      };
+      window.addEventListener("mousemove", this.#handleMouseMove);
+
+      this.#handleResize = () => {
+        camera.aspect = window.innerWidth / window.innerHeight;
+        camera.position.y = isMobile() ? -1.2 : 0;
+        camera.updateProjectionMatrix();
+        renderer.setSize(window.innerWidth, window.innerHeight);
+      };
+      window.addEventListener("resize", this.#handleResize);
+
+      const updatePointSize = () => {
+        const { lerp, smoothstep } = MathUtils;
+        // @ts-ignore
+        sphere.material.size = lerp(
+          waveSettings.pointSize.value,
+          gu.pointSize.value,
+          smoothstep(gu.planeToSphereMorph.value / svhHeight, 0.0, 0.2),
+        );
+      };
+
+      // Initialize correctly before first scroll
+      gu.planeToSphereMorph.value = window.scrollY;
+      updatePointSize();
+      sphere.scale.set(sphere.getScale(), sphere.getScale(), sphere.getScale());
+
+      const updateSpheresRotation = () => {
+        const { clamp } = MathUtils;
+        const mouseX = gu.mouseAnimated.value[0] / 10;
+        const mouseY = -(gu.mouseAnimated.value[1] / 10);
+        const ratio = window.innerWidth / svhHeight;
+
+        const lerpFactor = clamp(
+          gu.planeToSphereMorph.value / svhHeight,
+          0.2,
+          1,
+        );
+        const rotationLimit = gu.sphereRotationLimit.value * lerpFactor;
+        const maxAngle = Math.PI * rotationLimit;
+
+        const targetRotationX = clamp(mouseY, -1, 1) * maxAngle;
+        const targetRotationY = clamp(mouseX * ratio, -1, 1) * maxAngle;
+
+        sphere.rotation.x +=
+          (targetRotationX - sphere.rotation.x) * 0.2 * lerpFactor;
+        sphere.rotation.y +=
+          (targetRotationY - sphere.rotation.y) * 0.2 * lerpFactor;
+      };
+
+      // GSAP ScrollTrigger hook
+      this.#scrollTrigger = ScrollTrigger.create({
+        trigger: this,
+        start: "top top",
+        end: "+=3000",
+        onUpdate: (self) => {
+          gu.planeToSphereMorph.value = self.scroll();
+          updatePointSize();
+          //@ts-ignore
+          sphere.scale.set(
+            sphere.getScale(),
+            sphere.getScale(),
+            sphere.getScale(),
+          );
+        },
+      });
+
+      const clock = new Clock();
+      const animate = () => {
+        const delta = clock.getDelta();
+        gu.time.value += delta * 1.0;
+        this.#animationId = requestAnimationFrame(animate);
+
+        const maxDelta = 10 * delta;
+        for (let i = 0; i < 2; i++) {
+          const diff = gu.mouse.value[i] - gu.mouseAnimated.value[i];
+          if (Math.abs(diff) > maxDelta) {
+            gu.mouseAnimated.value[i] += Math.sign(diff) * maxDelta;
+          } else {
+            gu.mouseAnimated.value[i] = gu.mouse.value[i];
+          }
+        }
+
+        mouseLight.position.set(
+          gu.mouseAnimated.value[0],
+          gu.mouseAnimated.value[1],
+          -3.5,
+        );
+        gu.light.value = [
+          gu.mouseAnimated.value[0],
+          gu.mouseAnimated.value[1],
+          -3.5,
+        ];
+
+        updateSpheresRotation();
+        renderer.render(scene, camera);
+      };
+
+      animate();
+    }
+  }
+
+  if (!customElements.get("hero-section")) {
+    customElements.define("hero-section", HeroSection);
+  }
+</script>

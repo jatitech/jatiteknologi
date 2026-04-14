@@ -9,7 +9,7 @@
 
 @layer base {
   * {
-    @apply overflow-hidden border-border outline-outline/50;
+    @apply overscroll-none border-border outline-outline/50;
   }
   html,
   body {
@@ -23,4 +23,46 @@
   button {
     @apply cursor-pointer;
   }
+
+  a {
+    @apply relative inline-block after:absolute after:bottom-0 after:left-0 after:w-full after:origin-left after:scale-x-0 after:border-b after:border-dashed after:transition-transform after:duration-300 after:content-[''] hover:after:scale-x-100 aria-selected:after:scale-x-100;
+  }
+}
+
+@utility container {
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+
+  @media (width < 40rem /* 640px */) {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  @media (width >= 40rem /* 640px */) {
+    max-width: 40rem /* 640px */;
+  }
+  @media (width >= 48rem /* 768px */) {
+    max-width: 48rem /* 768px */;
+  }
+  @media (width >= 64rem /* 1024px */) {
+    max-width: 64rem /* 1024px */;
+  }
+  @media (width >= 80rem /* 1280px */) {
+    max-width: 80rem /* 1280px */;
+  }
+  @media (width >= 96rem /* 1536px */) {
+    max-width: 96rem /* 1536px */;
+  }
+}
+
+@utility bg-linear-metal {
+  background-image: linear-gradient(
+    to bottom right,
+    #cce8fe 0%,
+    #cda0ff 24%,
+    #8489f5 40%,
+    #cdf1ff 71%,
+    #b591e9 100%
+  );
 }

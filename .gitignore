@@ -31,3 +31,5 @@ pnpm-debug.log*
 
 .mise.toml
 docs/
+
+AGENTS.md

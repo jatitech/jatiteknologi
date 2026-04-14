@@ -1,4 +1,9 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "example_message": "Bonjour le monde {username}"
+  "example_message": "Bonjour le monde {username}",
+  "hero_title": "Conception de systèmes numériques évolutifs pour une croissance à long terme",
+  "hero_description": "Nous concevons des infrastructures numériques natives de pointe, axées sur la performance, pour les startups et les entreprises en pleine croissance qui exigent stabilité, rapidité et durabilité.",
+  "base_profile": "Profil",
+  "book_a_call": "Réserver Architecture Appeler",
+  "explore_services": "Découvrez nos services"
 }

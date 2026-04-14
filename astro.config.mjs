@@ -4,7 +4,6 @@ import cloudflare from "@astrojs/cloudflare";
 import tailwindcss from "@tailwindcss/vite";
 import { paraglideVitePlugin } from "@inlang/paraglide-js";
 import sitemap from "@astrojs/sitemap";
-import icon from "astro-icon";
 import { readFile } from "node:fs/promises";
 
 const site = process.env.PUBLIC_SITE_URL || "http://localhost:4321";
@@ -28,16 +27,10 @@ export default defineConfig({
   },
   site,
   adapter: cloudflare({
-    platformProxy: {
-      enabled: true,
-    },
     imageService: "cloudflare",
   }),
 
   vite: {
-    define: {
-      __LOCALES__: JSON.stringify(locales),
-    },
     ssr: {
       external: ["node:fs/promises", "node:url", "node:crypto", "node:fs"],
     },
@@ -59,5 +52,5 @@ export default defineConfig({
     },
   },
 
-  integrations: [sitemap(), icon()],
+  integrations: [sitemap()],
 });

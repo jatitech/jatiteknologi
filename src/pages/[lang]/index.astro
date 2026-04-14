@@ -1,8 +1,9 @@
 ---
 import { getLocale } from "@/lib/i18n";
 import { locales, baseLocale } from "@/paraglide/runtime";
-import Welcome from "@/components/Welcome.astro";
 import Layout from "@/layouts/Layout.astro";
+import HeroSection from "@/components/ui/sections/Hero.astro";
+import Header from "@/components/ui/sections/Header.astro";
 
 const locale = getLocale(Astro.currentLocale);
 
@@ -16,5 +17,8 @@ export function getStaticPaths() {
 ---
 
 <Layout locale={locale}>
-  <Welcome />
+  <Header />
+  <main>
+    <HeroSection locale={locale} />
+  </main>
 </Layout>
