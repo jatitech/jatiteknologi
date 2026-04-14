@@ -1,0 +1,226 @@
+---
+import { getLocale } from "@/lib/i18n";
+import { Button } from "@starwind/button";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import {
+  Item,
+  ItemContent,
+  ItemTitle,
+  ItemDescription,
+  ItemMedia,
+  ItemGroup,
+} from "@starwind/item";
+import { getNavigation } from "@/configs/nav";
+
+const locale = getLocale(Astro.currentLocale);
+
+const navItems = getNavigation();
+---
+
+<mega-menu-nav class="hidden md:block relative">
+  <ul class="md:flex items-center gap-1">
+    {
+      navItems.map((item, idx) => (
+        <li>
+          <Button
+            {...(item.href
+              ? { href: getRelativeLocaleUrl(locale, item.href) }
+              : { type: "button" })}
+            variant="ghost"
+            size="sm"
+            title={item.label}
+            data-index={idx}
+            aria-expanded="false"
+            aria-controls="mega-menu-panel"
+            class="mega-trigger"
+          >
+            {item.label}
+          </Button>
+        </li>
+      ))
+    }
+  </ul>
+
+  <!-- Shared Mega Menu Panel -->
+  <div
+    role="region"
+    aria-labelledby="mega-menu-content"
+    class="absolute top-full left-1/2 pt-4 w-[600px] z-50 invisible opacity-0"
+    style="transform: translate(-50%, 8px);"
+  >
+    <!-- Popover arrow/bridge to prevent losing hover - Invisible area that extends upwards -->
+    <div class="absolute -top-4 left-0 right-0 h-8 bg-transparent"></div>
+
+    <div
+      class="bg-background backdrop-opacity-75 bg-clip-padding backdrop-filter backdrop-blur-xl text-popover-foreground rounded-xl shadow-lg border border-border overflow-hidden relative"
+    >
+      <!-- The viewport that clips the sliding track -->
+      <div class="viewport relative w-full overflow-hidden">
+        <!-- The track that slides horizontally -->
+        <div class="track flex flex-row w-[600%]">
+          {
+            navItems.map((nav) => (
+              <div
+                class:list={[
+                  "pane w-1/6 p-6",
+                  nav.children?.length &&
+                    nav.children.length > 1 &&
+                    `flex flex-col gap-2`,
+                ]}
+              >
+                {nav.children?.map((item) => (
+                  <div>
+                    <h3 class="font-semibold mb-4 text-sm text-muted-foreground">
+                      {item.label}
+                    </h3>
+                    <ItemGroup class="gap-4">
+                      {item.items.map((menu) => (
+                        <Item
+                          as="a"
+                          href={getRelativeLocaleUrl(locale, menu.href)}
+                          class="after:hidden"
+                          title={menu.label}
+                          aria-label={menu.label}
+                        >
+                          <ItemMedia
+                            variant="icon"
+                            class="group-hover/item:bg-linear-metal"
+                          >
+                            {menu.icon && <menu.icon />}
+                          </ItemMedia>
+                          <ItemContent>
+                            <ItemTitle class="line-clamp-1">
+                              {menu.label}
+                            </ItemTitle>
+                            <ItemDescription>
+                              {menu.description}
+                            </ItemDescription>
+                          </ItemContent>
+                        </Item>
+                      ))}
+                    </ItemGroup>
+                  </div>
+                ))}
+              </div>
+            ))
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</mega-menu-nav>
+
+<script>
+  import gsap from "gsap";
+
+  class MegaMenuNav extends HTMLElement {
+    triggers: NodeListOf<HTMLElement>;
+    panel: HTMLElement | null;
+    track: HTMLElement | null;
+    closeTimeout: ReturnType<typeof setTimeout> | null;
+
+    constructor() {
+      super();
+      this.triggers = this.querySelectorAll<HTMLElement>(".mega-trigger");
+      this.panel = this.querySelector<HTMLElement>("[role='region']");
+      this.track = this.querySelector<HTMLElement>(".track");
+      this.closeTimeout = null;
+    }
+
+    connectedCallback(): void {
+      if (this.panel) {
+        gsap.set(this.panel, { xPercent: -50, y: 8, autoAlpha: 0 });
+      }
+      this.init();
+    }
+
+    init(): void {
+      // Setup hover for triggers
+      this.triggers.forEach((trigger) => {
+        trigger.addEventListener("mouseenter", (e) => this.handleEnter(e));
+        trigger.addEventListener("focus", (e) => this.handleEnter(e));
+      });
+
+      // Handle leaving the entire nav area to close the menu
+      this.addEventListener("mouseleave", () => this.handleLeave());
+      this.addEventListener("mouseenter", () => this.clearTimeout());
+
+      // Accessibility - close on escape
+      this.addEventListener("keydown", (e: KeyboardEvent) => {
+        if (e.key === "Escape") {
+          this.closeMenu();
+        }
+      });
+    }
+
+    handleEnter(event: Event): void {
+      this.clearTimeout();
+      const trigger = event.target as HTMLElement;
+      const index = parseInt(trigger.dataset.index || "0", 10);
+
+      this.openMenu(index);
+    }
+
+    handleLeave(): void {
+      // Small delay before closing to prevent flicker when moving between button and panel
+      this.closeTimeout = setTimeout(() => {
+        this.closeMenu();
+      }, 300);
+    }
+
+    clearTimeout(): void {
+      if (this.closeTimeout) {
+        clearTimeout(this.closeTimeout);
+        this.closeTimeout = null;
+      }
+    }
+
+    openMenu(index: number): void {
+      // Update ARIA states
+      this.triggers.forEach((t, i) => {
+        t.setAttribute("aria-expanded", (i === index).toString());
+      });
+
+      if (this.panel) {
+        gsap.to(this.panel, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.3,
+          ease: "back.out(1.2)",
+          overwrite: "auto",
+        });
+      }
+
+      // Slide the track: since we have 6 items taking up 600% width,
+      // each item is 16.666% of the track width.
+      if (this.track) {
+        const percentage = (100 / 6) * index;
+        gsap.to(this.track, {
+          xPercent: -percentage,
+          duration: 0.4,
+          ease: "power3.inOut",
+          overwrite: "auto",
+        });
+      }
+    }
+
+    closeMenu(): void {
+      // Reset ARIA
+      this.triggers.forEach((t) => t.setAttribute("aria-expanded", "false"));
+
+      if (this.panel) {
+        gsap.to(this.panel, {
+          autoAlpha: 0,
+          y: 8,
+          duration: 0.2,
+          ease: "power2.in",
+          overwrite: "auto",
+        });
+      }
+    }
+  }
+
+  if (!customElements.get("mega-menu-nav")) {
+    customElements.define("mega-menu-nav", MegaMenuNav);
+  }
+</script>

@@ -1,4 +1,9 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "example_message": "你好 {username}"
+  "example_message": "你好 {username}",
+  "hero_title": "构建可扩展的数字系统以实现长期增长",
+  "hero_description": "我们为初创企业和快速成长的企业设计以性能为导向、边缘原生的数字基础设施，满足其对稳定性、速度和可持续性的需求。",
+  "base_profile": "个人资料",
+  "book_a_call": "预约建筑咨询",
+  "explore_services": "探索服务"
 }

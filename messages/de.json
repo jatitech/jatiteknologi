@@ -1,4 +1,9 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "example_message": "Hallo Welt {username}"
+  "example_message": "Hallo Welt {username}",
+  "hero_title": "Entwicklung skalierbarer digitaler Systeme für langfristiges Wachstum",
+  "hero_description": "Wir entwickeln leistungsorientierte, Edge-native digitale Infrastrukturen für Start-ups und wachsende Unternehmen, die Stabilität, Geschwindigkeit und Nachhaltigkeit benötigen.",
+  "base_profile": "Profil",
+  "book_a_call": "Bucharchitektur-Anruf",
+  "explore_services": "Dienstleistungen entdecken"
 }

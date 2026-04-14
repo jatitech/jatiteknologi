@@ -5,22 +5,37 @@ import Head from "@/components/Head.astro";
 import { baseLocale } from "@/paraglide/runtime";
 import type { Locale } from "@/paraglide/runtime";
 import { formatLangTag } from "@/lib/i18n";
+import { SEO } from "astro-seo";
+import { siteConfig } from "@/configs/site";
 
 interface Props {
   locale?: Locale;
+  title?: string;
+  description?: string;
 }
 
-const { locale = baseLocale } = Astro.props;
+const {
+  locale = baseLocale,
+  title = siteConfig.title,
+  description = siteConfig.description,
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang={formatLangTag(locale)}>
+<html lang={formatLangTag(locale)} dir={locale === "ar" ? "rtl" : "ltr"}>
   <head>
-    <Head />
+    <Head title={title} description={description} />
+    <!-- <SEO
+      title={title}
+      titleTemplate={`%s | ${siteConfig.name}`}
+      description={description}
+    /> -->
     <ClientRouter />
   </head>
   <body>
-    <slot />
+    <div class="min-h-screen">
+      <slot />
+    </div>
   </body>
 </html>
 

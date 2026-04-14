@@ -1,4 +1,9 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "example_message": "Ciao mondo {username}"
+  "example_message": "Ciao mondo {username}",
+  "hero_title": "Progettazione di sistemi digitali scalabili per una crescita a lungo termine",
+  "hero_description": "Progettiamo infrastrutture digitali native edge orientate alle prestazioni per startup e aziende in espansione che richiedono stabilità, velocità e sostenibilità.",
+  "base_profile": "Profilo",
+  "book_a_call": "Prenota Architettura Chiama",
+  "explore_services": "Esplora i servizi"
 }

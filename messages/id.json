@@ -1,4 +1,9 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "example_message": "Halo Dunia {username}"
+  "example_message": "Halo Dunia {username}",
+  "hero_title": "Mendesain Sistem Digital yang Skalabel untuk Pertumbuhan Jangka Panjang",
+  "hero_description": "Kami merancang infrastruktur digital yang berorientasi pada kinerja dan native di edge untuk startup dan bisnis yang sedang berkembang yang membutuhkan stabilitas, kecepatan, dan keberlanjutan.",
+  "base_profile": "Profil",
+  "book_a_call": "Pesan Panggilan Arsitektur",
+  "explore_services": "Jelajahi Layanan"
 }

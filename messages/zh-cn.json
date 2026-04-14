@@ -1,4 +1,9 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "example_message": "你好世界 {username}"
+  "example_message": "你好世界 {username}",
+  "hero_title": "為長期成長設計可擴展的數位系統架構",
+  "hero_description": "我們為追求穩定性、速度與永續性的新創企業及擴展型企業，設計以效能為導向、原生於邊緣的數位基礎架構。",
+  "base_profile": "個人檔案",
+  "book_a_call": "預約建築諮詢",
+  "explore_services": "探索服務"
 }

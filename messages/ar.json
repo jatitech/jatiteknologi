@@ -1,4 +1,9 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
-  "example_message": "مرحباً {username}"
+  "example_message": "مرحباً {username}",
+  "hero_title": "تصميم أنظمة رقمية قابلة للتطوير من أجل النمو على المدى الطويل",
+  "hero_description": "نحن نصمم بنية تحتية رقمية متطورة وموجهة نحو الأداء للشركات الناشئة والشركات المتوسعة التي تتطلب الاستقرار والسرعة والاستدامة.",
+  "base_profile": "الملف الشخصي",
+  "book_a_call": "كتاب الهندسة المعمارية",
+  "explore_services": "استكشف الخدمات"
 }

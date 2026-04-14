@@ -1,0 +1,39 @@
+---
+import { getRelativeLocaleUrl } from "astro:i18n";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/ui/sections/Header.astro";
+import Button from "@starwind/button";
+import { getLocale } from "@/lib/i18n";
+
+const locale = getLocale(Astro.currentLocale);
+---
+
+<Layout
+  title="Page Not Found"
+  description="The page you are looking for does not exist."
+>
+  <Header />
+  <main
+    class="min-h-screen flex items-center justify-center p-4 text-center pb-20"
+  >
+    <div class="flex flex-col items-center gap-6 max-w-md">
+      <h1
+        class="text-6xl md:text-8xl font-black bg-linear-metal tracking-tighter bg-clip-text text-transparent"
+      >
+        404
+      </h1>
+      <p class="text-lg md:text-xl text-zinc-600 dark:text-zinc-400">
+        Oops! We couldn't find the page you're looking for.
+      </p>
+      <div class="mt-4">
+        <Button
+          href={getRelativeLocaleUrl(locale, "/")}
+          size="lg"
+          class="w-full"
+        >
+          Back to Homepage
+        </Button>
+      </div>
+    </div>
+  </main>
+</Layout>
