@@ -15,7 +15,7 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     env:
-      PUBLIC_SITE_URL: https://${{ github.event.pull_request.number }}-${{ vars.CF_WORKER_DOMAIN }}
+      PUBLIC_SITE_URL: https://pr-${{ github.event.pull_request.number }}.${{ vars.CF_PAGES_DOMAIN }}
     steps:
       - name: Checkout
         uses: actions/checkout@v5
@@ -39,11 +39,11 @@ jobs:
         env:
           NODE_ENV: production
 
-      - name: Deploy to Cloudflare Worker (PR Preview)
+      - name: Deploy to Cloudflare Pages (PR Preview)
         id: deploy
         uses: cloudflare/wrangler-action@v3
         with:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           gitHubToken: ${{ secrets.GITHUB_TOKEN }}
-          command: versions upload --message "PR #${{ github.event.pull_request.number }}"
+          command: pages deploy dist --branch=pr-${{ github.event.pull_request.number }}
