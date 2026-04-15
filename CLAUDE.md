@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Overview
 
-Jati Technology company website -- an edge-native marketing and consulting platform built with Astro 6, deployed to Cloudflare Workers. Supports 15 locales via Paraglide JS (base locale: `en`).
+Jati Technology company website -- an edge-native marketing and consulting platform built with Astro 5, deployed to Cloudflare Pages. Supports 15 locales via Paraglide JS (base locale: `en`).
 
 ## Commands
 
@@ -32,11 +32,16 @@ Tooling is managed via `mise` (`.mise.toml`): Node 24.14.0, pnpm 10.28.2. Lintin
 - **pre-push**: full build
 - **commit-msg**: commitlint with conventional commits (`feat:`, `fix:`, `chore:`, etc.)
 
+## CI/CD (GitHub Actions)
+
+- **deploy-production.yml**: push to `main` → build + `wrangler pages deploy dist` (production)
+- **deploy-preview.yml**: PR to `main` → build + `wrangler pages deploy dist --branch=pr-{number}` (preview URL)
+
 ## Architecture
 
 ### Rendering & Deployment
 
-Astro 6 SSR hybrid with `@astrojs/cloudflare` v13 adapter (uses Cloudflare Vite plugin + workerd runtime). Build output: `dist/server/` (Worker entry) + `dist/client/` (static assets). Deployed as Cloudflare Workers (not Pages). Wrangler config in `wrangler.jsonc`. Cloudflare runtime types are declared in `worker-configuration.d.ts` (regenerate with `pnpm cf-typegen`).
+Astro 5 SSR hybrid with `@astrojs/cloudflare` v12 adapter. Build output goes to `dist/` (configured via `pages_build_output_dir` in `wrangler.jsonc`). Deployed as Cloudflare Pages (not Workers). CI deploys production on push to `main`; PRs get preview deployments. Cloudflare runtime types are declared in `worker-configuration.d.ts` (regenerate with `pnpm cf-typegen`).
 
 ### Internationalization
 
