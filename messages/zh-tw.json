@@ -1,8 +1,8 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "example_message": "你好 {username}",
-  "hero_title": "构建可扩展的数字系统以实现长期增长",
-  "hero_description": "我们为初创企业和快速成长的企业设计以性能为导向、边缘原生的数字基础设施，满足其对稳定性、速度和可持续性的需求。",
+  "hero_title": "為長遠成長構建 AI 原生、邊緣優先的系統架構",
+  "hero_description": "我們為面向未來的新創企業與大型企業，設計智慧化的邊緣原生數位基礎設施——融合 AI 增強能力、零信任安全機制與可擴展工程實力。",
   "base_profile": "个人资料",
   "book_a_call": "预约建筑咨询",
   "explore_services": "探索服务"

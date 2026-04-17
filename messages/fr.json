@@ -1,8 +1,8 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "example_message": "Bonjour le monde {username}",
-  "hero_title": "Conception de systèmes numériques évolutifs pour une croissance à long terme",
-  "hero_description": "Nous concevons des infrastructures numériques natives de pointe, axées sur la performance, pour les startups et les entreprises en pleine croissance qui exigent stabilité, rapidité et durabilité.",
+  "hero_title": "Architecture de systèmes natifs IA, priorité edge, pour une croissance à long terme",
+  "hero_description": "Nous concevons des infrastructures numériques intelligentes et natives de la périphérie — alliant augmentation par l'IA, sécurité zéro confiance et ingénierie évolutive pour les startups et les entreprises bâties pour l'avenir.",
   "base_profile": "Profil",
   "book_a_call": "Réserver Architecture Appeler",
   "explore_services": "Découvrez nos services"

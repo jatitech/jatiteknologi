@@ -1,8 +1,8 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "example_message": "Hola mundo {username}",
-  "hero_title": "Diseño de sistemas digitales escalables para un crecimiento a largo plazo",
-  "hero_description": "Diseñamos infraestructuras digitales nativas y orientadas al rendimiento para startups y empresas en expansión que exigen estabilidad, velocidad y sostenibilidad.",
+  "hero_title": "Diseñando sistemas nativos de IA y con prioridad en el edge para un crecimiento sostenible",
+  "hero_description": "Diseñamos infraestructura digital inteligente y nativa del edge — combinando aumentación con IA, seguridad de confianza cero e ingeniería escalable para startups y empresas construidas para el futuro.",
   "base_profile": "Perfil",
   "book_a_call": "Reservar Arquitectura Llamar",
   "explore_services": "Explorar servicios"

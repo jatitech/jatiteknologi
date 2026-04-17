@@ -1,15 +1,20 @@
 import type { SvgComponent } from "astro/types";
 import AdjustmentsIcon from "@tabler/icons/outline/adjustments.svg";
+import BrainIcon from "@tabler/icons/outline/brain.svg";
 import BriefcaseIcon from "@tabler/icons/outline/briefcase.svg";
 import BulbIcon from "@tabler/icons/outline/bulb.svg";
 import CalendarEventIcon from "@tabler/icons/outline/calendar-event.svg";
 import CloudCheckIcon from "@tabler/icons/outline/cloud-check.svg";
 import CodeIcon from "@tabler/icons/outline/code.svg";
+import CpuIcon from "@tabler/icons/outline/cpu.svg";
+import FingerprintIcon from "@tabler/icons/outline/fingerprint.svg";
 import GavelIcon from "@tabler/icons/outline/gavel.svg";
 import InfoCircleIcon from "@tabler/icons/outline/info-circle.svg";
 import MailIcon from "@tabler/icons/outline/mail.svg";
 import RocketIcon from "@tabler/icons/outline/rocket.svg";
 import ServerIcon from "@tabler/icons/outline/server.svg";
+import ShieldLockIcon from "@tabler/icons/outline/shield-lock.svg";
+import ShoppingCartIcon from "@tabler/icons/outline/shopping-cart.svg";
 import TargetIcon from "@tabler/icons/outline/target.svg";
 import TopologyIcon from "@tabler/icons/outline/topology-complex.svg";
 import TransformIcon from "@tabler/icons/outline/transform.svg";
@@ -61,6 +66,46 @@ const NAVIGATION: ReadonlyArray<Navigation> = [
             description:
               "Modernizing legacy logic into scalable, cost-efficient, and growth-ready architectures.",
             icon: AdjustmentsIcon,
+          },
+          {
+            label: "AI Integration & Automation",
+            href: "/services/ai-integration-automation",
+            order: 4,
+            description:
+              "LLM integration, agentic AI workflows, and edge inference systems for intelligent applications.",
+            icon: BrainIcon,
+          },
+          {
+            label: "IoT Consulting & Design",
+            href: "/services/iot-consulting-design",
+            order: 5,
+            description:
+              "End-to-end IoT architecture and electronics integration for connected, intelligent systems.",
+            icon: CpuIcon,
+          },
+          {
+            label: "Information Security Consulting",
+            href: "/services/information-security-consulting",
+            order: 6,
+            description:
+              "Security architecture reviews, threat modeling, and compliance-ready system hardening.",
+            icon: ShieldLockIcon,
+          },
+          {
+            label: "Digital Identity Solutions",
+            href: "/services/digital-identity-solutions",
+            order: 7,
+            description:
+              "Scalable identity infrastructure — authentication, authorization, and digital trust systems.",
+            icon: FingerprintIcon,
+          },
+          {
+            label: "E-Commerce Development",
+            href: "/services/ecommerce-development",
+            order: 8,
+            description:
+              "High-performance e-commerce platforms engineered for scale, speed, and conversion.",
+            icon: ShoppingCartIcon,
           },
         ],
       },
@@ -203,7 +248,7 @@ const NAVIGATION: ReadonlyArray<Navigation> = [
             href: "/about",
             order: 1,
             description:
-              "An edge-native architecture firm building sustainable and scalable digital systems.",
+              "An AI-native, edge-first engineering partner building scalable and intelligent digital systems.",
             icon: InfoCircleIcon,
           },
           {
