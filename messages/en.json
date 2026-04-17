@@ -1,8 +1,8 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "example_message": "Hello world {username}",
-  "hero_title": "Architecting Scalable Digital Systems for Long-Term Growth",
-  "hero_description": "We design performance-driven, edge-native digital infrastructure for startups and scaling businesses that demand stability, speed, and sustainability.",
+  "hero_title": "Architecting AI-Native, Edge-First Systems for Long-Term Growth",
+  "hero_description": "We design intelligent, edge-native digital infrastructure — combining AI augmentation, zero-trust security, and scalable engineering for startups and enterprises built for the future.",
   "base_profile": "Profile",
   "book_a_call": "Book Architecture Call",
   "explore_services": "Explore Services"

@@ -1,8 +1,8 @@
 {
   "$schema": "https://inlang.com/schema/inlang-message-format",
   "example_message": "नमस्ते {username}",
-  "hero_title": "장기적 성장을 위한 확장 가능한 디지털 시스템 설계",
-  "hero_description": "우리는 안정성, 속도, 지속 가능성을 요구하는 스타트업과 성장 중인 기업을 위해 성능 중심의 엣지 네이티브 디지털 인프라를 설계합니다.",
+  "hero_title": "장기적 성장을 위한 AI 네이티브, 엣지 퍼스트 시스템 설계",
+  "hero_description": "우리는 AI 증강, 제로 트러스트 보안, 확장 가능한 엔지니어링을 결합하여 미래를 위해 설계된 스타트업과 기업을 위한 지능형 엣지 네이티브 디지털 인프라를 구축합니다.",
   "base_profile": "프로필",
   "book_a_call": "건축 상담 예약",
   "explore_services": "서비스 살펴보기"
