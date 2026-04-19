@@ -29,9 +29,6 @@ importers:
       astro:
         specifier: ^5.18.0
         version: 5.18.1(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.57.1)(typescript@6.0.2)(yaml@2.8.2)
-      astro-seo:
-        specifier: ^1.1.0
-        version: 1.1.0(prettier@3.8.1)(typescript@6.0.2)
       clsx:
         specifier: ^2.1.1
         version: 2.1.1
@@ -2027,9 +2024,6 @@ packages:
 
   array-timsort@1.0.3:
     resolution: {integrity: sha512-/+3GRL7dDAGEfM6TseQk/U+mi18TU2Ms9I3UlLdUMhz2hbvGNTKdj9xniwXfUqgYhHxRx0+8UnKkvlNwVU+cWQ==}
-
-  astro-seo@1.1.0:
-    resolution: {integrity: sha512-G6LDNDyga30o+52v58jU7C35n3cORUzk7RSuY+xf/ZRbW6JiNplyaOO1VoYVKO+xzYNaBcxqNln2RFRR/wgJNQ==}
 
   astro@5.18.1:
     resolution: {integrity: sha512-m4VWilWZ+Xt6NPoYzC4CgGZim/zQUO7WFL0RHCH0AiEavF1153iC3+me2atDvXpf/yX4PyGUeD8wZLq1cirT3g==}
@@ -5207,14 +5201,6 @@ snapshots:
   array-iterate@2.0.1: {}
 
   array-timsort@1.0.3: {}
-
-  astro-seo@1.1.0(prettier@3.8.1)(typescript@6.0.2):
-    dependencies:
-      '@astrojs/check': 0.9.8(prettier@3.8.1)(typescript@6.0.2)
-    transitivePeerDependencies:
-      - prettier
-      - prettier-plugin-astro
-      - typescript
 
   astro@5.18.1(@types/node@25.6.0)(jiti@2.6.1)(lightningcss@1.32.0)(rollup@4.57.1)(typescript@6.0.2)(yaml@2.8.2):
     dependencies:

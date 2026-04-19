@@ -104,7 +104,7 @@ const { locale = baseLocale } = Astro.props;
     AdditiveBlending,
     Material,
     Color,
-    Clock,
+    Timer,
     Points,
     PointsMaterial,
     PerspectiveCamera,
@@ -879,7 +879,7 @@ const { locale = baseLocale } = Astro.props;
         },
       });
 
-      const clock = new Clock();
+      const clock = new Timer();
       const animate = () => {
         const delta = clock.getDelta();
         gu.time.value += delta * 1.0;

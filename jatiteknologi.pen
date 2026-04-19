@@ -1,0 +1,723 @@
+{
+  "version": "2.11",
+  "children": [
+    {
+      "type": "frame",
+      "id": "gbTKK",
+      "x": 0,
+      "y": 0,
+      "name": "Home Page",
+      "theme": {
+        "f:Mode": "Dark"
+      },
+      "clip": true,
+      "width": 1440,
+      "fill": "$f:--background",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "dC8W6",
+          "name": "Hero + Header",
+          "clip": true,
+          "width": 1440,
+          "height": 1240,
+          "fill": "#0a0a0a",
+          "layout": "none",
+          "children": [
+            {
+              "type": "frame",
+              "id": "206ae",
+              "x": 0,
+              "y": 0,
+              "name": "Hero Background",
+              "clip": true,
+              "width": 1440,
+              "height": 682,
+              "fill": {
+                "type": "gradient",
+                "gradientType": "radial",
+                "enabled": true,
+                "rotation": 0,
+                "size": {
+                  "width": 1.4,
+                  "height": 1.6
+                },
+                "colors": [
+                  {
+                    "color": "#14213d",
+                    "position": 0
+                  },
+                  {
+                    "color": "#0a0a0a",
+                    "position": 1
+                  }
+                ],
+                "center": {
+                  "x": 0.42,
+                  "y": 0.32
+                }
+              },
+              "layout": "none",
+              "children": [
+                {
+                  "type": "script",
+                  "id": "XeZCj",
+                  "x": 0,
+                  "y": 0,
+                  "name": "Particle Wave",
+                  "width": 1440,
+                  "height": 682,
+                  "scriptUri": "particle-wave.js"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "tZHOo",
+              "x": 160,
+              "y": 16,
+              "name": "Floating Header",
+              "width": 1120,
+              "height": 56,
+              "fill": "#ffffff0f",
+              "cornerRadius": 6,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "#ffffff1a"
+              },
+              "padding": [
+                0,
+                24
+              ],
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "vP5hf",
+                  "name": "Logo",
+                  "gap": 10,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "UuiUd",
+                      "name": "logoIcon",
+                      "width": 26,
+                      "height": 26,
+                      "fill": "#06b6d4",
+                      "cornerRadius": 6,
+                      "justifyContent": "center",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "lOjpL",
+                          "name": "logoJ",
+                          "fill": "#0a0a0a",
+                          "content": "J",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "700"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "9Vutw",
+                      "name": "logoTxt",
+                      "fill": "#fafafa",
+                      "content": "Jati Technology",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "idXgC",
+                  "name": "Nav",
+                  "gap": 32,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "81GQ8",
+                      "name": "nav1",
+                      "fill": "#a3a3a3",
+                      "content": "Services",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "a2VX6",
+                      "name": "nav2",
+                      "fill": "#a3a3a3",
+                      "content": "Solutions",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dUZJP",
+                      "name": "nav3",
+                      "fill": "#a3a3a3",
+                      "content": "Products",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Xw9qA",
+                      "name": "nav4",
+                      "fill": "#a3a3a3",
+                      "content": "Cloud Care",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "dZ3ko",
+                      "name": "nav5",
+                      "fill": "#a3a3a3",
+                      "content": "Resources",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "text",
+                      "id": "xRG00",
+                      "name": "nav6",
+                      "fill": "#a3a3a3",
+                      "content": "Company",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "MVkts",
+                  "name": "Header Right",
+                  "gap": 20,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "odlWo",
+                      "name": "moonIcon",
+                      "width": 18,
+                      "height": 18,
+                      "iconFontName": "moon",
+                      "iconFontFamily": "lucide",
+                      "fill": "#a3a3a3"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "aM7kj",
+                      "name": "langWrap",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "FaXVp",
+                          "name": "globeIcon",
+                          "width": 16,
+                          "height": 16,
+                          "iconFontName": "globe",
+                          "iconFontFamily": "lucide",
+                          "fill": "#a3a3a3"
+                        },
+                        {
+                          "type": "text",
+                          "id": "ZHLfN",
+                          "name": "enTxt",
+                          "fill": "#a3a3a3",
+                          "content": "EN",
+                          "fontFamily": "Inter",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "hSETL",
+              "x": 32,
+              "y": 760,
+              "name": "Hero Content",
+              "width": 1376,
+              "gap": 32,
+              "alignItems": "end",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "iKz47",
+                  "name": "Hero Title",
+                  "fill": "#fafafa",
+                  "textGrowth": "fixed-width",
+                  "width": 560,
+                  "content": "Architecting AI-Native, Edge-First Systems for Long-Term Growth",
+                  "lineHeight": 1.1,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 48,
+                  "fontWeight": "700",
+                  "letterSpacing": -0.8
+                },
+                {
+                  "type": "frame",
+                  "id": "xmBn5",
+                  "name": "Middle Links",
+                  "width": "fill_container",
+                  "gap": 24,
+                  "padding": [
+                    0,
+                    16,
+                    8,
+                    0
+                  ],
+                  "justifyContent": "end",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "R4CrD",
+                      "name": "Profile Link",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "65rdq",
+                          "name": "profileIcon",
+                          "width": 16,
+                          "height": 16,
+                          "iconFontName": "file-down",
+                          "iconFontFamily": "lucide",
+                          "fill": "#a3a3a3"
+                        },
+                        {
+                          "type": "text",
+                          "id": "vCE2w",
+                          "name": "profileTxt",
+                          "fill": "#d4d4d8",
+                          "content": "Profile",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ON1wN",
+                      "name": "Lynk Link",
+                      "gap": 6,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "DdYDt",
+                          "name": "lynkTxt",
+                          "fill": "#d4d4d8",
+                          "content": "lynk.id",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 14,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "icon_font",
+                          "id": "UXZBh",
+                          "name": "lynkIcon",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "external-link",
+                          "iconFontFamily": "lucide",
+                          "fill": "#a3a3a3"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "YLjKy",
+                  "name": "Hero Right",
+                  "width": 400,
+                  "layout": "vertical",
+                  "gap": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "lnMCm",
+                      "name": "Hero Description",
+                      "fill": "#d4d4d8",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "We design intelligent, edge-native digital infrastructure — combining AI augmentation, zero-trust security, and scalable engineering for startups and enterprises built for the future.",
+                      "lineHeight": 1.55,
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "hOY9T",
+                      "name": "CTA Row",
+                      "width": "fill_container",
+                      "gap": 16,
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "d847Y",
+                          "name": "Primary Button",
+                          "width": "fill_container",
+                          "height": 40,
+                          "fill": "#fafafa",
+                          "cornerRadius": 6,
+                          "gap": 8,
+                          "padding": [
+                            0,
+                            18
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "8JpfR",
+                              "name": "primaryBtnTxt",
+                              "fill": "#0a0a0a",
+                              "content": "Book Architecture Call",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 13,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "cEm81",
+                          "name": "Outline Button",
+                          "width": "fill_container",
+                          "height": 40,
+                          "cornerRadius": 6,
+                          "stroke": {
+                            "align": "inside",
+                            "thickness": 1,
+                            "fill": "#ffffff33"
+                          },
+                          "gap": 8,
+                          "padding": [
+                            0,
+                            18
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "UQsY8",
+                              "name": "outlineIcon",
+                              "width": 14,
+                              "height": 14,
+                              "iconFontName": "arrow-down",
+                              "iconFontFamily": "lucide",
+                              "fill": "#fafafa"
+                            },
+                            {
+                              "type": "text",
+                              "id": "ikkni",
+                              "name": "outlineBtnTxt",
+                              "fill": "#fafafa",
+                              "content": "Explore Services",
+                              "fontFamily": "JetBrains Mono",
+                              "fontSize": 13,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "K0G5j",
+          "name": "Main Content",
+          "width": "fill_container",
+          "fill": "$f:--background",
+          "gap": 16,
+          "padding": [
+            40,
+            40,
+            64,
+            40
+          ],
+          "justifyContent": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "DdihT",
+              "name": "Left Gutter",
+              "width": 40,
+              "height": "fill_container",
+              "stroke": {
+                "align": "inside",
+                "thickness": {
+                  "right": 1,
+                  "left": 1
+                },
+                "fill": "#ffffff1a"
+              },
+              "layout": "none"
+            },
+            {
+              "type": "frame",
+              "id": "hgtjW",
+              "name": "Content Column",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "qtxRB",
+                  "name": "p1",
+                  "fill": "$f:--foreground",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe molestias dolores laborum atque debitis laboriosam. Exercitationem, enim! Deserunt officiis corporis atque eligendi sequi perferendis dolorem beatae iste fugit a.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "nYCo3",
+                  "name": "p2",
+                  "fill": "$f:--foreground",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe molestias dolores laborum atque debitis laboriosam. Exercitationem, enim! Deserunt officiis corporis atque eligendi sequi perferendis dolorem beatae iste fugit a.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "IUcYE",
+                  "name": "p3",
+                  "fill": "$f:--foreground",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe molestias dolores laborum atque debitis laboriosam. Exercitationem, enim! Deserunt officiis corporis atque eligendi sequi perferendis dolorem beatae iste fugit a.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "QFrin",
+                  "name": "p4",
+                  "fill": "$f:--foreground",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe molestias dolores laborum atque debitis laboriosam. Exercitationem, enim! Deserunt officiis corporis atque eligendi sequi perferendis dolorem beatae iste fugit a.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "tAD2M",
+                  "name": "p5",
+                  "fill": "$f:--foreground",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe molestias dolores laborum atque debitis laboriosam. Exercitationem, enim! Deserunt officiis corporis atque eligendi sequi perferendis dolorem beatae iste fugit a.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "8Waxq",
+                  "name": "p6",
+                  "fill": "$f:--foreground",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe molestias dolores laborum atque debitis laboriosam. Exercitationem, enim! Deserunt officiis corporis atque eligendi sequi perferendis dolorem beatae iste fugit a.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "zLbjC",
+                  "name": "p7",
+                  "fill": "$f:--foreground",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe molestias dolores laborum atque debitis laboriosam. Exercitationem, enim! Deserunt officiis corporis atque eligendi sequi perferendis dolorem beatae iste fugit a.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "hMZbD",
+                  "name": "p8",
+                  "fill": "$f:--foreground",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe molestias dolores laborum atque debitis laboriosam. Exercitationem, enim! Deserunt officiis corporis atque eligendi sequi perferendis dolorem beatae iste fugit a.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "bjIYl",
+                  "name": "p9",
+                  "fill": "$f:--foreground",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe molestias dolores laborum atque debitis laboriosam. Exercitationem, enim! Deserunt officiis corporis atque eligendi sequi perferendis dolorem beatae iste fugit a.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "fBmne",
+                  "name": "p10",
+                  "fill": "$f:--foreground",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe molestias dolores laborum atque debitis laboriosam. Exercitationem, enim! Deserunt officiis corporis atque eligendi sequi perferendis dolorem beatae iste fugit a.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "VgpPS",
+                  "name": "p11",
+                  "fill": "$f:--foreground",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe molestias dolores laborum atque debitis laboriosam. Exercitationem, enim! Deserunt officiis corporis atque eligendi sequi perferendis dolorem beatae iste fugit a.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "gMYyj",
+                  "name": "p12",
+                  "fill": "$f:--foreground",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe molestias dolores laborum atque debitis laboriosam. Exercitationem, enim! Deserunt officiis corporis atque eligendi sequi perferendis dolorem beatae iste fugit a.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "ju3vg",
+                  "name": "p13",
+                  "fill": "$f:--foreground",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe molestias dolores laborum atque debitis laboriosam. Exercitationem, enim! Deserunt officiis corporis atque eligendi sequi perferendis dolorem beatae iste fugit a.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "HL8Z2",
+                  "name": "p14",
+                  "fill": "$f:--foreground",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe molestias dolores laborum atque debitis laboriosam. Exercitationem, enim! Deserunt officiis corporis atque eligendi sequi perferendis dolorem beatae iste fugit a.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "KjL00",
+                  "name": "p15",
+                  "fill": "$f:--foreground",
+                  "textGrowth": "fixed-width",
+                  "width": "fill_container",
+                  "content": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo saepe molestias dolores laborum atque debitis laboriosam. Exercitationem, enim! Deserunt officiis corporis atque eligendi sequi perferendis dolorem beatae iste fugit a.",
+                  "lineHeight": 1.5,
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "UpUcu",
+              "name": "Right Gutter",
+              "width": 40,
+              "height": "fill_container",
+              "stroke": {
+                "align": "inside",
+                "thickness": {
+                  "right": 1,
+                  "left": 1
+                },
+                "fill": "#ffffff1a"
+              },
+              "layout": "none"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "imports": {
+    "f": "pencil:shadcn.lib.pen"
+  }
+}

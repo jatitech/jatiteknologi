@@ -37,6 +37,7 @@ export default defineConfig({
       external: ["node:fs/promises", "node:url", "node:crypto", "node:fs"],
     },
     plugins: [
+      // @ts-ignore
       tailwindcss(),
       paraglideVitePlugin({
         project: inlangDirectory,
