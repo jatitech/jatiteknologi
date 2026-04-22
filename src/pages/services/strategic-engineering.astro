@@ -1,0 +1,15 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/ui/sections/Header.astro";
+
+const title = "Strategic Engineering & Architecture";
+const description = "SaaS platforms, modernization, and architecture consulting for scaling companies.";
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  <main class="container max-w-3xl py-24">
+    <h1 class="text-4xl font-bold tracking-tight">{title}</h1>
+    <p class="mt-4 text-muted-foreground">{description}</p>
+  </main>
+</Layout>

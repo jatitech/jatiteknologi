@@ -34,6 +34,9 @@ type Navigation = {
   }[];
 };
 
+/**
+ * @rule Minimum navigation menu 1 and maximum 6
+ */
 const NAVIGATION: ReadonlyArray<Navigation> = [
   {
     label: "Services",

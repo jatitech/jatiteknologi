@@ -38,3 +38,5 @@ AGENTS.md
 .omc
 
 memory/
+# Added by code-review-graph
+.code-review-graph/

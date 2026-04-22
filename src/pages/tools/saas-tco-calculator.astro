@@ -1,0 +1,15 @@
+---
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/ui/sections/Header.astro";
+
+const title = "SaaS TCO Calculator";
+const description = "Compare total cost of ownership between SaaS subscriptions and self-hosted open-source alternatives.";
+---
+
+<Layout title={title} description={description}>
+  <Header />
+  <main class="container max-w-3xl py-24">
+    <h1 class="text-4xl font-bold tracking-tight">{title}</h1>
+    <p class="mt-4 text-muted-foreground">{description}</p>
+  </main>
+</Layout>
