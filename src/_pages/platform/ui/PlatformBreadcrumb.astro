@@ -1,0 +1,32 @@
+---
+import { dictionaryFor, localizedPath, type Locale } from "@/shared/i18n";
+import { BrandText } from "@/shared/ui/BrandText";
+
+interface Props {
+	locale: Locale;
+	/** The page's own name. It is the last item and is not a link. */
+	name: string;
+}
+
+const { locale, name } = Astro.props;
+const shared = dictionaryFor(locale).platform.shared;
+---
+
+<nav aria-label={shared.breadcrumb.label}>
+	<ol role="list" class="flex flex-wrap items-center gap-2 text-label-sm text-muted">
+		<li>
+			<a
+				href={localizedPath(locale, "home")}
+				class="inline-flex min-h-6 items-center rounded-sm text-on-surface-variant underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+			>
+				<BrandText text={shared.breadcrumb.home} />
+			</a>
+		</li>
+		<li class="flex items-center gap-2">
+			<span class="i-ph-caret-right size-3.5 shrink-0" aria-hidden="true"></span>
+			<span aria-current="page" class="inline-flex min-h-6 items-center text-on-surface">
+				<BrandText text={name} />
+			</span>
+		</li>
+	</ol>
+</nav>

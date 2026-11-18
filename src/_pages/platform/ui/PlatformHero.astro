@@ -1,0 +1,68 @@
+---
+import { dictionaryFor, type Locale, type PlatformCopy } from "@/shared/i18n";
+import { BrandText } from "@/shared/ui/BrandText";
+import { ContactActions } from "@/shared/ui/ContactActions";
+import { Eyebrow } from "@/shared/ui/Eyebrow";
+
+import PlatformBreadcrumb from "./PlatformBreadcrumb.astro";
+
+interface Props {
+	locale: Locale;
+	copy: PlatformCopy;
+}
+
+const { locale, copy } = Astro.props;
+const dictionary = dictionaryFor(locale);
+const { hero } = copy;
+---
+
+<section
+	aria-labelledby="platform-hero-heading"
+	class="px-margin-mobile pt-8 pb-14 md:px-margin-tablet md:pt-12 lg:px-margin lg:pt-12 lg:pb-24"
+>
+	<div class="mx-auto flex w-full max-w-[1280px] flex-col gap-10">
+		<PlatformBreadcrumb locale={locale} name={copy.name} />
+		<div class="flex flex-col gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-16">
+			<div class="flex max-w-[816px] flex-col gap-6">
+				<Eyebrow>
+					<BrandText text={hero.eyebrow} />
+				</Eyebrow>
+				<h1
+					id="platform-hero-heading"
+					class="text-mobile-display-lg font-medium text-balance text-on-surface md:text-display-lg"
+				>
+					<BrandText text={hero.headline} />
+				</h1>
+				<p class="text-mobile-body-lg text-on-surface-variant lg:text-body-lg">
+					<BrandText text={hero.lead} />
+				</p>
+				{
+					hero.chips && (
+						<ul role="list" class="flex flex-wrap gap-2">
+							{hero.chips.map((chip) => (
+								<li class="rounded-full bg-surface-sunken px-3 py-1 text-label-sm font-medium text-on-surface">
+									<BrandText text={chip} />
+								</li>
+							))}
+						</ul>
+					)
+				}
+				<ContactActions
+					primaryLabel={dictionary.nav.primaryAction}
+					secondaryLabel={dictionary.platform.shared.actions.email}
+				/>
+				<p class="text-body-sm text-muted">
+					<BrandText text={hero.nonAffiliation} />
+				</p>
+			</div>
+			<div
+				aria-hidden="true"
+				class="flex min-h-44 w-full items-center justify-center rounded-lg border border-outline bg-surface-sunken p-8 lg:min-h-90 lg:w-[400px] lg:shrink-0"
+			>
+				<p translate="no" class="text-center text-headline-sm font-semibold text-on-surface">
+					{copy.name}
+				</p>
+			</div>
+		</div>
+	</div>
+</section>

@@ -1,0 +1,42 @@
+---
+import { dictionaryFor, type Locale, type PlatformCopy } from "@/shared/i18n";
+import { BrandText } from "@/shared/ui/BrandText";
+
+import PlatformSection from "./PlatformSection.astro";
+import PlatformSectionHead from "./PlatformSectionHead.astro";
+import PlatformSourceLink from "./PlatformSourceLink.astro";
+
+interface Props {
+	locale: Locale;
+	copy: PlatformCopy;
+}
+
+const { locale, copy } = Astro.props;
+const shared = dictionaryFor(locale).platform.shared;
+---
+
+<PlatformSection headingId="problems-heading">
+	<PlatformSectionHead
+		id="problems-heading"
+		eyebrow={shared.problems.eyebrow}
+		title={copy.problems.title}
+	/>
+	<ul role="list" class="grid gap-4 md:grid-cols-2">
+		{
+			copy.problems.items.map((item, index) => (
+				<li class="flex flex-col gap-3 rounded-lg border border-outline bg-surface p-5 md:p-7">
+					<span aria-hidden="true" class="font-mono text-mono-sm text-muted">
+						{String(index + 1).padStart(2, "0")}
+					</span>
+					<h3 class="text-title-md font-semibold text-on-surface">
+						<BrandText text={item.title} />
+					</h3>
+					<p class="text-body-md text-muted">
+						<BrandText text={item.description} />
+					</p>
+					{item.source && <PlatformSourceLink source={item.source} />}
+				</li>
+			))
+		}
+	</ul>
+</PlatformSection>

@@ -1,0 +1,18 @@
+---
+import type { PlatformSource } from "@/shared/i18n";
+import { BrandText } from "@/shared/ui/BrandText";
+
+interface Props {
+	/** The document behind a claim. Its label is the visible text, and the link goes to its address. */
+	source: PlatformSource;
+}
+
+const { source } = Astro.props;
+---
+
+<a
+	href={source.href}
+	class="inline-flex min-h-6 items-center self-start font-mono text-mono-sm text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+>
+	<BrandText text={source.label} />
+</a>

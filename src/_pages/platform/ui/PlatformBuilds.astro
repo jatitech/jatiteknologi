@@ -1,0 +1,53 @@
+---
+import { dictionaryFor, type Locale, type PlatformCopy } from "@/shared/i18n";
+import { BrandText } from "@/shared/ui/BrandText";
+
+import PlatformSection from "./PlatformSection.astro";
+import PlatformSectionHead from "./PlatformSectionHead.astro";
+
+interface Props {
+	locale: Locale;
+	copy: PlatformCopy;
+}
+
+const { locale, copy } = Astro.props;
+const shared = dictionaryFor(locale).platform.shared;
+---
+
+<PlatformSection headingId="builds-heading" sunken>
+	<div class="grid gap-10 lg:grid-cols-[minmax(0,400fr)_minmax(0,800fr)] lg:gap-20">
+		<PlatformSectionHead
+			id="builds-heading"
+			eyebrow={shared.builds.eyebrow}
+			title={shared.builds.title}
+			description={shared.builds.description}
+		/>
+		<ul role="list" class="flex flex-col">
+			{
+				copy.builds.items.map((item, index) => (
+					<li
+						class:list={[
+							"flex items-start gap-5 py-6",
+							index > 0 && "border-t border-outline",
+						]}
+					>
+						<span
+							aria-hidden="true"
+							class="flex size-9 shrink-0 items-center justify-center rounded-md bg-primary-container font-mono text-mono-sm text-primary"
+						>
+							{String(index + 1).padStart(2, "0")}
+						</span>
+						<div class="flex min-w-0 flex-col gap-1.5">
+							<h3 class="text-title-md font-semibold text-on-surface">
+								<BrandText text={item.title} />
+							</h3>
+							<p class="text-body-md text-muted">
+								<BrandText text={item.description} />
+							</p>
+						</div>
+					</li>
+				))
+			}
+		</ul>
+	</div>
+</PlatformSection>

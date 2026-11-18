@@ -1,0 +1,22 @@
+---
+interface Props {
+	/** The id of the section's heading. The section is labelled by it. */
+	headingId: string;
+	/** Puts the section on `surface-sunken`. Sections alternate between the two tones. */
+	sunken?: boolean;
+}
+
+const { headingId, sunken = false } = Astro.props;
+---
+
+<section
+	aria-labelledby={headingId}
+	class:list={[
+		"scroll-mt-24 px-margin-mobile py-14 md:px-margin-tablet lg:px-margin lg:py-24",
+		sunken && "bg-surface-sunken",
+	]}
+>
+	<div class="mx-auto flex w-full max-w-[1280px] flex-col gap-10">
+		<slot />
+	</div>
+</section>

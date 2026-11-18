@@ -1,0 +1,21 @@
+---
+import BaseLayout from "@/app/layouts/BaseLayout.astro";
+import { PlatformPage, platformMeta } from "@/_pages/platform";
+
+export const prerender = true;
+
+const locale = "en";
+const slug = "meta";
+const page = platformMeta(locale, slug);
+---
+
+<BaseLayout
+	locale={locale}
+	title={page.title}
+	description={page.description}
+	path={page.path}
+	alternates={page.alternates}
+	navLinks={page.navLinks}
+>
+	<PlatformPage locale={locale} slug={slug} />
+</BaseLayout>

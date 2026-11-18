@@ -1,0 +1,48 @@
+---
+import { dictionaryFor, type Locale, type PlatformCopy } from "@/shared/i18n";
+import { BrandText } from "@/shared/ui/BrandText";
+import { Eyebrow } from "@/shared/ui/Eyebrow";
+
+import { howWeWorkHref } from "../model/meta";
+
+import PlatformSection from "./PlatformSection.astro";
+
+interface Props {
+	locale: Locale;
+	copy: PlatformCopy;
+}
+
+const { locale, copy } = Astro.props;
+const { experience } = dictionaryFor(locale).platform.shared;
+---
+
+<PlatformSection headingId="experience-heading">
+	<div
+		class="flex flex-col gap-6 rounded-lg border border-outline bg-surface p-7 md:p-10 lg:flex-row lg:gap-16 lg:p-12"
+	>
+		<div class="flex flex-col gap-3 lg:w-[360px] lg:shrink-0">
+			<Eyebrow>{experience.eyebrow}</Eyebrow>
+			<h2
+				id="experience-heading"
+				class="text-mobile-headline-md font-medium text-balance text-on-surface md:text-headline-md"
+			>
+				<BrandText text={experience.title} />
+			</h2>
+		</div>
+		<div class="flex max-w-[760px] flex-col gap-4">
+			{
+				copy.experience.paragraphs.map((paragraph) => (
+					<p class="text-mobile-body-md text-on-surface-variant lg:text-body-lg">
+						<BrandText text={paragraph} />
+					</p>
+				))
+			}
+		</div>
+	</div>
+	<a
+		href={howWeWorkHref(locale)}
+		class="inline-flex min-h-11 items-center self-start text-label-md font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+	>
+		<BrandText text={experience.processLink} />
+	</a>
+</PlatformSection>

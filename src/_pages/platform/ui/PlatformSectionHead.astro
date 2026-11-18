@@ -1,0 +1,31 @@
+---
+import { BrandText } from "@/shared/ui/BrandText";
+import { Eyebrow } from "@/shared/ui/Eyebrow";
+
+interface Props {
+	/** The id of the `h2`, which labels its section. */
+	id: string;
+	eyebrow: string;
+	title: string;
+	description?: string;
+}
+
+const { id, eyebrow, title, description } = Astro.props;
+---
+
+<div class="flex max-w-[720px] flex-col gap-3">
+	<Eyebrow>{eyebrow}</Eyebrow>
+	<h2
+		id={id}
+		class="text-mobile-headline-md font-medium text-balance text-on-surface md:text-headline-md"
+	>
+		<BrandText text={title} />
+	</h2>
+	{
+		description && (
+			<p class="text-body-md text-muted">
+				<BrandText text={description} />
+			</p>
+		)
+	}
+</div>

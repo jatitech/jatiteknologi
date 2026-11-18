@@ -1,0 +1,31 @@
+---
+import { dictionaryFor, type Locale } from "@/shared/i18n";
+import { BrandText } from "@/shared/ui/BrandText";
+import { ContactActions } from "@/shared/ui/ContactActions";
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const dictionary = dictionaryFor(locale);
+const { closing, actions } = dictionary.platform.shared;
+---
+
+<section
+	aria-labelledby="closing-heading"
+	class="px-margin-mobile py-section-tablet md:px-margin-tablet lg:px-margin lg:py-30"
+>
+	<div class="mx-auto flex w-full max-w-[1280px] flex-col items-center gap-6 text-center lg:gap-8">
+		<h2
+			id="closing-heading"
+			class="max-w-[900px] text-mobile-display-lg font-medium text-balance text-on-surface lg:text-display-lg"
+		>
+			<BrandText text={closing.headline} />
+		</h2>
+		<ContactActions primaryLabel={dictionary.nav.primaryAction} secondaryLabel={actions.email} />
+		<p class="max-w-[760px] text-body-sm text-muted">
+			<BrandText text={closing.disclaimer} />
+		</p>
+	</div>
+</section>

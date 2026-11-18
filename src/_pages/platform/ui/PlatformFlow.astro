@@ -1,0 +1,54 @@
+---
+import { dictionaryFor, type Locale, type PlatformCopy } from "@/shared/i18n";
+import { BrandText } from "@/shared/ui/BrandText";
+
+import PlatformSection from "./PlatformSection.astro";
+import PlatformSectionHead from "./PlatformSectionHead.astro";
+
+interface Props {
+	locale: Locale;
+	copy: PlatformCopy;
+}
+
+const { locale, copy } = Astro.props;
+const shared = dictionaryFor(locale).platform.shared;
+
+/** The connector between two boxes. It is decoration, so the ordered list carries the meaning. */
+const CONNECTOR = "mx-auto h-7 w-0.5 shrink-0 bg-primary lg:mx-0 lg:h-0.5 lg:w-24";
+const BOX = "flex min-h-24 items-center justify-center rounded-lg p-6 text-center lg:min-h-30 lg:flex-1";
+---
+
+<PlatformSection headingId="flow-heading">
+	<PlatformSectionHead id="flow-heading" eyebrow={shared.flow.eyebrow} title={shared.flow.title} />
+	<ol role="list" class="flex flex-col items-stretch lg:flex-row lg:items-center">
+		<li class:list={[BOX, "bg-surface-sunken"]}>
+			<p translate="no" class="text-label-md font-semibold text-on-surface">
+				<BrandText text={copy.name} />
+			</p>
+		</li>
+		<li aria-hidden="true" class={CONNECTOR}></li>
+		<li class:list={[BOX, "border border-outline bg-surface"]}>
+			<p class="text-title-md font-semibold text-balance text-on-surface">
+				<BrandText text={copy.flow.layer} />
+			</p>
+		</li>
+		<li aria-hidden="true" class={CONNECTOR}></li>
+		<li class:list={[BOX, "border border-outline bg-surface"]}>
+			<p class="text-title-md font-semibold text-balance text-on-surface">
+				<BrandText text={copy.flow.system} />
+			</p>
+		</li>
+	</ol>
+	<ul role="list" class="grid gap-6 md:grid-cols-3 lg:gap-8">
+		{
+			copy.flow.notes.map((note) => (
+				<li class="flex flex-col gap-3">
+					<span aria-hidden="true" class="h-[3px] w-10 bg-primary"></span>
+					<p class="text-body-md text-on-surface-variant">
+						<BrandText text={note} />
+					</p>
+				</li>
+			))
+		}
+	</ul>
+</PlatformSection>

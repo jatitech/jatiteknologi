@@ -1,0 +1,30 @@
+---
+import { localizedPath, type Locale, type PlatformCopy } from "@/shared/i18n";
+import { BrandText } from "@/shared/ui/BrandText";
+
+import PlatformItems from "./PlatformItems.astro";
+import PlatformSection from "./PlatformSection.astro";
+import PlatformSectionHead from "./PlatformSectionHead.astro";
+
+interface Props {
+	locale: Locale;
+	extra: NonNullable<PlatformCopy["extra"]>;
+}
+
+const { locale, extra } = Astro.props;
+---
+
+<PlatformSection headingId="extra-heading">
+	<PlatformSectionHead id="extra-heading" eyebrow={extra.eyebrow} title={extra.title} />
+	<PlatformItems items={extra.items} variant="card" />
+	{
+		extra.link && (
+			<a
+				href={localizedPath(locale, extra.link.to)}
+				class="inline-flex min-h-11 items-center self-start text-label-md font-semibold text-primary underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+			>
+				<BrandText text={extra.link.label} />
+			</a>
+		)
+	}
+</PlatformSection>

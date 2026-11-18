@@ -1,0 +1,19 @@
+---
+import { dictionaryFor, type Locale } from "@/shared/i18n";
+
+import PlatformItems from "./PlatformItems.astro";
+import PlatformSection from "./PlatformSection.astro";
+import PlatformSectionHead from "./PlatformSectionHead.astro";
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const { terms } = dictionaryFor(locale).platform.shared;
+---
+
+<PlatformSection headingId="terms-heading">
+	<PlatformSectionHead id="terms-heading" eyebrow={terms.eyebrow} title={terms.title} />
+	<PlatformItems items={terms.items} variant="rule" />
+</PlatformSection>

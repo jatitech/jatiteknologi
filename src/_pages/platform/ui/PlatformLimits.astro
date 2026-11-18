@@ -1,0 +1,22 @@
+---
+import type { PlatformCopy } from "@/shared/i18n";
+
+import PlatformItems from "./PlatformItems.astro";
+import PlatformSection from "./PlatformSection.astro";
+import PlatformSectionHead from "./PlatformSectionHead.astro";
+
+interface Props {
+	copy: PlatformCopy;
+}
+
+const { copy } = Astro.props;
+---
+
+<PlatformSection headingId="limits-heading" sunken>
+	<PlatformSectionHead
+		id="limits-heading"
+		eyebrow={copy.limits.eyebrow}
+		title={copy.limits.title}
+	/>
+	<PlatformItems items={copy.limits.items} variant="rule" />
+</PlatformSection>

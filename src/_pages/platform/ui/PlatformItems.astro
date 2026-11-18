@@ -1,0 +1,37 @@
+---
+import type { PlatformCard } from "@/shared/i18n";
+import { BrandText } from "@/shared/ui/BrandText";
+
+import PlatformSourceLink from "./PlatformSourceLink.astro";
+
+interface Props {
+	items: readonly PlatformCard[];
+	/** `card` draws each item as a bordered card. `rule` puts a hairline above each item. */
+	variant: "card" | "rule";
+}
+
+const { items, variant } = Astro.props;
+---
+
+<ul role="list" class="grid gap-8 md:grid-cols-3">
+	{
+		items.map((item) => (
+			<li
+				class:list={[
+					"flex flex-col gap-3",
+					variant === "card"
+						? "rounded-lg border border-outline bg-surface p-5 md:p-7"
+						: "border-t border-outline pt-5",
+				]}
+			>
+				<h3 class="text-title-md font-semibold text-on-surface">
+					<BrandText text={item.title} />
+				</h3>
+				<p class="text-body-md text-muted">
+					<BrandText text={item.description} />
+				</p>
+				{item.source && <PlatformSourceLink source={item.source} />}
+			</li>
+		))
+	}
+</ul>
