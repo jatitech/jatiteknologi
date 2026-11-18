@@ -58,6 +58,10 @@ jobs:
         run: sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0
       - name: Build and serve the production build
         if: ${{ !inputs.site }}
+        env:
+          # The default site is on workers.dev, which robots.txt and a noindex tag block, so the
+          # scan would find no routes and score SEO 69. Scan the build as its own origin.
+          VITE_APP_SITE: http://localhost:4321
         run: |
           vp run build
           nohup vp exec astro preview --ignore-lock > preview.log 2>&1 &
