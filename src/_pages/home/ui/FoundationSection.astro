@@ -14,6 +14,17 @@ interface Props {
 
 const { locale } = Astro.props;
 const strings = dictionaryFor(locale).home.foundation;
+
+// Class names are written out in full so UnoCSS finds them. The logos are the monochrome marks from
+// Simple Icons, drawn in the text colour, and the name beside them stays as text.
+const LOGOS: Record<(typeof PLATFORM_SLUGS)[number], readonly string[]> = {
+	"frappe-erpnext": ["i-simple-icons-frappe", "i-simple-icons-erpnext"],
+	odoo: ["i-simple-icons-odoo"],
+	meta: ["i-simple-icons-meta"],
+	shopify: ["i-simple-icons-shopify"],
+	shopee: ["i-simple-icons-shopee"],
+	"tiktok-shop": ["i-simple-icons-tiktok"],
+};
 ---
 
 <section
@@ -61,9 +72,14 @@ const strings = dictionaryFor(locale).home.foundation;
 					<li>
 						<a
 							href={localizedPath(locale, slug)}
-							class="group relative flex min-h-28 items-center justify-center rounded-md bg-surface-sunken p-3 text-center text-label-md font-semibold text-on-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:min-h-37 lg:p-6"
+							class="group relative flex min-h-28 flex-col items-center justify-center gap-3 rounded-md bg-surface-sunken p-3 text-center text-label-md font-semibold text-on-surface focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary lg:min-h-37 lg:p-6"
 							aria-label={`${platformCopyFor(locale, slug).name}: ${strings.pageLabel}`}
 						>
+							<span aria-hidden="true" class="flex items-center gap-2 text-on-surface-variant">
+								{LOGOS[slug].map((logo) => (
+									<span class={`${logo} size-7 lg:size-8`} />
+								))}
+							</span>
 							<span translate="no">{platformCopyFor(locale, slug).name}</span>
 							<span
 								aria-hidden="true"

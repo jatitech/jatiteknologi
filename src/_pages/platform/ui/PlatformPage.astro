@@ -27,7 +27,7 @@ const { locale, slug } = Astro.props;
 const copy = platformCopyFor(locale, slug);
 const shared = dictionaryFor(locale).platform.shared;
 
-/** Home, then the page. There is no services index yet, so "Layanan" is left out rather than linked. */
+/** Home, then the page. There is no integrations index yet, so "Integrasi" is left out rather than linked. */
 const breadcrumb = serializeJsonLd(
 	breadcrumbJsonLd([
 		{ name: shared.breadcrumb.home, url: new URL(localizedPath(locale, "home"), Astro.site).href },
@@ -36,7 +36,7 @@ const breadcrumb = serializeJsonLd(
 );
 ---
 
-<PlatformHero locale={locale} copy={copy} />
+<PlatformHero locale={locale} slug={slug} copy={copy} />
 <PlatformProblems locale={locale} copy={copy} />
 <PlatformBuilds locale={locale} copy={copy} />
 {copy.extra && <PlatformExtra locale={locale} extra={copy.extra} />}
