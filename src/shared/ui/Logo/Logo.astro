@@ -1,0 +1,22 @@
+---
+import lightLogo from "../../../../brand/logo/jatiteknologi-horizontal.svg";
+import darkLogo from "../../../../brand/logo/export/jatiteknologi-horizontal-white.svg";
+
+import { dictionaryFor, type Locale } from "@/shared/i18n";
+
+interface Props {
+	locale: Locale;
+}
+
+/**
+ * The horizontal lockup, which carries the name, so its alt text is the brand name. The full-colour
+ * master is used on light grounds and the all-white file on dark ones, the two pairs the brand
+ * guidelines approve. Both come from `brand/logo`, the one source of the logo.
+ */
+const { locale } = Astro.props;
+---
+
+<picture>
+	<source srcset={darkLogo.src} media="(prefers-color-scheme: dark)" />
+	<img src={lightLogo.src} alt={dictionaryFor(locale).meta.siteTitle} width="160" height="28" />
+</picture>

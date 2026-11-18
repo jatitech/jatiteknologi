@@ -1,0 +1,39 @@
+---
+import { dictionaryFor, type Locale } from "@/shared/i18n";
+
+import { languageOptions } from "./language-options";
+
+interface Props {
+	/** The locale of the page being shown. */
+	locale: Locale;
+	/** This page's path in each locale where it exists. A missing locale links to its home page. */
+	alternates: Partial<Record<Locale, string>>;
+}
+
+const { locale, alternates } = Astro.props;
+const options = languageOptions(locale, alternates);
+---
+
+<div
+	role="group"
+	aria-label={dictionaryFor(locale).nav.language}
+	class="inline-flex items-center rounded-full border border-outline-strong p-0.5"
+>
+	{
+		options.map((option) => (
+			<a
+				href={option.href}
+				lang={option.locale}
+				hreflang={option.locale}
+				aria-current={option.current ? "true" : undefined}
+				class:list={[
+					"inline-flex h-8 items-center justify-center rounded-full px-3 text-label-sm font-medium",
+					"focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary",
+					option.current ? "bg-primary-container text-primary" : "text-on-surface-variant",
+				]}
+			>
+				{option.label}
+			</a>
+		))
+	}
+</div>

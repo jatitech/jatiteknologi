@@ -1,0 +1,23 @@
+---
+import { CONTACT_HREF } from "@/shared/contact";
+import { Button } from "@/shared/ui/Button";
+
+interface Props {
+	/** The filled button's label. It goes to the contact address. */
+	primaryLabel: string;
+	/** The outlined button's label, shown with an envelope icon. It goes to the contact address too. */
+	secondaryLabel: string;
+}
+
+const { primaryLabel, secondaryLabel } = Astro.props;
+---
+
+<div class="flex w-full flex-col gap-3 lg:w-auto lg:flex-row lg:items-center">
+	<Button href={CONTACT_HREF} class="w-full justify-between lg:w-auto">
+		{primaryLabel}
+	</Button>
+	<Button href={CONTACT_HREF} variant="secondary" class="w-full justify-center lg:w-auto">
+		<span class="i-ph-envelope-simple size-5 shrink-0" aria-hidden="true"></span>
+		{secondaryLabel}
+	</Button>
+</div>

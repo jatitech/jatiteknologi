@@ -1,0 +1,13 @@
+---
+import { splitBrands } from "./brands";
+
+interface Props {
+	/** The text to show. Each brand name in it is wrapped in a `translate="no"` span. */
+	text: string;
+}
+
+const { text } = Astro.props;
+const runs = splitBrands(text);
+---
+
+<span>{runs.map((run) => (run.brand ? <span translate="no">{run.text}</span> : run.text))}</span>
