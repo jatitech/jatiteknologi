@@ -1,0 +1,35 @@
+{
+  "brand": "Jatiteknologi",
+  "tagline": "Technology as strong as teak.",
+  "brief": "A founder-led software studio in Tangerang that builds ERP, custom software and IT support for Indonesian SMEs. The mark should feel plain, exact and built to last, like good joinery, not like a flashy app shop.",
+  "adjectives": ["crafted", "exact", "dependable", "warm"],
+  "criteria": "Success: distinct from swooshes, circuits and globes; recognisable at 16 px; works in one colour; carries the teak craft idea without wood clichés.",
+  "industry": "services",
+  "nav": ["Layanan", "Cara kerja", "Kontak"],
+  "brand_color": "#1D5FD6",
+  "greyscale": false,
+  "designer": "Jatiteknologi",
+  "round": 2,
+  "concepts": [
+    {
+      "name": "Tenon JT",
+      "symbol": "../jatiteknologi-symbol.svg",
+      "lockup": "../jatiteknologi-horizontal.svg",
+      "symbol_on_tile": "../export/jatiteknologi-symbol-white.svg",
+      "lockup_on_dark": "../export/jatiteknologi-horizontal-white.svg",
+      "tile_color": "#1D5FD6",
+      "idea": "The J and T of Jati Teknologi, joined like a mortise and tenon: parts that fit together and hold.",
+      "rationale": [
+        "A joint is what the studio sells: ERP and custom software that fit a business and hold for years",
+        "The only teak in the mark is the tenon, so the warm accent stays small, as BRAND.md asks",
+        "Built from rectangles and two arcs on a 256 grid; a heavier small-size cut keeps the joint visible at 16 px"
+      ]
+    }
+  ],
+  "recommendation": "Tenon JT, chosen 17 November 2026. It is the most ownable of the five round-1 concepts and the strongest at small sizes.",
+  "next_steps": [
+    "Run a trademark search (PDKI Indonesia, WIPO Global Brand Database) before printing anything",
+    "Use the web icon set and lockups on the website build",
+    "Order business cards and signage only after the trademark search is clear"
+  ]
+}
