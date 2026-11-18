@@ -60,25 +60,3 @@ export const LIGHT_MODE = {
   "color.success": PALETTE["color.green.700"],
   "color.warning": PALETTE["color.amber.700"],
 } as const;
-
-/** Colour roles in dark mode (Penpot `modes/dark`). Same role names as light mode. */
-export const DARK_MODE = {
-  "color.primary": PALETTE["color.blue.300"],
-  "color.primary-hover": PALETTE["color.blue.400"],
-  "color.primary-container": PALETTE["color.night.800"],
-  "color.on-primary": PALETTE["color.night.950"],
-  "color.secondary": PALETTE["color.blue.300"],
-  "color.secondary-container": PALETTE["color.night.850"],
-  "color.tertiary": PALETTE["color.teak.300"],
-  "color.neutral": PALETTE["color.night.950"],
-  "color.surface": PALETTE["color.night.900"],
-  "color.surface-sunken": PALETTE["color.night.925"],
-  "color.on-surface": PALETTE["color.night.50"],
-  "color.on-surface-variant": PALETTE["color.night.300"],
-  "color.muted": PALETTE["color.night.400"],
-  "color.outline": PALETTE["color.night.750"],
-  "color.outline-strong": PALETTE["color.night.600"],
-  "color.error": PALETTE["color.red.300"],
-  "color.success": PALETTE["color.green.300"],
-  "color.warning": PALETTE["color.amber.300"],
-} as const;

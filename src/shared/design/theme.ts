@@ -1,7 +1,7 @@
 import type { Theme } from "unocss/preset-wind4";
 
 import { FONT_VARIABLE } from "./fonts";
-import { DARK_MODE, LIGHT_MODE } from "./palette";
+import { LIGHT_MODE } from "./palette";
 import { RADIUS, SHADOW, SPACING } from "./scale";
 import { TYPOGRAPHY } from "./typography";
 
@@ -20,24 +20,17 @@ function declarations(entries: readonly (readonly [string, string])[]): string {
 }
 
 const lightRoot = `:root {
-    color-scheme: light dark;
+    color-scheme: light;
     ${declarations(Object.entries(LIGHT_MODE))}
   }`;
 
-const darkRoot = `:root {
-    ${declarations(Object.entries(DARK_MODE))}
-  }`;
-
 /**
- * Colour roles as custom properties, set on `:root` for light and overridden for the system's dark
- * scheme. Utilities read `var(--color-*)`, so they switch without a class. Also paints the page
- * ground and default text with the roles. There is no manual toggle yet.
+ * Colour roles as custom properties on `:root`. The site is light only: `color-scheme: light` keeps
+ * the browser's own UI light too, whatever the system prefers. Penpot's `modes/dark` tokens are
+ * not shipped until a dark theme is planned. Also paints the page ground and default text.
  */
 export const designPreflight = [
   lightRoot,
-  `@media (prefers-color-scheme: dark) {
-  ${darkRoot}
-}`,
   "html { background-color: var(--color-neutral); color: var(--color-on-surface); }",
 ].join("\n");
 

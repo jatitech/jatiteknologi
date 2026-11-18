@@ -2,7 +2,7 @@ import { readFileSync } from "node:fs";
 
 import { describe, expect, it } from "vite-plus/test";
 
-import { DARK_MODE, LIGHT_MODE, PALETTE } from "./palette";
+import { LIGHT_MODE, PALETTE } from "./palette";
 import { RADIUS, RADIUS_PRIMITIVES, SPACING, SPACING_PRIMITIVES } from "./scale";
 import { designPreflight, designTheme } from "./theme";
 import { TYPOGRAPHY } from "./typography";
@@ -89,13 +89,6 @@ const colourCases = [
     new Map(Object.entries(LIGHT_MODE)),
     "",
   ),
-  ...valueCases(
-    "modes/dark",
-    file.sets["modes/dark"],
-    "color",
-    new Map(Object.entries(DARK_MODE)),
-    "",
-  ),
 ];
 
 const spacingCodes = new Map([...Object.entries(SPACING_PRIMITIVES), ...Object.entries(SPACING)]);
@@ -148,7 +141,6 @@ describe("code token names", () => {
   it.for([
     ["colour primitives", Object.keys(PALETTE), scalarsOf(file.sets.primitives, "color")],
     ["light mode", Object.keys(LIGHT_MODE), scalarsOf(file.sets["modes/light"], "color")],
-    ["dark mode", Object.keys(DARK_MODE), scalarsOf(file.sets["modes/dark"], "color")],
     [
       "spacing",
       [...spacingCodes.keys()],
@@ -170,13 +162,18 @@ describe("code token names", () => {
 });
 
 describe("theme colours", () => {
+  it("ships no dark scheme", () => {
+    expect(designPreflight).not.toContain("prefers-color-scheme");
+    expect(designPreflight).toContain("color-scheme: light;");
+  });
+
   const themeColours = new Map(Object.entries(designTheme.colors ?? {}));
 
   it.for(Object.keys(LIGHT_MODE).map((token) => token.replace("color.", "")))(
-    "%s points at a variable declared for both schemes",
+    "%s points at a variable declared once",
     (role) => {
       expect(themeColours.get(role)).toBe(`var(--color-${role})`);
-      expect(designPreflight.split(`--color-${role}:`).length - 1).toBe(2);
+      expect(designPreflight.split(`--color-${role}:`).length - 1).toBe(1);
     },
   );
 });

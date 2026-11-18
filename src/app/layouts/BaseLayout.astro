@@ -1,7 +1,7 @@
 ---
 import { Font } from "astro:assets";
 
-import { DARK_MODE, FONT_VARIABLE, LIGHT_MODE } from "@/shared/design";
+import { FONT_VARIABLE, LIGHT_MODE } from "@/shared/design";
 import { DEFAULT_LOCALE, LOCALES, OG_LOCALE, dictionaryFor, type Locale } from "@/shared/i18n";
 
 import SiteFooter from "./SiteFooter.astro";
@@ -59,8 +59,7 @@ const defaultHref = alternates[DEFAULT_LOCALE];
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
 		<link rel="manifest" href="/site.webmanifest" />
-		<meta name="theme-color" content={LIGHT_MODE["color.neutral"]} media="(prefers-color-scheme: light)" />
-		<meta name="theme-color" content={DARK_MODE["color.neutral"]} media="(prefers-color-scheme: dark)" />
+		<meta name="theme-color" content={LIGHT_MODE["color.neutral"]} />
 		<Font cssVariable={FONT_VARIABLE.sans} preload={[{ weight: 400, style: "normal", subset: "latin" }]} />
 		<Font cssVariable={FONT_VARIABLE.mono} />
 		<meta property="og:type" content="website" />
