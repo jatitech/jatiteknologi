@@ -50,7 +50,8 @@ The public marketing site of Jatiteknologi (PT Jati Teknologi Indonesia). Brand 
 - Copy is written in English first, then into plain Indonesian with the `bahasa-indonesia-plain` skill (`BRAND.md`, "Voice").
 - Platform pages: one `PlatformCopy` per page in `src/shared/i18n/platform/{id,en}/<slug>.ts`, registered in each locale's `index.ts`. A new page needs its slug in `PLATFORM_SLUGS` and `ROUTES` (`routes.ts`), the two route files in `src/pages/layanan/` and `src/pages/en/services/`, and a row in `docs/platform-pages.md`. Every figure needs a card `source` whose label carries a date; `content.test.ts` enforces it.
 - `design/tokens.penpot.json` is a verified Penpot export; `src/shared/design/tokens.test.ts` fails when the code drifts from it. `docs/penpot/*.md` are read-only specs exported from Penpot: regenerate them from the file, don't hand-edit.
-- `public/site.webmanifest` hard-codes the theme colours (`#FAF8F4`, `#0B1220`). The layout's theme-color meta tags come from `color.neutral` in `src/shared/design/palette.ts`, and `e2e/home-page/links-the-web-app-manifest-and-its-icons.spec.ts` pins both to those two values. Change the palette, the manifest and the spec together.
+- The site is light only: `color-scheme: light` on `:root`, one `theme-color` meta, one logo. Penpot's `modes/dark` tokens stay in `design/tokens.penpot.json` but are not shipped, and `DESIGN.md`'s dark-mode and toggle sections are parked. To add a dark theme later, restore a `DARK_MODE` palette, an `@media (prefers-color-scheme: dark)` block in `designPreflight`, the white logo and a second `theme-color`, and test both schemes with axe.
+- `public/site.webmanifest` hard-codes the theme colour (`#FAF8F4`). The layout's `theme-color` meta tag comes from `color.neutral` in `src/shared/design/palette.ts`, and `e2e/home-page/links-the-web-app-manifest-and-its-icons.spec.ts` pins both to that value. Change the palette, the manifest and the spec together.
 
 ## Gotchas
 
