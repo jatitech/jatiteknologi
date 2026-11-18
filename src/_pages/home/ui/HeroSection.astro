@@ -1,0 +1,38 @@
+---
+import { dictionaryFor, type Locale } from "@/shared/i18n";
+import { ContactActions } from "@/shared/ui/ContactActions";
+
+import HeroArt from "./HeroArt.astro";
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const dictionary = dictionaryFor(locale);
+const strings = dictionary.home.hero;
+---
+
+<section
+	aria-labelledby="hero-heading"
+	class="px-margin-mobile pt-8 pb-10 md:px-margin-tablet md:pt-16 lg:px-margin lg:pt-section-tablet lg:pb-16"
+>
+	<div class="mx-auto flex w-full max-w-[1280px] flex-col gap-6 lg:gap-10">
+		<div class="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between lg:gap-12">
+			<h1
+				id="hero-heading"
+				class="max-w-[780px] text-mobile-display-xl font-medium text-balance text-on-surface md:text-display-lg lg:text-display-xl"
+			>
+				{strings.headline}
+			</h1>
+			<p class="max-w-[400px] text-mobile-body-lg text-on-surface-variant lg:text-body-lg">
+				{strings.lead}
+			</p>
+		</div>
+		<ContactActions
+			primaryLabel={dictionary.nav.primaryAction}
+			secondaryLabel={dictionary.home.actions.email}
+		/>
+		<HeroArt locale={locale} />
+	</div>
+</section>

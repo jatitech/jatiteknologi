@@ -1,0 +1,21 @@
+---
+/**
+ * The washed frame behind an illustration. It is decorative, so the whole frame is hidden from
+ * assistive technology. The wash is the Media frame gradient from DESIGN.md, built from theme colours.
+ */
+interface Props {
+	class?: string;
+}
+
+const { class: className } = Astro.props;
+---
+
+<div
+	aria-hidden="true"
+	class:list={[
+		"rounded-lg bg-[linear-gradient(160deg,var(--color-secondary-container)_0%,var(--color-primary-container)_55%,color-mix(in_srgb,var(--color-tertiary)_12%,var(--color-neutral))_100%)]",
+		className,
+	]}
+>
+	<slot />
+</div>

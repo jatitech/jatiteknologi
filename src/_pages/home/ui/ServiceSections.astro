@@ -1,0 +1,65 @@
+---
+import { dictionaryFor, localizedPath, type Locale } from "@/shared/i18n";
+
+import ServiceSection from "./ServiceSection.astro";
+import type { Feature } from "./feature";
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const strings = dictionaryFor(locale);
+const { erp, custom, care } = strings.home;
+
+/** The text link under each service. ERP goes to its platform page; custom and care go to the process section, the nearest page about the work. */
+const learnMore = strings.home.learnMore;
+const processHref = `#${strings.home.anchors.howWeWork}`;
+
+const erpFeatures: readonly Feature[] = [
+	{ icon: "stock", ...erp.features.stock },
+	{ icon: "data", ...erp.features.data },
+	{ icon: "phased", ...erp.features.phased },
+];
+
+const customFeatures: readonly Feature[] = [
+	{ icon: "apps", ...custom.features.apps },
+	{ icon: "integration", ...custom.features.integration },
+	{ icon: "docs", ...custom.features.docs },
+];
+
+const careFeatures: readonly Feature[] = [
+	{ icon: "monitoring", ...care.features.monitoring },
+	{ icon: "adjustments", ...care.features.adjustments },
+	{ icon: "engineer", ...care.features.engineer },
+];
+---
+
+<ServiceSection
+	id="erp"
+	eyebrow={erp.eyebrow}
+	headline={erp.headline}
+	mediaTitle={erp.window}
+	mediaStatus={erp.status}
+	features={erpFeatures}
+	link={{ href: localizedPath(locale, "frappe-erpnext"), label: learnMore }}
+/>
+<ServiceSection
+	id="custom"
+	reversed
+	eyebrow={custom.eyebrow}
+	headline={custom.headline}
+	mediaTitle={custom.window}
+	mediaStatus={custom.status}
+	features={customFeatures}
+	link={{ href: processHref, label: learnMore }}
+/>
+<ServiceSection
+	id="care"
+	eyebrow={care.eyebrow}
+	headline={care.headline}
+	mediaTitle={care.window}
+	mediaStatus={care.status}
+	features={careFeatures}
+	link={{ href: processHref, label: learnMore }}
+/>

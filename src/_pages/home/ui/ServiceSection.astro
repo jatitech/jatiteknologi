@@ -1,0 +1,82 @@
+---
+import { Eyebrow } from "@/shared/ui/Eyebrow";
+
+import FeatureRow from "./FeatureRow.astro";
+import MediaFrame from "./MediaFrame.astro";
+import ProductWindow from "./ProductWindow.astro";
+import type { Feature } from "./feature";
+
+interface Props {
+	/** The section's id. Its heading gets `{id}-heading`. */
+	id: string;
+	/** Puts the copy on the left and the media on the right from 1024px. Below that the media comes first. */
+	reversed?: boolean;
+	eyebrow: string;
+	headline: string;
+	mediaTitle: string;
+	mediaStatus: string;
+	features: readonly Feature[];
+	/** An optional text link under the features, such as "Pelajari layanan". */
+	link?: { href: string; label: string };
+}
+
+const { id, reversed = false, eyebrow, headline, mediaTitle, mediaStatus, features, link } =
+	Astro.props;
+
+const headingId = `${id}-heading`;
+---
+
+<section
+	aria-labelledby={headingId}
+	class="scroll-mt-24 px-margin-mobile py-9 md:px-margin-tablet lg:px-margin lg:py-16"
+>
+	<div
+		class:list={[
+			"mx-auto grid w-full max-w-[1280px] gap-4 lg:items-center lg:gap-18",
+			reversed
+				? "lg:grid-cols-[minmax(0,580fr)_minmax(0,628fr)]"
+				: "lg:grid-cols-[minmax(0,628fr)_minmax(0,580fr)]",
+		]}
+	>
+		<MediaFrame
+			class:list={[
+				"flex min-h-60 items-center justify-center p-6 lg:min-h-110 lg:p-12",
+				reversed ? "lg:col-start-2" : "lg:col-start-1",
+			]}
+		>
+			<ProductWindow title={mediaTitle} status={mediaStatus} class="w-full" />
+		</MediaFrame>
+		<div class:list={["flex flex-col gap-4 lg:gap-5", reversed ? "lg:col-start-1" : "lg:col-start-2"]}>
+			<Eyebrow>{eyebrow}</Eyebrow>
+			<h2
+				id={headingId}
+				class="text-mobile-headline-md font-medium text-balance text-on-surface md:text-headline-md lg:max-w-[560px]"
+			>
+				{headline}
+			</h2>
+			<ul role="list" class="flex flex-col">
+				{
+					features.map((feature) => (
+						<FeatureRow
+							icon={feature.icon}
+							title={feature.title}
+							description={feature.description}
+						/>
+					))
+				}
+			</ul>
+			{
+				link && (
+					<a
+						href={link.href}
+						class="inline-flex min-h-11 items-center gap-1.5 self-start text-label-sm font-medium text-on-surface underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+						aria-label={`${link.label}: ${eyebrow}`}
+					>
+						{link.label}
+						<span class="i-ph-arrow-right size-4 text-primary" aria-hidden="true"></span>
+					</a>
+				)
+			}
+		</div>
+	</div>
+</section>

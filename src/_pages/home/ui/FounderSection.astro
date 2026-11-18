@@ -1,0 +1,33 @@
+---
+import { dictionaryFor, type Locale } from "@/shared/i18n";
+import { Eyebrow } from "@/shared/ui/Eyebrow";
+
+import FounderPhoto from "./FounderPhoto.astro";
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const strings = dictionaryFor(locale).home.founder;
+---
+
+<section
+	aria-labelledby="founder-heading"
+	class="scroll-mt-24 px-margin-mobile py-section-mobile md:px-margin-tablet lg:px-margin lg:py-section"
+>
+	<div class="mx-auto flex w-full max-w-[1280px] flex-col gap-4 lg:flex-row lg:items-start lg:gap-20">
+		<FounderPhoto />
+		<div class="flex flex-col gap-4 lg:max-w-[640px]">
+			<Eyebrow>{strings.eyebrow}</Eyebrow>
+			<h2
+				id="founder-heading"
+				class="text-mobile-headline-sm font-semibold text-on-surface lg:text-headline-sm"
+			>
+				{strings.name}
+			</h2>
+			<p class="text-mobile-body-lg text-on-surface-variant lg:text-body-lg">{strings.bio}</p>
+			<p class="text-body-sm text-muted">{strings.disclosure}</p>
+		</div>
+	</div>
+</section>

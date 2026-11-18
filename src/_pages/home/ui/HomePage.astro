@@ -1,0 +1,26 @@
+---
+import { type Locale } from "@/shared/i18n";
+import { organizationJsonLd, serializeJsonLd } from "@/shared/seo";
+
+import ClosingSection from "./ClosingSection.astro";
+import FoundationSection from "./FoundationSection.astro";
+import FounderSection from "./FounderSection.astro";
+import HeroSection from "./HeroSection.astro";
+import HowWeWorkSection from "./HowWeWorkSection.astro";
+import ServiceSections from "./ServiceSections.astro";
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const organization = serializeJsonLd(organizationJsonLd(new URL("/", Astro.site)));
+---
+
+<HeroSection locale={locale} />
+<FoundationSection locale={locale} />
+<ServiceSections locale={locale} />
+<HowWeWorkSection locale={locale} />
+<FounderSection locale={locale} />
+<ClosingSection locale={locale} />
+<script type="application/ld+json" is:inline set:html={organization}></script>

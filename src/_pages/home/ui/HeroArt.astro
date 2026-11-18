@@ -1,0 +1,53 @@
+---
+import { dictionaryFor, type Locale } from "@/shared/i18n";
+
+import MediaFrame from "./MediaFrame.astro";
+import ProductWindow from "./ProductWindow.astro";
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const art = dictionaryFor(locale).home.art;
+
+/** Literal class names, so UnoCSS can see them in this file. The flow lines join the two columns on desktop. */
+const TILES = [
+	{ icon: "i-ph-receipt", label: art.receipt },
+	{ icon: "i-ph-warehouse", label: art.warehouse },
+	{ icon: "i-ph-cash-register", label: art.cashier },
+	{ icon: "i-ph-moped", label: art.courier },
+];
+---
+
+<MediaFrame class="flex flex-col items-center justify-center gap-4 px-4 py-5 lg:h-[420px] lg:flex-row lg:gap-6 lg:p-12">
+	<div class="grid w-full grid-cols-4 gap-2 lg:w-[212px] lg:shrink-0 lg:grid-cols-2 lg:gap-5">
+		{
+			TILES.map((tile) => (
+				<div class="mx-auto flex h-[60px] w-full max-w-[60px] flex-col items-center justify-center gap-2 rounded-md bg-surface lg:h-[87px] lg:w-24 lg:max-w-none lg:items-start lg:justify-start lg:px-4 lg:py-3.5">
+					<span class:list={[tile.icon, "size-8 shrink-0 text-on-surface"]} aria-hidden="true"></span>
+					<span class="hidden font-mono text-eyebrow font-medium text-muted uppercase lg:block">
+						{tile.label}
+					</span>
+				</div>
+			))
+		}
+	</div>
+	<svg
+		class="hidden h-[194px] w-14 shrink-0 text-primary lg:block"
+		viewBox="0 0 56 194"
+		fill="none"
+		stroke="currentColor"
+		stroke-width="1.5"
+		stroke-linecap="round"
+	>
+		<path d="M0 43C28 43 28 97 56 97" />
+		<path d="M0 151C28 151 28 97 56 97" />
+	</svg>
+	<ProductWindow
+		title={art.window}
+		status={art.status}
+		float
+		class="w-full lg:w-[520px] lg:shrink-0"
+	/>
+</MediaFrame>

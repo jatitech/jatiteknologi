@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@/app/layouts/BaseLayout.astro";
+import { HomePage, homeNavLinks } from "@/_pages/home";
+import { dictionaryFor, localizedPath, pageTitle } from "@/shared/i18n";
+
+export const prerender = true;
+
+const locale = "id";
+const strings = dictionaryFor(locale);
+const path = localizedPath(locale, "home");
+---
+
+<BaseLayout
+	locale={locale}
+	title={pageTitle(locale)}
+	description={strings.meta.homeDescription}
+	path={path}
+	alternates={{ id: path, en: localizedPath("en", "home") }}
+	navLinks={homeNavLinks(locale)}
+>
+	<HomePage locale={locale} />
+</BaseLayout>

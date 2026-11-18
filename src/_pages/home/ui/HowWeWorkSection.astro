@@ -1,0 +1,46 @@
+---
+import { dictionaryFor, type Locale } from "@/shared/i18n";
+import { Eyebrow } from "@/shared/ui/Eyebrow";
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const strings = dictionaryFor(locale);
+const anchor = strings.home.anchors.howWeWork;
+const steps = strings.home.howWeWork;
+---
+
+<section
+	id={anchor}
+	aria-labelledby="how-we-work-heading"
+	class="scroll-mt-24 bg-surface-sunken px-margin-mobile py-section-mobile md:px-margin-tablet lg:px-margin lg:py-section"
+>
+	<div class="mx-auto flex w-full max-w-[1280px] flex-col gap-4 lg:gap-5">
+		<Eyebrow>{steps.eyebrow}</Eyebrow>
+		<h2
+			id="how-we-work-heading"
+			class="max-w-[720px] text-mobile-headline-lg font-medium text-balance text-on-surface md:text-headline-lg"
+		>
+			{steps.headline}
+		</h2>
+		<ol role="list" class="grid list-none gap-3 md:grid-cols-2 lg:grid-cols-4 lg:gap-6">
+			{
+				steps.steps.map((step, index) => (
+					<li class="flex flex-col items-start gap-3 rounded-md bg-surface p-6">
+						<span aria-hidden="true" class="font-mono text-mono-sm font-normal text-tertiary">
+							{String(index + 1).padStart(2, "0")}
+						</span>
+						<h3 class="text-mobile-headline-sm font-semibold text-on-surface lg:text-headline-sm">
+							{step.title}
+						</h3>
+						<p class="text-mobile-body-md text-on-surface-variant lg:text-body-md">
+							{step.description}
+						</p>
+					</li>
+				))
+			}
+		</ol>
+	</div>
+</section>

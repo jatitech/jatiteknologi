@@ -1,0 +1,38 @@
+---
+/** A mock application window with skeleton rows and one status chip. Decorative, so its parent hides it. */
+interface Props {
+	title: string;
+	status: string;
+	/** The hero window floats above its frame; the service windows sit on a ring. */
+	float?: boolean;
+	class?: string;
+}
+
+const { title, status, float = false, class: className } = Astro.props;
+---
+
+<div
+	class:list={[
+		"flex flex-col overflow-hidden rounded-md bg-surface",
+		float ? "shadow-float" : "shadow-ring",
+		className,
+	]}
+>
+	<div class="flex h-10 items-center gap-1.5 border-b border-outline px-4">
+		<span class="size-2 rounded-full bg-outline"></span>
+		<span class="size-2 rounded-full bg-outline"></span>
+		<span class="size-2 rounded-full bg-outline"></span>
+		<span class="ml-2.5 text-label-sm font-medium text-on-surface">{title}</span>
+	</div>
+	<div class="flex flex-col items-start gap-3 p-5">
+		<span class="h-3 w-[75%] rounded-sm bg-surface-sunken"></span>
+		<span class="h-3 w-[92%] rounded-sm bg-surface-sunken"></span>
+		<span class="h-3 w-[58%] rounded-sm bg-surface-sunken"></span>
+		<span
+			class="inline-flex h-7.5 items-center gap-1.5 rounded-full bg-surface-sunken px-2.5 text-label-sm font-medium text-on-surface"
+		>
+			<span class="i-ph-check size-2.5 shrink-0 text-success" aria-hidden="true"></span>
+			{status}
+		</span>
+	</div>
+</div>
