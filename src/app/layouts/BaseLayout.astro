@@ -1,0 +1,80 @@
+---
+import { Font } from "astro:assets";
+
+import { DARK_MODE, FONT_VARIABLE, LIGHT_MODE } from "@/shared/design";
+import { DEFAULT_LOCALE, LOCALES, OG_LOCALE, dictionaryFor, type Locale } from "@/shared/i18n";
+
+import SiteFooter from "./SiteFooter.astro";
+import SiteHeader from "./SiteHeader.astro";
+
+interface Props {
+	locale: Locale;
+	/** Document title, already formatted with `pageTitle` from `@/shared/i18n`. */
+	title: string;
+	description: string;
+	/** This page's path in its own locale. Used for the canonical and Open Graph URLs. */
+	path: string;
+	/** This page's path in each locale where it exists, including its own. */
+	alternates?: Partial<Record<Locale, string>>;
+	/** Asks search engines not to index the page. Set on the not-found page. */
+	noindex?: boolean;
+	/** Links in the header's desktop bar. Pass only links whose targets this page renders. */
+	navLinks?: readonly { href: string; label: string }[];
+}
+
+const {
+	locale,
+	title,
+	description,
+	path,
+	alternates = {},
+	noindex = false,
+	navLinks = [],
+} = Astro.props;
+
+const strings = dictionaryFor(locale);
+const absolute = (pathname: string) => new URL(pathname, Astro.site).href;
+const canonical = absolute(path);
+
+const hreflangs = LOCALES.flatMap((lang) => {
+	const href = alternates[lang];
+
+	return href ? [{ lang, url: absolute(href) }] : [];
+});
+
+const defaultHref = alternates[DEFAULT_LOCALE];
+---
+
+<html lang={locale}>
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width" />
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		{noindex && <meta name="robots" content="noindex" />}
+		{hreflangs.map(({ lang, url }) => <link rel="alternate" hreflang={lang} href={url} />)}
+		{defaultHref && <link rel="alternate" hreflang="x-default" href={absolute(defaultHref)} />}
+		<link rel="icon" href="/favicon.ico" sizes="32x32" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+		<link rel="manifest" href="/site.webmanifest" />
+		<meta name="theme-color" content={LIGHT_MODE["color.neutral"]} media="(prefers-color-scheme: light)" />
+		<meta name="theme-color" content={DARK_MODE["color.neutral"]} media="(prefers-color-scheme: dark)" />
+		<Font cssVariable={FONT_VARIABLE.sans} preload={[{ weight: 400, style: "normal", subset: "latin" }]} />
+		<Font cssVariable={FONT_VARIABLE.mono} />
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:locale" content={OG_LOCALE[locale]} />
+	</head>
+	<body>
+		<a href="#content" class="sr-only focus:not-sr-only">{strings.skipLink}</a>
+		<SiteHeader locale={locale} alternates={alternates} links={navLinks} />
+		<main id="content" tabindex="-1">
+			<slot />
+		</main>
+		<SiteFooter locale={locale} alternates={alternates} />
+	</body>
+</html>

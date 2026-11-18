@@ -1,0 +1,80 @@
+---
+import { CONTACT_EMAIL, CONTACT_HREF } from "@/shared/contact";
+import { LanguageSwitch } from "@/shared/ui/LanguageSwitch";
+import { Logo } from "@/shared/ui/Logo";
+import { dictionaryFor, localizedPath, platformLinks, type Locale } from "@/shared/i18n";
+
+interface Props {
+	locale: Locale;
+	/** This page's path in each locale where it exists, as passed to `BaseLayout`. */
+	alternates: Partial<Record<Locale, string>>;
+}
+
+const { locale, alternates } = Astro.props;
+const strings = dictionaryFor(locale);
+const year = new Date().getFullYear();
+const services = platformLinks(locale);
+
+/** The home page's process section, the only company page that exists so far. */
+const processHref = `${localizedPath(locale, "home")}#${dictionaryFor(locale).home.anchors.howWeWork}`;
+---
+
+<footer class="bg-neutral px-5 pt-0 pb-12 md:px-8 lg:px-12 lg:pt-20 lg:pb-16">
+	<div class="mx-auto flex w-full max-w-[1280px] flex-col gap-12">
+		<div aria-hidden="true" class="h-px bg-outline"></div>
+
+		<div class="flex flex-col gap-12 lg:flex-row lg:justify-between lg:gap-12">
+			<div class="flex flex-col gap-3">
+				<Logo locale={locale} />
+				<p class="text-body-sm text-on-surface-variant">{strings.footer.tagline}</p>
+			</div>
+
+			<div class="flex flex-col gap-2.5">
+				<h2 class="text-title-md font-semibold text-muted">{strings.footer.servicesHeading}</h2>
+				<ul role="list" class="flex flex-col gap-2.5">
+					{
+						services.map((service) => (
+							<li>
+								<a
+									href={service.href}
+									translate="no"
+									class="text-body-sm text-on-surface-variant underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+								>
+									{service.label}
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</div>
+			<div class="flex flex-col gap-2.5">
+				<h2 class="text-title-md font-semibold text-muted">{strings.footer.companyHeading}</h2>
+				<ul role="list" class="flex flex-col gap-2.5">
+					<li>
+						<a
+							href={processHref}
+							class="text-body-sm text-on-surface-variant underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+						>
+							{strings.nav.howWeWork}
+						</a>
+					</li>
+				</ul>
+			</div>
+			<div class="flex flex-col gap-2.5">
+				<h2 class="text-title-md font-semibold text-muted">{strings.footer.contactHeading}</h2>
+				<a
+					href={CONTACT_HREF}
+					class="text-body-sm text-on-surface-variant underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+				>
+					{CONTACT_EMAIL}
+				</a>
+				<p class="text-body-sm text-on-surface-variant">{strings.footer.location}</p>
+			</div>
+		</div>
+
+		<div class="flex flex-col items-start gap-6 lg:flex-row lg:items-center lg:justify-between">
+			<p class="text-body-sm text-muted">{strings.footer.legal(year)}</p>
+			<LanguageSwitch locale={locale} alternates={alternates} />
+		</div>
+	</div>
+</footer>
