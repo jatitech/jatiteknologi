@@ -6,7 +6,7 @@ test.describe("Home page", () => {
   test("Links each platform tile to its page, with an arrow on hover", async ({ page }) => {
     for (const locale of ["id", "en"] as const) {
       const path = locale === "en" ? "/en" : "/";
-      const label = locale === "en" ? "service page" : "halaman layanan";
+      const label = locale === "en" ? "integration page" : "halaman integrasi";
 
       await page.goto(path);
 

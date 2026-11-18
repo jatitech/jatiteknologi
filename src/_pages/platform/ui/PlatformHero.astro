@@ -1,5 +1,10 @@
 ---
-import { dictionaryFor, type Locale, type PlatformCopy } from "@/shared/i18n";
+import {
+	dictionaryFor,
+	type Locale,
+	type PlatformCopy,
+	type PlatformPageSlug,
+} from "@/shared/i18n";
 import { BrandText } from "@/shared/ui/BrandText";
 import { ContactActions } from "@/shared/ui/ContactActions";
 import { Eyebrow } from "@/shared/ui/Eyebrow";
@@ -8,10 +13,58 @@ import PlatformBreadcrumb from "./PlatformBreadcrumb.astro";
 
 interface Props {
 	locale: Locale;
+	slug: PlatformPageSlug;
 	copy: PlatformCopy;
 }
 
-const { locale, copy } = Astro.props;
+const { locale, slug, copy } = Astro.props;
+
+/**
+ * Each platform's own colour (from its brand marks) and logos, for the panel beside the headline.
+ * The panel is a decoration: a tint of the brand colour behind the monochrome mark, a solid bar of the
+ * colour along the top, and the name in the site's ink, which keeps the text at full contrast. Class names are
+ * written out in full so UnoCSS finds them.
+ */
+const BRAND: Record<PlatformPageSlug, { panel: string; bar: string; mark: string; logos: readonly string[] }> = {
+	"frappe-erpnext": {
+		panel: "border-[#0089FF]/30 bg-[#0089FF]/10",
+		bar: "bg-[#0089FF]/100",
+		mark: "text-[#0089FF]",
+		logos: ["i-simple-icons-frappe", "i-simple-icons-erpnext"],
+	},
+	odoo: {
+		panel: "border-[#714B67]/30 bg-[#714B67]/10",
+		bar: "bg-[#714B67]/100",
+		mark: "text-[#714B67]",
+		logos: ["i-simple-icons-odoo"],
+	},
+	meta: {
+		panel: "border-[#0467DF]/30 bg-[#0467DF]/10",
+		bar: "bg-[#0467DF]/100",
+		mark: "text-[#0467DF]",
+		logos: ["i-simple-icons-meta"],
+	},
+	shopify: {
+		panel: "border-[#7AB55C]/40 bg-[#7AB55C]/15",
+		bar: "bg-[#7AB55C]/100",
+		mark: "text-[#5E8E3E]",
+		logos: ["i-simple-icons-shopify"],
+	},
+	shopee: {
+		panel: "border-[#EE4D2D]/30 bg-[#EE4D2D]/10",
+		bar: "bg-[#EE4D2D]/100",
+		mark: "text-[#EE4D2D]",
+		logos: ["i-simple-icons-shopee"],
+	},
+	"tiktok-shop": {
+		panel: "border-black/20 bg-black/5",
+		bar: "bg-black/100",
+		mark: "text-black",
+		logos: ["i-simple-icons-tiktok"],
+	},
+};
+
+const brand = BRAND[slug];
 const dictionary = dictionaryFor(locale);
 const { hero } = copy;
 ---
@@ -57,8 +110,18 @@ const { hero } = copy;
 			</div>
 			<div
 				aria-hidden="true"
-				class="flex min-h-44 w-full items-center justify-center rounded-lg border border-outline bg-surface-sunken p-8 lg:min-h-90 lg:w-[400px] lg:shrink-0"
+				class:list={[
+					"flex min-h-44 w-full flex-col items-center justify-center gap-6 relative overflow-hidden rounded-lg border p-8 lg:min-h-90 lg:w-[400px] lg:shrink-0",
+					brand.panel,
+				]}
 			>
+				<span
+					data-brand-bar
+					class:list={["absolute inset-x-0 top-0 h-2", brand.bar]}
+				></span>
+				<span class:list={["flex items-center gap-4", brand.mark]}>
+					{brand.logos.map((logo) => <span class={`${logo} size-14 lg:size-20`} />)}
+				</span>
 				<p translate="no" class="text-center text-headline-sm font-semibold text-on-surface">
 					{copy.name}
 				</p>

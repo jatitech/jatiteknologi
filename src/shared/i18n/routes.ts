@@ -3,11 +3,11 @@ import { DEFAULT_LOCALE, type Locale } from "./locale";
 /** Path prefix of a locale: none for the default locale, `/en` for English. */
 const prefixOf = (locale: Locale) => (locale === DEFAULT_LOCALE ? "" : `/${locale}`);
 
-/** The segment before a platform slug: `/layanan/<slug>` in Indonesian, `/en/services/<slug>` in English. */
-const SERVICE_SEGMENT: Record<Locale, string> = { id: "layanan", en: "services" };
+/** The segment before a platform slug: `/integrasi/<slug>` in Indonesian, `/en/integrations/<slug>` in English. */
+const INTEGRATION_SEGMENT: Record<Locale, string> = { id: "integrasi", en: "integrations" };
 
 const platformPage = (slug: string) => (locale: Locale) =>
-  `${prefixOf(locale)}/${SERVICE_SEGMENT[locale]}/${slug}`;
+  `${prefixOf(locale)}/${INTEGRATION_SEGMENT[locale]}/${slug}`;
 
 /** The platform slugs. Each has a route in both locales. A page exists only where its copy does. */
 export const PLATFORM_SLUGS = [

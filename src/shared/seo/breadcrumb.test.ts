@@ -5,7 +5,7 @@ import { serializeJsonLd } from "./organization";
 
 const TRAIL = [
   { name: "Beranda", url: "https://jatiteknologi.test/" },
-  { name: "Frappe dan ERPNext", url: "https://jatiteknologi.test/layanan/frappe-erpnext" },
+  { name: "Frappe dan ERPNext", url: "https://jatiteknologi.test/integrasi/frappe-erpnext" },
 ];
 
 describe("breadcrumbJsonLd", () => {
@@ -28,7 +28,7 @@ describe("breadcrumbJsonLd", () => {
           "@type": "ListItem",
           position: 2,
           name: "Frappe dan ERPNext",
-          item: "https://jatiteknologi.test/layanan/frappe-erpnext",
+          item: "https://jatiteknologi.test/integrasi/frappe-erpnext",
         },
       ],
     });

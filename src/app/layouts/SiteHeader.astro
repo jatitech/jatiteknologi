@@ -17,8 +17,8 @@ const { locale, alternates, links = [] } = Astro.props;
 const strings = dictionaryFor(locale);
 const home = localizedPath(locale, "home");
 
-/** The six platform pages, shown under "Layanan". */
-const services = platformLinks(locale);
+/** The six platform pages, shown under "Integrasi". */
+const integrations = platformLinks(locale);
 
 /** The mobile menu is a native popover, so it opens and closes without a script. */
 const MENU_ID = "mobile-menu";
@@ -47,7 +47,7 @@ const ICON_TARGET =
 					<summary
 						class="inline-flex h-9 cursor-pointer list-none items-center gap-1.5 rounded-full px-3 text-label-sm font-medium text-on-surface hover:bg-surface-sunken focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary [&::-webkit-details-marker]:hidden"
 					>
-						{strings.nav.services}
+						{strings.nav.integrations}
 						<span class="i-ph-caret-down size-3.5 group-open:rotate-180" aria-hidden="true"></span>
 					</summary>
 					<ul
@@ -55,14 +55,14 @@ const ICON_TARGET =
 						class="absolute top-full left-0 z-50 mt-2 flex w-64 flex-col gap-1 rounded-lg border border-outline bg-surface p-2 shadow-overlay"
 					>
 						{
-							services.map((service) => (
+							integrations.map((integration) => (
 								<li>
 									<a
-									href={service.href}
+									href={integration.href}
 									translate="no"
 									class="flex min-h-11 items-center rounded-md px-3 text-label-md font-medium text-on-surface hover:bg-surface-sunken focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
 								>
-									{service.label}
+									{integration.label}
 								</a>
 							</li>
 							))

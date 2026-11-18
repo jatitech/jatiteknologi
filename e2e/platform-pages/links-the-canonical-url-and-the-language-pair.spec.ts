@@ -10,8 +10,8 @@ test.describe("Platform page", () => {
     page,
   }) => {
     for (const { slug } of PLATFORM_PAGES.filter((item) => item.locale === "id")) {
-      const idPath = `/layanan/${slug}`;
-      const enPath = `/en/services/${slug}`;
+      const idPath = `/integrasi/${slug}`;
+      const enPath = `/en/integrations/${slug}`;
 
       for (const path of [idPath, enPath]) {
         await page.goto(path);

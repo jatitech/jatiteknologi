@@ -13,7 +13,7 @@ interface Props {
 const { locale, alternates } = Astro.props;
 const strings = dictionaryFor(locale);
 const year = new Date().getFullYear();
-const services = platformLinks(locale);
+const integrations = platformLinks(locale);
 
 /** The home page's process section, the only company page that exists so far. */
 const processHref = `${localizedPath(locale, "home")}#${dictionaryFor(locale).home.anchors.howWeWork}`;
@@ -30,17 +30,17 @@ const processHref = `${localizedPath(locale, "home")}#${dictionaryFor(locale).ho
 			</div>
 
 			<div class="flex flex-col gap-2.5">
-				<h2 class="text-title-md font-semibold text-muted">{strings.footer.servicesHeading}</h2>
+				<h2 class="text-title-md font-semibold text-muted">{strings.footer.integrationsHeading}</h2>
 				<ul role="list" class="flex flex-col gap-2.5">
 					{
-						services.map((service) => (
+						integrations.map((integration) => (
 							<li>
 								<a
-									href={service.href}
+									href={integration.href}
 									translate="no"
 									class="text-body-sm text-on-surface-variant underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
 								>
-									{service.label}
+									{integration.label}
 								</a>
 							</li>
 						))

@@ -2,13 +2,17 @@ import { expect, test } from "../fixtures";
 
 test.describe("Home page", () => {
   const LINKS = [
-    { path: "/", name: "Pelajari layanan: Implementasi ERPNext", href: "/layanan/frappe-erpnext" },
+    {
+      path: "/",
+      name: "Pelajari layanan: Implementasi ERPNext",
+      href: "/integrasi/frappe-erpnext",
+    },
     { path: "/", name: "Pelajari layanan: Pengembangan perangkat lunak", href: "#cara-kerja" },
     { path: "/", name: "Pelajari layanan: Pendampingan TI", href: "#cara-kerja" },
     {
       path: "/en",
       name: "Explore the service: ERPNext implementation",
-      href: "/en/services/frappe-erpnext",
+      href: "/en/integrations/frappe-erpnext",
     },
     { path: "/en", name: "Explore the service: Software development", href: "#how-we-work" },
     { path: "/en", name: "Explore the service: Long-term IT care", href: "#how-we-work" },
@@ -29,7 +33,7 @@ test.describe("Home page", () => {
     await page
       .getByRole("link", { name: "Pelajari layanan: Implementasi ERPNext", exact: true })
       .click();
-    await expect(page).toHaveURL(/\/layanan\/frappe-erpnext$/);
+    await expect(page).toHaveURL(/\/integrasi\/frappe-erpnext$/);
     await expect(page.getByRole("heading", { level: 1 })).toBeVisible();
   });
 });

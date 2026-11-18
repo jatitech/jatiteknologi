@@ -10,8 +10,8 @@ test.describe("Platform page", () => {
     await answerUpgradedRequestsOverHttp(page);
 
     for (const [from, to, name] of [
-      ["/layanan/shopee", "/layanan/tiktok-shop", "Lihat juga halaman TikTok Shop →"],
-      ["/layanan/tiktok-shop", "/layanan/shopee", "Lihat juga halaman Shopee →"],
+      ["/integrasi/shopee", "/integrasi/tiktok-shop", "Lihat juga halaman TikTok Shop →"],
+      ["/integrasi/tiktok-shop", "/integrasi/shopee", "Lihat juga halaman Shopee →"],
     ] as const) {
       await page.goto(from);
 

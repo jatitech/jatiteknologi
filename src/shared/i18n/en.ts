@@ -16,12 +16,12 @@ export const en: Dictionary = {
     close: "Close menu",
     language: "Choose language",
     primaryAction: "Schedule a chat",
-    services: "Services",
+    integrations: "Integrations",
     howWeWork: "How we work",
   },
   footer: {
     tagline: "Technology as strong as teak.",
-    servicesHeading: "Services",
+    integrationsHeading: "Integrations",
     companyHeading: "Company",
     contactHeading: "Contact",
     location: "Tangerang, Banten",
@@ -62,7 +62,7 @@ export const en: Dictionary = {
         "We build integrations, apps and automation through each platform's public API.",
       checkIndependent:
         "We are an independent company and are not affiliated with these platforms.",
-      pageLabel: "service page",
+      pageLabel: "integration page",
       trademark:
         "Frappe, ERPNext, Odoo, Meta, WhatsApp, Instagram, Facebook, Threads, Shopify, Shopee, TikTok, and TikTok Shop are trademarks of their respective owners. Jatiteknologi is an independent company and is not affiliated with, endorsed by, or sponsored by those trademark owners.",
     },
@@ -152,6 +152,7 @@ export const en: Dictionary = {
     founder: {
       eyebrow: "The person building your system",
       name: "Risqi Romadhoni, founder",
+      photoAlt: "Portrait of Risqi Romadhoni, founder of Jatiteknologi",
       bio: "I have been building software since 2016. At Yummy Corp, I helped the Yummyshop order system serve more than 50,000 SME merchants. At Virtual Spirit, I developed Medplanner, a medical app for the Malaysian government.",
       disclosure:
         "The experience above is the founder's personal experience at previous companies.",
