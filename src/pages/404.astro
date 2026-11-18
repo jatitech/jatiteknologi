@@ -1,0 +1,22 @@
+---
+import BaseLayout from "@/app/layouts/BaseLayout.astro";
+import { NotFoundPage } from "@/_pages/not-found";
+import { dictionaryFor, localizedPath, pageTitle } from "@/shared/i18n";
+
+export const prerender = true;
+
+const locale = "id";
+const strings = dictionaryFor(locale);
+const path = localizedPath(locale, "notFound");
+---
+
+<BaseLayout
+	locale={locale}
+	title={pageTitle(locale, strings.notFound.title)}
+	description={strings.notFound.lead}
+	path={path}
+	alternates={{ id: path, en: localizedPath("en", "notFound") }}
+	noindex
+>
+	<NotFoundPage locale={locale} />
+</BaseLayout>
