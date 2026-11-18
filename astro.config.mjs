@@ -19,8 +19,8 @@ const PLATFORM_PAIRS = PLATFORM_SLUGS.map((slug) => ({
 
 /**
  * Pairs each platform page with its other language. The sitemap integration pairs URLs that share a
- * path after the locale prefix, and the platform pages use different segments (`/layanan/` and
- * `/en/services/`), so they need their links written here.
+ * path after the locale prefix, and the platform pages use different segments (`/integrasi/` and
+ * `/en/integrations/`), so they need their links written here.
  * @param {import("@astrojs/sitemap").SitemapItem} item
  * @returns {import("@astrojs/sitemap").SitemapItem}
  */

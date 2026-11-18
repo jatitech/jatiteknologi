@@ -15,12 +15,12 @@ export const id = {
     close: "Tutup menu",
     language: "Pilih bahasa",
     primaryAction: "Jadwalkan obrolan",
-    services: "Layanan",
+    integrations: "Integrasi",
     howWeWork: "Cara kerja",
   },
   footer: {
     tagline: "Teknologi sekuat jati.",
-    servicesHeading: "Layanan",
+    integrationsHeading: "Integrasi",
     companyHeading: "Perusahaan",
     contactHeading: "Kontak",
     location: "Tangerang, Banten",
@@ -60,7 +60,7 @@ export const id = {
       checkIntegrations:
         "Kami membangun integrasi, aplikasi, dan otomasi lewat API publik tiap platform.",
       checkIndependent: "Kami perusahaan independen dan tidak berafiliasi dengan platform ini.",
-      pageLabel: "halaman layanan",
+      pageLabel: "halaman integrasi",
       trademark:
         "Frappe, ERPNext, Odoo, Meta, WhatsApp, Instagram, Facebook, Threads, Shopify, Shopee, TikTok, dan TikTok Shop adalah merek dagang milik pemiliknya masing-masing. Jatiteknologi adalah perusahaan independen dan tidak berafiliasi dengan, didukung, atau disponsori oleh pemilik merek tersebut.",
     },
@@ -149,6 +149,7 @@ export const id = {
     founder: {
       eyebrow: "Yang membangun sistem Anda",
       name: "Risqi Romadhoni, pendiri",
+      photoAlt: "Potret Risqi Romadhoni, pendiri Jatiteknologi",
       bio: "Saya membangun perangkat lunak sejak 2016. Di Yummy Corp, saya membantu sistem pesanan Yummyshop melayani lebih dari 50.000 pedagang UMKM. Di Virtual Spirit, saya mengembangkan Medplanner, aplikasi medis untuk pemerintah Malaysia.",
       disclosure: "Pengalaman di atas adalah pengalaman pribadi pendiri di perusahaan sebelumnya.",
     },

@@ -7,7 +7,7 @@ test.use({ baseURL: PREVIEW_URL });
 test.describe("Platform page", () => {
   test("Shows a breadcrumb whose home link opens the home page", async ({ page }) => {
     await answerUpgradedRequestsOverHttp(page);
-    await page.goto("/layanan/frappe-erpnext");
+    await page.goto("/integrasi/frappe-erpnext");
 
     const breadcrumb = page.getByRole("navigation", { name: "Jalur halaman" });
     await expect(breadcrumb.getByRole("link", { name: "Beranda" })).toHaveAttribute("href", "/");

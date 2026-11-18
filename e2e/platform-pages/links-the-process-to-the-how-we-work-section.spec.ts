@@ -6,12 +6,12 @@ test.use({ baseURL: PREVIEW_URL });
 
 const PROCESS_LINKS = [
   {
-    path: "/layanan/frappe-erpnext",
+    path: "/integrasi/frappe-erpnext",
     name: "Cara kami bekerja: dengarkan, rancang, bangun bertahap, dampingi →",
     anchor: "cara-kerja",
   },
   {
-    path: "/en/services/frappe-erpnext",
+    path: "/en/integrations/frappe-erpnext",
     name: "How we work: listen, plan, build in stages, stay with you →",
     anchor: "how-we-work",
   },

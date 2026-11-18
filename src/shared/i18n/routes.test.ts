@@ -30,8 +30,8 @@ describe("platform routes", () => {
   });
 
   it.for(PLATFORM_SLUGS)("gives %s a path in each locale", (slug) => {
-    expect(localizedPath("id", slug)).toBe(`/layanan/${slug}`);
-    expect(localizedPath("en", slug)).toBe(`/en/services/${slug}`);
+    expect(localizedPath("id", slug)).toBe(`/integrasi/${slug}`);
+    expect(localizedPath("en", slug)).toBe(`/en/integrations/${slug}`);
   });
 
   it("gives every route a different path in each locale", () => {
@@ -50,7 +50,7 @@ describe("platform routes", () => {
 
     expect(alternates.id.split("/").at(-1)).toBe(slug);
     expect(alternates.en.split("/").at(-1)).toBe(slug);
-    expect(alternates.en.startsWith("/en/services/")).toBe(true);
-    expect(alternates.id.startsWith("/layanan/")).toBe(true);
+    expect(alternates.en.startsWith("/en/integrations/")).toBe(true);
+    expect(alternates.id.startsWith("/integrasi/")).toBe(true);
   });
 });
