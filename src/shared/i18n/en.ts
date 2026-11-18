@@ -42,7 +42,7 @@ export const en: Dictionary = {
     actions: {
       email: "Send an email",
     },
-    learnMore: "Learn more",
+    learnMore: "Explore the service",
     hero: {
       headline: "Durable business systems for growing SMEs.",
       lead: "We build and look after business systems for SMEs: ERPNext, custom software, and IT long-term care. You talk directly with the engineer who builds it.",

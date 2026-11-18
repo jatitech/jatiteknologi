@@ -6,10 +6,10 @@ export default defineUnlighthouseConfig({
   scanner: { ignoreI18nPages: false },
   ci: {
     budget: {
-      performance: 90,
+      performance: 100,
       accessibility: 100,
       "best-practices": 100,
-      seo: 90,
+      seo: 100,
     },
     buildStatic: true,
   },

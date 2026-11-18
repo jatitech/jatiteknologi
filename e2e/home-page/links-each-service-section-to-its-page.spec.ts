@@ -7,11 +7,11 @@ test.describe("Home page", () => {
     { path: "/", name: "Pelajari layanan: Pendampingan TI", href: "#cara-kerja" },
     {
       path: "/en",
-      name: "Learn more: ERPNext implementation",
+      name: "Explore the service: ERPNext implementation",
       href: "/en/services/frappe-erpnext",
     },
-    { path: "/en", name: "Learn more: Software development", href: "#how-we-work" },
-    { path: "/en", name: "Learn more: Long-term IT care", href: "#how-we-work" },
+    { path: "/en", name: "Explore the service: Software development", href: "#how-we-work" },
+    { path: "/en", name: "Explore the service: Long-term IT care", href: "#how-we-work" },
   ] as const;
 
   test("Links each service section to its platform page or to the process section", async ({
