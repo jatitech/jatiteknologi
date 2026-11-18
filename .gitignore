@@ -56,3 +56,6 @@ pnpm-debug.log*
 # Plans written by the improve skill (plans/ is Claude Code's plan mode)
 /advisor-plans/
 src/middleware.ts
+
+# Working notes and Penpot specs stay local
+/docs/
