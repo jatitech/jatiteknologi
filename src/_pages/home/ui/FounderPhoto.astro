@@ -1,28 +1,29 @@
 ---
+import photo from "../../../assets/founder.webp";
+
+import { dictionaryFor, type Locale } from "@/shared/i18n";
+
+interface Props {
+	locale: Locale;
+}
+
 /**
- * Placeholder for the founder's portrait. The file has no approved photo yet, so this draws the growth
- * rings from DESIGN.md instead and is hidden from assistive technology. To use a photo, replace this
- * body with an `<img>` at 400 × 480 (`width`, `height`, `loading="lazy"`, `decoding="async"`) and give it
- * alt text that names the founder. Nothing else needs to change.
+ * The founder's portrait, cropped to 5:6 from the original studio photo (800 × 960, shown at up to
+ * 400 px wide), so the frame needs no cropping of its own. It sits below the fold, so it loads lazily.
  */
+const { locale } = Astro.props;
 ---
 
 <div
-	aria-hidden="true"
-	class="flex aspect-[8/9] w-full max-w-[320px] shrink-0 items-center justify-center overflow-hidden rounded-lg bg-secondary-container lg:aspect-[5/6] lg:max-w-[400px]"
+	class="aspect-[8/9] w-full max-w-[320px] shrink-0 overflow-hidden rounded-lg bg-surface-sunken lg:aspect-[5/6] lg:max-w-[400px]"
 >
-	<svg
-		viewBox="0 0 400 480"
-		preserveAspectRatio="xMidYMid slice"
-		class="h-full w-full text-primary opacity-30"
-		fill="none"
-		stroke="currentColor"
-		stroke-width="1.5"
-	>
-		<circle cx="200" cy="240" r="60" />
-		<circle cx="200" cy="240" r="110" />
-		<circle cx="200" cy="240" r="160" />
-		<circle cx="200" cy="240" r="210" />
-		<circle cx="200" cy="240" r="260" />
-	</svg>
+	<img
+		src={photo.src}
+		alt={dictionaryFor(locale).home.founder.photoAlt}
+		width="400"
+		height="480"
+		loading="lazy"
+		decoding="async"
+		class="size-full object-cover object-top"
+	/>
 </div>
