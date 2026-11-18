@@ -1,0 +1,75 @@
+version: 2
+updates:
+  - package-ecosystem: npm
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Asia/Jakarta
+    cooldown:
+      default-days: 3
+    open-pull-requests-limit: 5
+    versioning-strategy: increase
+    commit-message:
+      prefix: chore
+      include: scope
+    # A dependency joins the first group that matches it, so coupled packages
+    # come before the catch-all and always move together.
+    groups:
+      astro:
+        patterns:
+          - astro
+          - "@astrojs/*"
+      vite-plus:
+        patterns:
+          - vite-plus
+          - vite
+          - "@voidzero-dev/*"
+          - "@vitest/*"
+          - "@oxlint/*"
+      playwright:
+        patterns:
+          - playwright
+          - "@playwright/test"
+      unocss:
+        patterns:
+          - unocss
+          - "@unocss/*"
+      iconify:
+        patterns:
+          - "@iconify-json/*"
+        update-types:
+          - minor
+          - patch
+      size-limit:
+        patterns:
+          - size-limit
+          - "@size-limit/*"
+      minor-and-patch:
+        patterns:
+          - "*"
+        update-types:
+          - minor
+          - patch
+    ignore:
+      # @astrojs/check 0.9 accepts only TypeScript 5 or 6.
+      - dependency-name: typescript
+        update-types:
+          - version-update:semver-major
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly
+      day: monday
+      time: "06:00"
+      timezone: Asia/Jakarta
+    cooldown:
+      default-days: 3
+    commit-message:
+      prefix: ci
+    groups:
+      actions:
+        patterns:
+          - "*"
