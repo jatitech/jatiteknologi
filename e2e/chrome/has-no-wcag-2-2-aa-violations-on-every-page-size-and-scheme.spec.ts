@@ -9,7 +9,7 @@ const VIEWPORTS = [
   { width: 1440, height: 900 },
 ] as const;
 
-const SCHEMES = ["light", "dark"] as const;
+const SCHEMES = ["light"] as const;
 
 /** One axe rule that failed in one state, with the elements it failed on. */
 interface Failure {

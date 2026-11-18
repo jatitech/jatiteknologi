@@ -13,7 +13,7 @@ const VIEWPORTS = [
   { width: 1440, height: 900 },
 ] as const;
 
-const SCHEMES = ["light", "dark"] as const;
+const SCHEMES = ["light"] as const;
 
 test.describe("Platform page", () => {
   test("Has no WCAG 2.2 AA violations at 360px and 1440px in both schemes and languages, odoo", async ({

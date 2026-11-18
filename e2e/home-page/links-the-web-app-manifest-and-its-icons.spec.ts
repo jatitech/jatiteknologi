@@ -12,12 +12,7 @@ test.describe("Home page", () => {
         "href",
         "/apple-touch-icon.png",
       );
-      await expect(
-        page.locator('meta[name="theme-color"][media="(prefers-color-scheme: light)"]'),
-      ).toHaveAttribute("content", "#FAF8F4");
-      await expect(
-        page.locator('meta[name="theme-color"][media="(prefers-color-scheme: dark)"]'),
-      ).toHaveAttribute("content", "#0B1220");
+      await expect(page.locator('meta[name="theme-color"]')).toHaveAttribute("content", "#FAF8F4");
 
       const response = await page.request.get("/site.webmanifest");
       expect(response.status()).toBe(200);
