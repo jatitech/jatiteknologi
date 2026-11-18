@@ -30,7 +30,7 @@
     "@astrojs/cloudflare": "^14.4.8",
     "@astrojs/sitemap": "^3.7.5",
     "@axe-core/playwright": "^4.14.0",
-    "@iconify-json/lucide": "^1.2.154",
+    "@iconify-json/lucide": "^1.2.155",
     "@iconify-json/ph": "^1.2.2",
     "@iconify-json/simple-icons": "^1.2.102",
     "@oxlint/plugins": "1.93.0",
