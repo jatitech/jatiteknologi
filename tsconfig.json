@@ -1,0 +1,14 @@
+{
+  "extends": ["astro/tsconfigs/strict", "./.void/tsconfig.json"],
+  "files": [".astro/types.d.ts"],
+  "include": [".void/*.d.ts", "**/*"],
+  "exclude": ["dist"],
+  "compilerOptions": {
+    "types": ["void/env"],
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
