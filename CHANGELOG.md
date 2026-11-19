@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.0.1](https://github.com/jatitech/jatiteknologi/compare/v1.0.0...v1.0.1) (2026-11-19)
+
+
+### Bug Fixes
+
+* **home:** keep the reversed service row on one grid row ([#10](https://github.com/jatitech/jatiteknologi/issues/10)) ([f98b82e](https://github.com/jatitech/jatiteknologi/commit/f98b82ed01d9f172a487269669e51ac67e03ae47))
+
 ## 1.0.0 (2026-11-18)
 
 
