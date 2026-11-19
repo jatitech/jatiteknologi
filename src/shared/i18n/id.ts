@@ -152,6 +152,8 @@ export const id = {
       photoAlt: "Potret Risqi Romadhoni, pendiri Jatiteknologi",
       bio: "Saya membangun perangkat lunak sejak 2016. Di Yummy Corp, saya membantu sistem pesanan Yummyshop melayani lebih dari 50.000 pedagang UMKM. Di Virtual Spirit, saya mengembangkan Medplanner, aplikasi medis untuk pemerintah Malaysia.",
       disclosure: "Pengalaman di atas adalah pengalaman pribadi pendiri di perusahaan sebelumnya.",
+      personalSite: "Situs pribadi saya",
+      newTab: "(dibuka di tab baru)",
     },
     closing: {
       headline: "Mulai dari satu proses. Tumbuh bertahap.",
