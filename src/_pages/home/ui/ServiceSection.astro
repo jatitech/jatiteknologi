@@ -41,12 +41,18 @@ const headingId = `${id}-heading`;
 		<MediaFrame
 			class:list={[
 				"flex min-h-60 items-center justify-center p-6 lg:min-h-110 lg:p-12",
+				"lg:row-start-1",
 				reversed ? "lg:col-start-2" : "lg:col-start-1",
 			]}
 		>
 			<ProductWindow title={mediaTitle} status={mediaStatus} class="w-full" />
 		</MediaFrame>
-		<div class:list={["flex flex-col gap-4 lg:gap-5", reversed ? "lg:col-start-1" : "lg:col-start-2"]}>
+		<div
+			class:list={[
+				"flex flex-col gap-4 lg:row-start-1 lg:gap-5",
+				reversed ? "lg:col-start-1" : "lg:col-start-2",
+			]}
+		>
 			<Eyebrow>{eyebrow}</Eyebrow>
 			<h2
 				id={headingId}
