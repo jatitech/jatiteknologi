@@ -156,7 +156,7 @@ export const en: Dictionary = {
       bio: "I have been building software since 2016. At Yummy Corp, I helped the Yummyshop order system serve more than 50,000 SME merchants. At Virtual Spirit, I developed Medplanner, a medical app for the Malaysian government.",
       disclosure:
         "The experience above is the founder's personal experience at previous companies.",
-      personalSite: "My personal site, heyris.me",
+      personalSite: "My personal site",
       newTab: "(opens in a new tab)",
     },
     closing: {

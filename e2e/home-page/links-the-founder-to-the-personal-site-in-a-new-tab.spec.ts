@@ -5,8 +5,8 @@ test.describe("Home page", () => {
     page,
   }) => {
     for (const [path, name] of [
-      ["/", "Situs pribadi saya, heyris.me (dibuka di tab baru)"],
-      ["/en", "My personal site, heyris.me (opens in a new tab)"],
+      ["/", "Situs pribadi saya (dibuka di tab baru)"],
+      ["/en", "My personal site (opens in a new tab)"],
     ] as const) {
       await page.goto(path);
 
