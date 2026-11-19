@@ -1,4 +1,5 @@
 ---
+import { PERSONAL_SITE_HREF } from "@/shared/contact";
 import { dictionaryFor, type Locale } from "@/shared/i18n";
 import { Eyebrow } from "@/shared/ui/Eyebrow";
 
@@ -28,6 +29,16 @@ const strings = dictionaryFor(locale).home.founder;
 			</h2>
 			<p class="text-mobile-body-lg text-on-surface-variant lg:text-body-lg">{strings.bio}</p>
 			<p class="text-body-sm text-muted">{strings.disclosure}</p>
+			<a
+				href={PERSONAL_SITE_HREF}
+				target="_blank"
+				rel="noopener"
+				class="inline-flex min-h-11 items-center gap-1.5 self-start text-label-md font-medium text-on-surface underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+			>
+				{strings.personalSite}
+				<span class="sr-only">{strings.newTab}</span>
+				<span class="i-ph-arrow-up-right size-4 text-primary" aria-hidden="true"></span>
+			</a>
 		</div>
 	</div>
 </section>
