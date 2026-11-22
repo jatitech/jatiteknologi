@@ -17,13 +17,13 @@ function cardsOf(copy: PlatformCopy): Array<PlatformCard> {
   return [...copy.problems.items, ...copy.limits.items, ...(copy.extra?.items ?? [])];
 }
 
+const card = (item: PlatformCard) => ({ source: item.source !== undefined });
+
 /**
  * The structure of a page without its text: which parts exist, how many items each list has, and
  * which cards carry a source. Two locales of one page must have the same structure.
  */
 function layoutOf(copy: PlatformCopy) {
-  const card = (item: PlatformCard) => ({ source: item.source !== undefined });
-
   return {
     chips: copy.hero.chips?.length ?? null,
     problems: copy.problems.items.map(card),
