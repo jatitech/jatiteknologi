@@ -22,6 +22,7 @@ That upstream path at that commit is the pristine base for a future three-way me
 
 - `vite.config.ts` turns on every generic rule, plus `oxc/no-accumulating-spread`, at `"error"` with default options.
 - Lint and format share the same ignore list, `TOOLING_IGNORE_PATTERNS`, in `vite.config.ts`.
+- `@cloudflare/oxlint-config` loads `@nkzw/oxlint-config`'s `quality/*` rules, which nkzw adapted from this same upstream commit. `vite.config.ts` turns those 12 off, so each finding comes from this vendored copy only.
 - `@oxlint/plugins` is pinned to exactly `1.94.0`, matching the `oxlint` version Vite+ 1.7.0 installs.
 
 ## Intentional deviations from upstream instructions
