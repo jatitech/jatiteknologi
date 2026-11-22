@@ -8,6 +8,7 @@ export const en: Dictionary = {
     title: (page) => `${page} · Jatiteknologi`,
     homeDescription:
       "Jatiteknologi builds systems for businesses that have outgrown Excel but don't need a giant vendor.",
+    ogImageAlt: "Jatiteknologi logo",
   },
   skipLink: "Skip to content",
   nav: {

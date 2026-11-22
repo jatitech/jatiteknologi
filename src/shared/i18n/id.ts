@@ -7,6 +7,7 @@ export const id = {
     title: (page: string) => `${page} · Jatiteknologi`,
     homeDescription:
       "Jatiteknologi membangun sistem untuk usaha yang sudah terlalu besar untuk dicatat di Excel, tetapi belum perlu vendor besar.",
+    ogImageAlt: "Logo Jatiteknologi",
   },
   skipLink: "Langsung ke konten",
   nav: {
