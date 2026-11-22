@@ -1,4 +1,5 @@
-import { LOCALES, localizedPath, type Locale } from "@/shared/i18n";
+import { LOCALES, localizedPath } from "@/shared/i18n";
+import type { Locale } from "@/shared/i18n";
 
 const LABEL: Record<Locale, string> = { id: "ID", en: "EN" };
 

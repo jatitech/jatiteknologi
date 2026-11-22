@@ -3,8 +3,8 @@ import {
   localizedPath,
   PLATFORM_SLUGS,
   platformCopyFor,
-  type Locale,
 } from "../../src/shared/i18n";
+import type { Locale } from "../../src/shared/i18n";
 
 /** One platform page in one locale: its path and its copy. */
 export interface PlatformPage {
