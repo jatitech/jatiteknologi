@@ -42,5 +42,5 @@ export function organizationJsonLd(site: URL): OrganizationJsonLd {
 
 /** The JSON text for a `<script type="application/ld+json">`. `<` is escaped so no value can close the tag. */
 export function serializeJsonLd(data: OrganizationJsonLd | BreadcrumbJsonLd): string {
-  return JSON.stringify(data).replaceAll("<", "\\u003c");
+  return JSON.stringify(data).replaceAll("<", String.raw`\u003c`);
 }
