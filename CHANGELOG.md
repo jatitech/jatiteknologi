@@ -1,5 +1,17 @@
 # Changelog
 
+## [1.1.0](https://github.com/jatitech/jatiteknologi/compare/v1.0.1...v1.1.0) (2026-11-22)
+
+
+### Features
+
+* **home:** link the founder's personal site in a new tab ([#12](https://github.com/jatitech/jatiteknologi/issues/12)) ([7eea7c5](https://github.com/jatitech/jatiteknologi/commit/7eea7c5a0e107af2c15fe0be834e3e85220f1cc6))
+
+
+### Bug Fixes
+
+* **seo:** use a logo card as the Open Graph image ([#13](https://github.com/jatitech/jatiteknologi/issues/13)) ([0b476ea](https://github.com/jatitech/jatiteknologi/commit/0b476ea4076eb02a0596255f74ae0dd5dd6c90c6))
+
 ## [1.0.1](https://github.com/jatitech/jatiteknologi/compare/v1.0.0...v1.0.1) (2026-11-19)
 
 
