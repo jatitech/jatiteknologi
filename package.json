@@ -41,14 +41,14 @@
     "@unocss/astro": "^66.13.0",
     "@unocss/extractor-mdc": "^66.13.0",
     "@vitest/browser-playwright": "5.1.0",
-    "knip": "^6.45.1",
+    "knip": "^6.46.1",
     "playwright": "1.65.1",
     "size-limit": "^14.3.0",
     "typescript": "^6.0.3",
     "unlighthouse": "^0.19.1",
     "unocss": "^66.13.0",
     "vite-plus": "catalog:",
-    "void": "^1.9.1"
+    "void": "^1.11.0"
   },
   "devEngines": {
     "packageManager": {
