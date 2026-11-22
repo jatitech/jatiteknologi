@@ -1,3 +1,5 @@
+import { buffer } from "node:stream/consumers";
+
 import type { Page } from "@playwright/test";
 
 import { PREVIEW_URL } from "./origins";
@@ -15,7 +17,7 @@ export async function answerUpgradedRequestsOverHttp(page: Page): Promise<void> 
     await route.fulfill({
       status: upstream.status,
       headers: Object.fromEntries(upstream.headers),
-      body: Buffer.from(await upstream.arrayBuffer()),
+      body: upstream.body === null ? "" : await buffer(upstream.body),
     });
   });
 }
