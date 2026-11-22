@@ -1,6 +1,6 @@
 # Vitest
 
-Vite+ 1.5 bundles Vitest 5.1. `pnpm test` (`vp test`) runs once and exits; it never watches unless you run `vp test watch`. The pre-commit hook runs it after `check:fix`, so a failing test blocks the commit. Run one project with `vp test --project <name>`, or one file with `vp test run <path>`.
+Vite+ 1.7 bundles Vitest 5.1. `pnpm test` (`vp test`) runs once and exits; it never watches unless you run `vp test watch`. The pre-commit hook runs it after `check:fix`, so a failing test blocks the commit. Run one project with `vp test --project <name>`, or one file with `vp test run <path>`.
 
 ## Projects
 
