@@ -14,7 +14,7 @@ const SCHEMES = ["light"] as const;
 /** One axe rule that failed in one state, with the elements it failed on. */
 interface Failure {
   id: string;
-  targets: string[];
+  targets: Array<string>;
 }
 
 // Scanned on the built site, which is what ships. Each state is a full page load, so the time limit is raised.
@@ -27,7 +27,7 @@ test.describe("Accessibility", () => {
   }) => {
     await answerUpgradedRequestsOverHttp(page);
     test.setTimeout(180_000);
-    const failures: Record<string, Failure[]> = {};
+    const failures: Record<string, Array<Failure>> = {};
 
     for (const viewport of VIEWPORTS) {
       for (const colorScheme of SCHEMES) {

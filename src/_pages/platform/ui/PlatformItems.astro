@@ -5,7 +5,7 @@ import { BrandText } from "@/shared/ui/BrandText";
 import PlatformSourceLink from "./PlatformSourceLink.astro";
 
 interface Props {
-	items: readonly PlatformCard[];
+	items: ReadonlyArray<PlatformCard>;
 	/** `card` draws each item as a bordered card. `rule` puts a hairline above each item. */
 	variant: "card" | "rule";
 }

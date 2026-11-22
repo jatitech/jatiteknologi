@@ -2,7 +2,7 @@ import { expect, test } from "../fixtures";
 
 test.describe("Design tokens", () => {
   test("Loads the fonts from the site's own origin", async ({ page }) => {
-    const requestedUrls: string[] = [];
+    const requestedUrls: Array<string> = [];
     page.on("request", (request) => requestedUrls.push(request.url()));
 
     await page.goto("/");

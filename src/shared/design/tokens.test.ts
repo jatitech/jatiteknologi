@@ -35,8 +35,8 @@ interface ValueCase {
   actual: string | undefined;
 }
 
-// SAFETY: the file is the Penpot export this repo commits; the cases below fail if its shape changes.
-const file = JSON.parse(readFileSync(TOKEN_FILE, "utf8")) as PenpotFile;
+// The cases below fail if the committed Penpot export changes shape.
+const file: PenpotFile = JSON.parse(readFileSync(TOKEN_FILE, "utf8"));
 
 const referenced = new Map([
   ...Object.entries(file.sets.primitives),
@@ -71,7 +71,7 @@ function valueCases(
   type: PenpotScalar["type"],
   code: ReadonlyMap<string, string>,
   unit: string,
-): ValueCase[] {
+): Array<ValueCase> {
   return scalarsOf(tokens, type).map(({ name, value }) => ({
     set,
     name,

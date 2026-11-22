@@ -3,14 +3,15 @@ import { CONTACT_HREF } from "@/shared/contact";
 import { Button } from "@/shared/ui/Button";
 import { LanguageSwitch } from "@/shared/ui/LanguageSwitch";
 import { Logo } from "@/shared/ui/Logo";
-import { dictionaryFor, localizedPath, platformLinks, type Locale } from "@/shared/i18n";
+import { dictionaryFor, localizedPath, platformLinks } from "@/shared/i18n";
+import type { Locale } from "@/shared/i18n";
 
 interface Props {
 	locale: Locale;
 	/** This page's path in each locale where it exists, as passed to `BaseLayout`. */
 	alternates: Partial<Record<Locale, string>>;
 	/** Links shown between the logo and the desktop controls, as passed to `BaseLayout`. */
-	links?: readonly { href: string; label: string }[];
+	links?: ReadonlyArray<{ href: string; label: string }>;
 }
 
 const { locale, alternates, links = [] } = Astro.props;

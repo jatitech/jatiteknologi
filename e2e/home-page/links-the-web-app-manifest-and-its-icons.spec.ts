@@ -1,5 +1,11 @@
 import { expect, test } from "../fixtures";
 
+interface WebManifest {
+  name: string;
+  start_url: string;
+  icons: Array<{ src: string; sizes: string; purpose: string }>;
+}
+
 test.describe("Home page", () => {
   for (const path of ["/", "/en"]) {
     test(`Links the web app manifest and its icons from ${path}`, async ({ page }) => {
@@ -16,7 +22,7 @@ test.describe("Home page", () => {
 
       const response = await page.request.get("/site.webmanifest");
       expect(response.status()).toBe(200);
-      const manifest = await response.json();
+      const manifest: WebManifest = await response.json();
       expect(manifest).toMatchObject({ name: "Jatiteknologi", start_url: "/" });
       expect(manifest.icons).toEqual([
         expect.objectContaining({ sizes: "192x192", purpose: "any" }),

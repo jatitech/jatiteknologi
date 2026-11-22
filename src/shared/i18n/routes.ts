@@ -1,4 +1,5 @@
-import { DEFAULT_LOCALE, type Locale } from "./locale";
+import { DEFAULT_LOCALE } from "./locale";
+import type { Locale } from "./locale";
 
 /** Path prefix of a locale: none for the default locale, `/en` for English. */
 const prefixOf = (locale: Locale) => (locale === DEFAULT_LOCALE ? "" : `/${locale}`);

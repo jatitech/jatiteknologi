@@ -15,7 +15,7 @@ function variableName(token: string): string {
   return `--${token.replaceAll(".", "-")}`;
 }
 
-function declarations(entries: readonly (readonly [string, string])[]): string {
+function declarations(entries: ReadonlyArray<readonly [string, string]>): string {
   return entries.map(([token, value]) => `${variableName(token)}: ${value};`).join("\n    ");
 }
 

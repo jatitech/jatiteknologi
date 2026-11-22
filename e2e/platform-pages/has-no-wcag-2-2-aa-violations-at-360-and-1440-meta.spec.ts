@@ -23,7 +23,7 @@ test.describe("Platform page", () => {
     await answerUpgradedRequestsOverHttp(page);
     test.setTimeout(300_000);
 
-    const failures: string[] = [];
+    const failures: Array<string> = [];
 
     for (const viewport of VIEWPORTS) {
       for (const colorScheme of SCHEMES) {

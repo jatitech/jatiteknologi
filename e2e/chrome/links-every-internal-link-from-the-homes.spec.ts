@@ -32,7 +32,7 @@ test.describe("Site chrome", () => {
 
     expect([...targets]).toEqual(expect.arrayContaining(sources));
 
-    const broken: string[] = [];
+    const broken: Array<string> = [];
 
     for (const target of targets) {
       const response = await page.request.get(target);

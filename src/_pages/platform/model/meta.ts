@@ -1,11 +1,5 @@
-import {
-  dictionaryFor,
-  localizedPath,
-  pageTitle,
-  platformCopyFor,
-  type Locale,
-  type PlatformPageSlug,
-} from "@/shared/i18n";
+import { dictionaryFor, localizedPath, pageTitle, platformCopyFor } from "@/shared/i18n";
+import type { Locale, PlatformPageSlug } from "@/shared/i18n";
 
 /** What a platform route passes to `BaseLayout`: its title, description, paths, and header links. */
 interface PlatformMeta {
@@ -13,7 +7,7 @@ interface PlatformMeta {
   description: string;
   path: string;
   alternates: Partial<Record<Locale, string>>;
-  navLinks: { href: string; label: string }[];
+  navLinks: Array<{ href: string; label: string }>;
 }
 
 /** The homepage's "how we work" section, from any locale. */

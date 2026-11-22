@@ -23,14 +23,14 @@ export default defineConfig({
       command: "astro dev --ignore-lock",
       url: DEV_URL,
       reuseExistingServer: !process.env.CI,
-      gracefulShutdown: { signal: "SIGTERM", timeout: 5_000 },
+      gracefulShutdown: { signal: "SIGTERM", timeout: 5000 },
     },
     {
       // Serves dist/, which `test:e2e` builds before Playwright starts. Only it sends public/_headers.
       command: `astro preview --ignore-lock --port ${new URL(PREVIEW_URL).port}`,
       url: PREVIEW_URL,
       reuseExistingServer: !process.env.CI,
-      gracefulShutdown: { signal: "SIGTERM", timeout: 5_000 },
+      gracefulShutdown: { signal: "SIGTERM", timeout: 5000 },
     },
   ],
 });

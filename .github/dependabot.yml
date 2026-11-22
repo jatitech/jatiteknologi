@@ -28,6 +28,7 @@ updates:
           - "@voidzero-dev/*"
           - "@vitest/*"
           - "@oxlint/*"
+          - "@cloudflare/oxlint-config"
       playwright:
         patterns:
           - playwright

@@ -28,7 +28,7 @@ const FORBIDDEN = [
 const NEGATION = /\b(bukan|tidak|not|no)\b/i;
 
 /** The sentences of `text` that name a forbidden word without negating it. */
-function flaggedSentences(text: string): string[] {
+function flaggedSentences(text: string): Array<string> {
   return text
     .split(/(?<=[.!?])\s+/)
     .filter((sentence) => FORBIDDEN.some((word) => word.test(sentence)))

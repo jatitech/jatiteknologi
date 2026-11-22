@@ -1,10 +1,6 @@
 ---
-import {
-	dictionaryFor,
-	type Locale,
-	type PlatformCopy,
-	type PlatformPageSlug,
-} from "@/shared/i18n";
+import { dictionaryFor } from "@/shared/i18n";
+import type { Locale, PlatformCopy, PlatformPageSlug } from "@/shared/i18n";
 import { BrandText } from "@/shared/ui/BrandText";
 import { ContactActions } from "@/shared/ui/ContactActions";
 import { Eyebrow } from "@/shared/ui/Eyebrow";
@@ -25,7 +21,10 @@ const { locale, slug, copy } = Astro.props;
  * colour along the top, and the name in the site's ink, which keeps the text at full contrast. Class names are
  * written out in full so UnoCSS finds them.
  */
-const BRAND: Record<PlatformPageSlug, { panel: string; bar: string; mark: string; logos: readonly string[] }> = {
+const BRAND: Record<
+	PlatformPageSlug,
+	{ panel: string; bar: string; mark: string; logos: ReadonlyArray<string> }
+> = {
 	"frappe-erpnext": {
 		panel: "border-[#0089FF]/30 bg-[#0089FF]/10",
 		bar: "bg-[#0089FF]/100",
