@@ -1,5 +1,6 @@
 import { fileURLToPath } from "node:url";
 
+import cloudflare from "@cloudflare/oxlint-config";
 import { defineConfig } from "vite-plus";
 import { playwright } from "vite-plus/test/browser-playwright";
 
@@ -70,12 +71,67 @@ export default defineConfig({
     ],
   },
   lint: {
-    ignorePatterns: TOOLING_IGNORE_PATTERNS,
+    // Spread the preset: `extends` drops its `env` in Oxlint 1.94.
+    ...cloudflare,
+    ignorePatterns: [...(cloudflare.ignorePatterns ?? []), ...TOOLING_IGNORE_PATTERNS],
     jsPlugins: [
+      ...(cloudflare.jsPlugins ?? []),
       { name: "vite-plus", specifier: "vite-plus/oxlint-plugin" },
       { name: "anti-slop", specifier: "./tools/oxlint/anti-slop/index.ts" },
     ],
+    overrides: [
+      ...(cloudflare.overrides ?? []),
+      // Astro defines `Astro` in component scripts, and `astro check` type-checks them.
+      { files: ["**/*.astro"], globals: { Astro: "readonly" } },
+    ],
     rules: {
+      ...cloudflare.rules,
+      // One-line guard clauses stay; a body that spans lines needs braces.
+      curly: ["error", "multi-line"],
+      // DOM scripts narrow elements with instanceof, and anti-slop already bans typeof checks.
+      "@nkzw/no-instanceof": "off",
+      // No React here. The rule flags every function named use*, such as Playwright's fixture `use`.
+      "react/rules-of-hooks": "off",
+      // @cloudflare/workers-types gives Element an HTMLRewriter append() that takes no nodes.
+      "unicorn/prefer-dom-node-append": "off",
+      // nkzw's copies of the anti-slop rules below.
+      "quality/no-array-filter-map": "off",
+      "quality/no-chained-type-assertions": "off",
+      "quality/no-conditional-empty-object-spread": "off",
+      "quality/no-known-value-widening": "off",
+      "quality/no-object-parameters": "off",
+      "quality/no-reduce-accumulator-copy": "off",
+      "quality/no-reflect-apply": "off",
+      "quality/no-reflect-get": "off",
+      "quality/no-unknown-returns": "off",
+      "quality/no-unknown-type-aliases": "off",
+      "quality/no-unsafe-dictionary-type": "off",
+      "quality/no-widen-then-assert": "off",
+      // On before the preset through Oxlint's correctness category, which the preset turns off.
+      "no-caller": "error",
+      "no-iterator": "error",
+      "no-unassigned-vars": "error",
+      "oxc/bad-array-method-on-arguments": "error",
+      "oxc/bad-match-all-arg": "error",
+      "oxc/erasing-op": "error",
+      "oxc/only-used-in-recursion": "error",
+      "typescript/no-base-to-string": "error",
+      "typescript/no-implied-eval": "error",
+      "typescript/no-meaningless-void-operator": "error",
+      "typescript/no-redundant-type-constituents": "error",
+      "typescript/no-this-alias": "error",
+      "typescript/no-useless-default-assignment": "error",
+      "typescript/no-useless-empty-export": "error",
+      "typescript/restrict-template-expressions": "error",
+      "unicorn/no-await-in-promise-methods": "error",
+      "unicorn/no-empty-file": "error",
+      "unicorn/no-new-array": "error",
+      "unicorn/no-single-promise-in-promise-methods": "error",
+      "unicorn/no-thenable": "error",
+      "unicorn/no-unnecessary-await": "error",
+      "unicorn/no-useless-fallback-in-spread": "error",
+      "unicorn/no-useless-length-check": "error",
+      "unicorn/prefer-string-starts-ends-with": "error",
       "vite-plus/prefer-vite-plus-imports": "error",
       "no-unused-vars": "error",
       "max-lines": [
@@ -105,7 +161,18 @@ export default defineConfig({
       "anti-slop/no-widen-then-assert": "error",
       "anti-slop/require-readable-spacing": "error",
       "anti-slop/require-safety-comment-for-type-assertion": "error",
+      // Temporary while migrating: the commit that enables each rule removes its line.
+      "typescript/array-type": "off",
+      "import/consistent-type-specifier-style": "off",
+      "typescript/no-import-type-side-effects": "off",
+      "unicorn/prefer-string-raw": "off",
+      "unicorn/numeric-separators-style": "off",
+      "unicorn/consistent-function-scoping": "off",
+      "typescript/no-unsafe-call": "off",
+      "typescript/no-unsafe-assignment": "off",
+      "typescript/no-unsafe-member-access": "off",
+      "typescript/no-unsafe-type-assertion": "off",
     },
-    options: { typeAware: true, typeCheck: true },
+    options: { ...cloudflare.options, typeCheck: true },
   },
 });
