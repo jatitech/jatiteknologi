@@ -71,7 +71,7 @@ function valueCases(
   type: PenpotScalar["type"],
   code: ReadonlyMap<string, string>,
   unit: string,
-): ValueCase[] {
+): Array<ValueCase> {
   return scalarsOf(tokens, type).map(({ name, value }) => ({
     set,
     name,

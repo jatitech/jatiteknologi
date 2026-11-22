@@ -23,7 +23,7 @@ interface PlatformStep {
 interface PlatformExtra {
   eyebrow: string;
   title: string;
-  items: readonly PlatformCard[];
+  items: ReadonlyArray<PlatformCard>;
   link?: { label: string; to: PlatformSlug };
 }
 
@@ -37,30 +37,30 @@ export interface PlatformCopy {
     /** Also the page's meta description, so keep it under 160 characters. */
     lead: string;
     /** Text-only chips under the lead, for pages that list apps. */
-    chips?: readonly string[];
+    chips?: ReadonlyArray<string>;
     /** The line under the buttons: independence, and the platform's trademark notice. */
     nonAffiliation: string;
   };
   problems: {
     title: string;
-    items: readonly PlatformCard[];
+    items: ReadonlyArray<PlatformCard>;
   };
   builds: {
-    items: readonly PlatformStep[];
+    items: ReadonlyArray<PlatformStep>;
   };
   extra?: PlatformExtra;
   flow: {
     layer: string;
     system: string;
-    notes: readonly string[];
+    notes: ReadonlyArray<string>;
   };
   limits: {
     eyebrow: string;
     title: string;
-    items: readonly PlatformCard[];
+    items: ReadonlyArray<PlatformCard>;
   };
   experience: {
-    paragraphs: readonly string[];
+    paragraphs: ReadonlyArray<string>;
   };
 }
 
@@ -72,7 +72,7 @@ export interface PlatformShared {
   builds: { eyebrow: string; title: string; description: string };
   flow: { eyebrow: string; title: string };
   experience: { eyebrow: string; title: string; processLink: string };
-  terms: { eyebrow: string; title: string; items: readonly PlatformCard[] };
+  terms: { eyebrow: string; title: string; items: ReadonlyArray<PlatformCard> };
   closing: { headline: string; disclaimer: string };
 }
 

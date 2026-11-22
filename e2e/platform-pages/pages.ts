@@ -16,7 +16,7 @@ export interface PlatformPage {
 }
 
 /** All six platform pages in both locales, Indonesian first. */
-export const PLATFORM_PAGES: PlatformPage[] = (["id", "en"] as const).flatMap((locale) =>
+export const PLATFORM_PAGES: Array<PlatformPage> = (["id", "en"] as const).flatMap((locale) =>
   PLATFORM_SLUGS.map((slug) => ({
     locale,
     slug,

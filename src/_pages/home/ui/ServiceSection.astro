@@ -15,7 +15,7 @@ interface Props {
 	headline: string;
 	mediaTitle: string;
 	mediaStatus: string;
-	features: readonly Feature[];
+	features: ReadonlyArray<Feature>;
 	/** An optional text link under the features, such as "Pelajari layanan". */
 	link?: { href: string; label: string };
 }

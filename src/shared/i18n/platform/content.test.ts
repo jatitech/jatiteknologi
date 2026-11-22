@@ -13,7 +13,7 @@ const idPages = new Map(Object.entries(id.pages));
 const enPages = new Map(Object.entries(en.pages));
 
 /** Every card of a page: the problems, the limits, and the extra section. */
-function cardsOf(copy: PlatformCopy): PlatformCard[] {
+function cardsOf(copy: PlatformCopy): Array<PlatformCard> {
   return [...copy.problems.items, ...copy.limits.items, ...(copy.extra?.items ?? [])];
 }
 

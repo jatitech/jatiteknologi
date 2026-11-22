@@ -18,7 +18,7 @@ export function platformCopyFor(locale: Locale, slug: PlatformPageSlug): Platfor
 }
 
 /** The header and footer link to each platform page, in the order of the home page's tiles. */
-export function platformLinks(locale: Locale): { href: string; label: string }[] {
+export function platformLinks(locale: Locale): Array<{ href: string; label: string }> {
   return PLATFORM_SLUGS.map((slug) => ({
     href: localizedPath(locale, slug),
     label: platformCopyFor(locale, slug).name,

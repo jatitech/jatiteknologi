@@ -10,7 +10,7 @@ test.describe("Not-found page", () => {
   test("Applies the full content security policy and raises no violations", async ({ page }) => {
     await answerUpgradedRequestsOverHttp(page);
 
-    const errors: string[] = [];
+    const errors: Array<string> = [];
     // Chromium logs the 404 navigation itself as a console error. Only errors from elsewhere count.
     page.on("console", (message) => {
       if (message.type() === "error" && !message.location().url.endsWith(NOT_FOUND_PATH)) {

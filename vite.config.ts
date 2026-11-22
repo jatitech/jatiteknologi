@@ -162,7 +162,6 @@ export default defineConfig({
       "anti-slop/require-readable-spacing": "error",
       "anti-slop/require-safety-comment-for-type-assertion": "error",
       // Temporary while migrating: the commit that enables each rule removes its line.
-      "typescript/array-type": "off",
       "import/consistent-type-specifier-style": "off",
       "typescript/no-import-type-side-effects": "off",
       "unicorn/prefer-string-raw": "off",

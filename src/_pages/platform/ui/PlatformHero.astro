@@ -25,7 +25,10 @@ const { locale, slug, copy } = Astro.props;
  * colour along the top, and the name in the site's ink, which keeps the text at full contrast. Class names are
  * written out in full so UnoCSS finds them.
  */
-const BRAND: Record<PlatformPageSlug, { panel: string; bar: string; mark: string; logos: readonly string[] }> = {
+const BRAND: Record<
+	PlatformPageSlug,
+	{ panel: string; bar: string; mark: string; logos: ReadonlyArray<string> }
+> = {
 	"frappe-erpnext": {
 		panel: "border-[#0089FF]/30 bg-[#0089FF]/10",
 		bar: "bg-[#0089FF]/100",

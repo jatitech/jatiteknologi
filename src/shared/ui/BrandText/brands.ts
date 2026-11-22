@@ -29,8 +29,8 @@ export interface TextRun {
  * Splits `text` into runs, so each brand name can be wrapped on its own. A brand name is written
  * with a no-break space inside it, as the design asks for "TikTok Shop".
  */
-export function splitBrands(text: string): TextRun[] {
-  const runs: TextRun[] = [];
+export function splitBrands(text: string): Array<TextRun> {
+  const runs: Array<TextRun> = [];
   let last = 0;
 
   for (const match of text.matchAll(BRAND_PATTERN)) {

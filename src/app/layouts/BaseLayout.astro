@@ -20,7 +20,7 @@ interface Props {
 	/** Asks search engines not to index the page. Set on the not-found page. */
 	noindex?: boolean;
 	/** Links in the header's desktop bar. Pass only links whose targets this page renders. */
-	navLinks?: readonly { href: string; label: string }[];
+	navLinks?: ReadonlyArray<{ href: string; label: string }>;
 }
 
 const {

@@ -16,19 +16,19 @@ const { erp, custom, care } = strings.home;
 const learnMore = strings.home.learnMore;
 const processHref = `#${strings.home.anchors.howWeWork}`;
 
-const erpFeatures: readonly Feature[] = [
+const erpFeatures: ReadonlyArray<Feature> = [
 	{ icon: "stock", ...erp.features.stock },
 	{ icon: "data", ...erp.features.data },
 	{ icon: "phased", ...erp.features.phased },
 ];
 
-const customFeatures: readonly Feature[] = [
+const customFeatures: ReadonlyArray<Feature> = [
 	{ icon: "apps", ...custom.features.apps },
 	{ icon: "integration", ...custom.features.integration },
 	{ icon: "docs", ...custom.features.docs },
 ];
 
-const careFeatures: readonly Feature[] = [
+const careFeatures: ReadonlyArray<Feature> = [
 	{ icon: "monitoring", ...care.features.monitoring },
 	{ icon: "adjustments", ...care.features.adjustments },
 	{ icon: "engineer", ...care.features.engineer },

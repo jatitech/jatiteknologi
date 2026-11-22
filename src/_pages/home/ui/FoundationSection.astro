@@ -17,7 +17,7 @@ const strings = dictionaryFor(locale).home.foundation;
 
 // Class names are written out in full so UnoCSS finds them. The logos are the monochrome marks from
 // Simple Icons, drawn in the text colour, and the name beside them stays as text.
-const LOGOS: Record<(typeof PLATFORM_SLUGS)[number], readonly string[]> = {
+const LOGOS: Record<(typeof PLATFORM_SLUGS)[number], ReadonlyArray<string>> = {
 	"frappe-erpnext": ["i-simple-icons-frappe", "i-simple-icons-erpnext"],
 	odoo: ["i-simple-icons-odoo"],
 	meta: ["i-simple-icons-meta"],

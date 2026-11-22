@@ -5,7 +5,7 @@ import { PLATFORM_PAGES } from "../platform-pages/pages";
 
 declare global {
   interface Window {
-    cspViolations: string[];
+    cspViolations: Array<string>;
   }
 }
 
@@ -18,7 +18,7 @@ test.describe("Content security policy", () => {
     test.setTimeout(240_000);
     await answerUpgradedRequestsOverHttp(page);
 
-    const errors: string[] = [];
+    const errors: Array<string> = [];
     page.on("console", (message) => {
       if (message.type() === "error") errors.push(message.text());
     });

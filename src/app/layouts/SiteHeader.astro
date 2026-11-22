@@ -10,7 +10,7 @@ interface Props {
 	/** This page's path in each locale where it exists, as passed to `BaseLayout`. */
 	alternates: Partial<Record<Locale, string>>;
 	/** Links shown between the logo and the desktop controls, as passed to `BaseLayout`. */
-	links?: readonly { href: string; label: string }[];
+	links?: ReadonlyArray<{ href: string; label: string }>;
 }
 
 const { locale, alternates, links = [] } = Astro.props;

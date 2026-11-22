@@ -9,7 +9,7 @@ const LABEL: Record<Locale, string> = { id: "ID", en: "EN" };
 export function languageOptions(
   current: Locale,
   alternates: Partial<Record<Locale, string>>,
-): { locale: Locale; label: string; href: string; current: boolean }[] {
+): Array<{ locale: Locale; label: string; href: string; current: boolean }> {
   return LOCALES.map((locale) => ({
     locale,
     label: LABEL[locale],

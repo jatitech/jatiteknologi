@@ -13,7 +13,7 @@ interface PlatformMeta {
   description: string;
   path: string;
   alternates: Partial<Record<Locale, string>>;
-  navLinks: { href: string; label: string }[];
+  navLinks: Array<{ href: string; label: string }>;
 }
 
 /** The homepage's "how we work" section, from any locale. */

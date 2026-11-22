@@ -2,17 +2,17 @@
 export interface BreadcrumbJsonLd {
   "@context": "https://schema.org";
   "@type": "BreadcrumbList";
-  itemListElement: {
+  itemListElement: Array<{
     "@type": "ListItem";
     position: number;
     name: string;
     item: string;
-  }[];
+  }>;
 }
 
 /** A breadcrumb trail as JSON-LD. Positions count from 1 in the order given. */
 export function breadcrumbJsonLd(
-  trail: readonly { name: string; url: string }[],
+  trail: ReadonlyArray<{ name: string; url: string }>,
 ): BreadcrumbJsonLd {
   return {
     "@context": "https://schema.org",
