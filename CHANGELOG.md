@@ -1,5 +1,12 @@
 # Changelog
 
+## [1.2.0](https://github.com/jatitech/jatiteknologi/compare/v1.1.0...v1.2.0) (2026-11-23)
+
+
+### Features
+
+* **footer:** link the Facebook Page ([#21](https://github.com/jatitech/jatiteknologi/issues/21)) ([cd5c40b](https://github.com/jatitech/jatiteknologi/commit/cd5c40b5ab7deba598d16caf6888ac0fcd2e69bd))
+
 ## [1.1.0](https://github.com/jatitech/jatiteknologi/compare/v1.0.1...v1.1.0) (2026-11-22)
 
 
