@@ -33,6 +33,12 @@ describe("organizationJsonLd", () => {
       },
     });
   });
+
+  it("links the Facebook Page as sameAs", () => {
+    expect(organizationJsonLd(SITE).sameAs).toEqual([
+      "https://www.facebook.com/profile.php?id=61587708123428",
+    ]);
+  });
 });
 
 describe("serializeJsonLd", () => {

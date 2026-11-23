@@ -23,6 +23,7 @@ test.describe("Home page", () => {
           addressRegion: "Banten",
           addressCountry: "ID",
         },
+        sameAs: ["https://www.facebook.com/profile.php?id=61587708123428"],
       });
     }
   });
