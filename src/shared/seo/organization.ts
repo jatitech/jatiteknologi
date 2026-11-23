@@ -1,4 +1,4 @@
-import { CONTACT_EMAIL } from "@/shared/contact";
+import { CONTACT_EMAIL, FACEBOOK_PAGE_HREF } from "@/shared/contact";
 
 import type { BreadcrumbJsonLd } from "./breadcrumb";
 
@@ -18,6 +18,7 @@ interface OrganizationJsonLd {
     addressRegion: string;
     addressCountry: string;
   };
+  sameAs: Array<string>;
 }
 
 /** The organization as JSON-LD for the site at `site`. The logo is the 512 px app icon in `public/`. */
@@ -37,6 +38,7 @@ export function organizationJsonLd(site: URL): OrganizationJsonLd {
       addressRegion: "Banten",
       addressCountry: "ID",
     },
+    sameAs: [FACEBOOK_PAGE_HREF],
   };
 }
 

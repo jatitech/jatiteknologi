@@ -6,3 +6,6 @@ export const PERSONAL_SITE_HREF = "https://www.heyris.me/?ref=jatiteknologi.com"
 
 /** The link behind the primary action until a booking link exists. */
 export const CONTACT_HREF = `mailto:${CONTACT_EMAIL}`;
+
+/** The company's Facebook Page. It has no username yet, so the link uses its numeric id. */
+export const FACEBOOK_PAGE_HREF = "https://www.facebook.com/profile.php?id=61587708123428";
